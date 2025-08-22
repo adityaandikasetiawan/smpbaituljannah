@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kurikulum - SMPTI Baituljannah</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <i class="icon icon-loading"></i>
+      </div>
+    </div>
+  </div>
+  
+  <%- include('partials/header') %>
+  
+  <main class="main-content layout-pt-lg layout-pb-lg">
+    <section class="page-header -type-1">
+      <div class="container">
+        <div class="page-header__content">
+          <div class="row justify-center text-center">
+            <div class="col-xl-6 col-lg-7 col-md-9">
+              <h1 class="page-header__title">Kurikulum</h1>
+              <p class="page-header__text">Struktur kurikulum SMPTI Baituljannah yang mengintegrasikan pendidikan umum dan keagamaan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kurikulum Overview -->
+    <section class="layout-pt-md layout-pb-md">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-8 col-lg-9">
+            <h2 class="text-30 lh-16 fw-700">Kurikulum Merdeka Terintegrasi</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">SMPTI Baituljannah menerapkan Kurikulum Merdeka yang diintegrasikan dengan nilai-nilai Islam untuk membentuk generasi yang cerdas, berkarakter, dan berakhlak mulia.</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- Mata Pelajaran Wajib -->
+          <div class="col-lg-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4 h-100">
+              <div class="courseCard__content px-30 py-30">
+                <div class="d-flex align-items-center mb-20">
+                  <div class="bg-blue-1 rounded-8 size-60 d-flex align-items-center justify-center mr-20">
+                    <i class="fas fa-book text-white text-20"></i>
+                  </div>
+                  <h4 class="courseCard__title text-20 fw-600">Mata Pelajaran Wajib</h4>
+                </div>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Pendidikan Agama Islam & Budi Pekerti</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Pendidikan Pancasila & Kewarganegaraan</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Bahasa Indonesia</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Matematika</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Ilmu Pengetahuan Alam (IPA)</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Ilmu Pengetahuan Sosial (IPS)</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Bahasa Inggris</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Seni Budaya</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Pendidikan Jasmani, Olahraga & Kesehatan</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Prakarya & Kewirausahaan</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mata Pelajaran Muatan Lokal -->
+          <div class="col-lg-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4 h-100">
+              <div class="courseCard__content px-30 py-30">
+                <div class="d-flex align-items-center mb-20">
+                  <div class="bg-green-1 rounded-8 size-60 d-flex align-items-center justify-center mr-20">
+                    <i class="fas fa-mosque text-white text-20"></i>
+                  </div>
+                  <h4 class="courseCard__title text-20 fw-600">Muatan Lokal & Keagamaan</h4>
+                </div>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Bahasa Arab</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Al-Quran & Hadits</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Akidah Akhlak</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Fiqh</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Sejarah Kebudayaan Islam</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Tahfidz Al-Quran</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Teknologi Informasi & Komunikasi</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Bahasa Daerah (Betawi)</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-15">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Bimbingan Konseling</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-15"></i>
+                    <span class="text-14">Ekstrakurikuler Wajib (Pramuka)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Struktur Kurikulum per Kelas -->
+    <section class="layout-pt-md layout-pb-md bg-light-6">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-8 col-lg-9">
+            <h2 class="text-30 lh-16 fw-700">Struktur Kurikulum per Kelas</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Pembagian jam pelajaran dan alokasi waktu untuk setiap tingkat kelas</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- Kelas VII -->
+          <div class="col-lg-4">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4 text-center">
+              <div class="courseCard__content px-30 py-40">
+                <div class="bg-purple-1 rounded-8 size-80 d-flex align-items-center justify-center mx-auto mb-20">
+                  <span class="text-white text-24 fw-700">VII</span>
+                </div>
+                <h4 class="courseCard__title text-20 fw-600 mb-20">Kelas 7</h4>
+                <div class="text-left">
+                  <div class="d-flex justify-between mb-10">
+                    <span class="text-14">Total Jam/Minggu:</span>
+                    <span class="text-14 fw-500">42 JP</span>
+                  </div>
+                  <div class="d-flex justify-between mb-10">
+                    <span class="text-14">Mata Pelajaran Wajib:</span>
+                    <span class="text-14 fw-500">32 JP</span>
+                  </div>
+                  <div class="d-flex justify-between mb-10">
+                    <span class="text-14">Muatan Lokal:</span>
+                    <span class="text-14 fw-500">8 JP</span>
+                  </div>
+                  <div class="d-flex justify-between">
+                    <span class="text-14">Ekstrakurikuler:</span>
+                    <span class="text-14 fw-500">2 JP</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kelas VIII -->
+          <div class="col-lg-4">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4 text-center">
+              <div class="courseCard__content px-30 py-40">
+                <div class="bg-orange-1 rounded-8 size-80 d-flex align-items-center justify-center mx-auto mb-20">
+                  <span class="text-white text-24 fw-700">VIII</span>
+                </div>
+                <h4 class="courseCard__title text-20 fw-600 mb-20">Kelas 8</h4>
+                <div class="text-left">
+                  <div class="d-flex justify-between mb-10">
+                    <span class="text-14">Total Jam/Minggu:</span>
+                    <span class="text-14 fw-500">42 JP</span>
+                  </div>
+                  <div class="d-flex justify-between mb-10">
+                    <span class="text-14">Mata Pelajaran Wajib:</span>
+                    <span class="text-14 fw-500">32 JP</span>
+                  </div>
+                  <div class="d-flex justify-between mb-10">
+                    <span class="text-14">Muatan Lokal:</span>
+                    <span class="text-14 fw-500">8 JP</span>
+                  </div>
+                  <div class="d-flex justify-between">
+                    <span class="text-14">Ekstrakurikuler:</span>
+                    <span class="text-14 fw-500">2 JP</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kelas IX -->
+          <div class="col-lg-4">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4 text-center">
+              <div class="courseCard__content px-30 py-40">
+                <div class="bg-red-1 rounded-8 size-80 d-flex align-items-center justify-center mx-auto mb-20">
+                  <span class="text-white text-24 fw-700">IX</span>
+                </div>
+                <h4 class="courseCard__title text-20 fw-600 mb-20">Kelas 9</h4>
+                <div class="text-left">
+                  <div class="d-flex justify-between mb-10">
+                    <span class="text-14">Total Jam/Minggu:</span>
+                    <span class="text-14 fw-500">44 JP</span>
+                  </div>
+                  <div class="d-flex justify-between mb-10">
+                    <span class="text-14">Mata Pelajaran Wajib:</span>
+                    <span class="text-14 fw-500">34 JP</span>
+                  </div>
+                  <div class="d-flex justify-between mb-10">
+                    <span class="text-14">Muatan Lokal:</span>
+                    <span class="text-14 fw-500">8 JP</span>
+                  </div>
+                  <div class="d-flex justify-between">
+                    <span class="text-14">Persiapan UN/AKM:</span>
+                    <span class="text-14 fw-500">2 JP</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keunggulan Kurikulum -->
+    <section class="layout-pt-md layout-pb-md">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-8 col-lg-9">
+            <h2 class="text-30 lh-16 fw-700">Keunggulan Kurikulum SMPTI Baituljannah</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Pendekatan pembelajaran yang holistik dan inovatif</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- Integrasi Nilai Islam -->
+          <div class="col-lg-6">
+            <div class="featureCard d-flex align-items-start">
+              <div class="featureCard__icon bg-green-1 rounded-8 size-60 d-flex align-items-center justify-center mr-20 flex-shrink-0">
+                <i class="fas fa-star-and-crescent text-white text-20"></i>
+              </div>
+              <div class="featureCard__content">
+                <h4 class="featureCard__title text-17 fw-600 mb-10">Integrasi Nilai-Nilai Islam</h4>
+                <p class="featureCard__text text-14 lh-18 text-light-1">Setiap mata pelajaran diintegrasikan dengan nilai-nilai Islam untuk membentuk karakter Islami yang kuat pada siswa.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pembelajaran Berbasis Teknologi -->
+          <div class="col-lg-6">
+            <div class="featureCard d-flex align-items-start">
+              <div class="featureCard__icon bg-blue-1 rounded-8 size-60 d-flex align-items-center justify-center mr-20 flex-shrink-0">
+                <i class="fas fa-laptop text-white text-20"></i>
+              </div>
+              <div class="featureCard__content">
+                <h4 class="featureCard__title text-17 fw-600 mb-10">Pembelajaran Berbasis Teknologi</h4>
+                <p class="featureCard__text text-14 lh-18 text-light-1">Menggunakan teknologi modern dalam proses pembelajaran untuk mempersiapkan siswa menghadapi era digital.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pendekatan Saintifik -->
+          <div class="col-lg-6">
+            <div class="featureCard d-flex align-items-start">
+              <div class="featureCard__icon bg-orange-1 rounded-8 size-60 d-flex align-items-center justify-center mr-20 flex-shrink-0">
+                <i class="fas fa-microscope text-white text-20"></i>
+              </div>
+              <div class="featureCard__content">
+                <h4 class="featureCard__title text-17 fw-600 mb-10">Pendekatan Saintifik</h4>
+                <p class="featureCard__text text-14 lh-18 text-light-1">Menerapkan metode pembelajaran saintifik: mengamati, menanya, mengumpulkan informasi, mengasosiasi, dan mengkomunikasikan.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pembelajaran Kontekstual -->
+          <div class="col-lg-6">
+            <div class="featureCard d-flex align-items-start">
+              <div class="featureCard__icon bg-purple-1 rounded-8 size-60 d-flex align-items-center justify-center mr-20 flex-shrink-0">
+                <i class="fas fa-globe text-white text-20"></i>
+              </div>
+              <div class="featureCard__content">
+                <h4 class="featureCard__title text-17 fw-600 mb-10">Pembelajaran Kontekstual</h4>
+                <p class="featureCard__text text-14 lh-18 text-light-1">Mengaitkan materi pembelajaran dengan kehidupan nyata dan lingkungan sekitar siswa untuk pemahaman yang lebih mendalam.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pengembangan Karakter -->
+          <div class="col-lg-6">
+            <div class="featureCard d-flex align-items-start">
+              <div class="featureCard__icon bg-red-1 rounded-8 size-60 d-flex align-items-center justify-center mr-20 flex-shrink-0">
+                <i class="fas fa-heart text-white text-20"></i>
+              </div>
+              <div class="featureCard__content">
+                <h4 class="featureCard__title text-17 fw-600 mb-10">Pengembangan Karakter</h4>
+                <p class="featureCard__text text-14 lh-18 text-light-1">Fokus pada pembentukan karakter melalui pembiasaan nilai-nilai positif dalam kehidupan sehari-hari di sekolah.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Penilaian Autentik -->
+          <div class="col-lg-6">
+            <div class="featureCard d-flex align-items-start">
+              <div class="featureCard__icon bg-yellow-1 rounded-8 size-60 d-flex align-items-center justify-center mr-20 flex-shrink-0">
+                <i class="fas fa-chart-line text-white text-20"></i>
+              </div>
+              <div class="featureCard__content">
+                <h4 class="featureCard__title text-17 fw-600 mb-10">Penilaian Autentik</h4>
+                <p class="featureCard__text text-14 lh-18 text-light-1">Sistem penilaian yang komprehensif meliputi aspek pengetahuan, keterampilan, dan sikap siswa secara holistik.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jadwal Pembelajaran -->
+    <section class="layout-pt-md layout-pb-lg bg-light-6">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-8 col-lg-9">
+            <h2 class="text-30 lh-16 fw-700">Jadwal Pembelajaran</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Waktu pembelajaran yang efektif dan efisien</p>
+          </div>
+        </div>
+        
+        <div class="row justify-center">
+          <div class="col-lg-8">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__content px-40 py-40">
+                <div class="row y-gap-20">
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                      <div class="bg-blue-1 rounded-8 size-50 d-flex align-items-center justify-center mr-15">
+                        <i class="fas fa-clock text-white text-16"></i>
+                      </div>
+                      <div>
+                        <div class="text-14 fw-600">Jam Masuk</div>
+                        <div class="text-13 text-light-1">07:00 WIB</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                      <div class="bg-orange-1 rounded-8 size-50 d-flex align-items-center justify-center mr-15">
+                        <i class="fas fa-clock text-white text-16"></i>
+                      </div>
+                      <div>
+                        <div class="text-14 fw-600">Jam Pulang</div>
+                        <div class="text-13 text-light-1">15:30 WIB</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                      <div class="bg-green-1 rounded-8 size-50 d-flex align-items-center justify-center mr-15">
+                        <i class="fas fa-calendar text-white text-16"></i>
+                      </div>
+                      <div>
+                        <div class="text-14 fw-600">Hari Efektif</div>
+                        <div class="text-13 text-light-1">Senin - Jumat</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                      <div class="bg-purple-1 rounded-8 size-50 d-flex align-items-center justify-center mr-15">
+                        <i class="fas fa-hourglass-half text-white text-16"></i>
+                      </div>
+                      <div>
+                        <div class="text-14 fw-600">Durasi JP</div>
+                        <div class="text-13 text-light-1">40 Menit</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                      <div class="bg-red-1 rounded-8 size-50 d-flex align-items-center justify-center mr-15">
+                        <i class="fas fa-coffee text-white text-16"></i>
+                      </div>
+                      <div>
+                        <div class="text-14 fw-600">Istirahat 1</div>
+                        <div class="text-13 text-light-1">09:20 - 09:35</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                      <div class="bg-yellow-1 rounded-8 size-50 d-flex align-items-center justify-center mr-15">
+                        <i class="fas fa-utensils text-white text-16"></i>
+                      </div>
+                      <div>
+                        <div class="text-14 fw-600">Istirahat 2</div>
+                        <div class="text-13 text-light-1">12:00 - 12:30</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <%- include('partials/footer') %>
+  
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

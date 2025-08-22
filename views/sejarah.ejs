@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sejarah - SMPTI Baituljannah</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <i class="icon icon-loading"></i>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Header -->
+  <%- include('partials/header') %>
+  
+  <main class="main-content">
+        <section class="page-header -type-1">
+          <div class="container">
+            <div class="page-header__content">
+              <div class="row justify-center text-center">
+                <div class="col-xl-6 col-lg-7 col-md-9">
+                  <h1 class="page-header__title"><%= sejarah.title %></h1>
+                  <p class="page-header__text">Perjalanan panjang SMPTI Baituljannah dalam memberikan pendidikan berkualitas berbasis teknologi informasi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="layout-pt-md layout-pb-lg">
+          <div class="container">
+            <div class="row justify-center">
+              <div class="col-xl-10">
+                <div class="timeline">
+                  <% sejarah.content.forEach((item, index) => { %>
+                  <div class="timeline-item <%= index % 2 === 0 ? 'timeline-item-left' : 'timeline-item-right' %>">
+                    <div class="timeline-marker">
+                      <div class="timeline-marker-icon bg-purple-1">
+                        <i class="icon icon-graduation-cap text-white"></i>
+                      </div>
+                    </div>
+                    <div class="timeline-content">
+                      <div class="timeline-card bg-white shadow-4 rounded-8 px-30 py-30">
+                        <div class="timeline-year text-purple-1 text-24 fw-600 mb-15"><%= item.year %></div>
+                        <p class="timeline-text text-dark-1 lh-18"><%= item.event %></p>
+                      </div>
+                    </div>
+                  </div>
+                  <% }); %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="layout-pt-md layout-pb-lg bg-light-6">
+          <div class="container">
+            <div class="row justify-center text-center">
+              <div class="col-xl-6 col-lg-8">
+                <div class="sectionTitle">
+                  <h2 class="sectionTitle__title">Pencapaian Bersejarah</h2>
+                  <p class="sectionTitle__text">Berbagai milestone penting yang telah dicapai sekolah dalam perjalanan sejarahnya</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row y-gap-30 justify-between pt-60 lg:pt-50">
+              <div class="col-lg-3 col-md-6">
+                <div class="counterCard text-center">
+                  <div class="counterCard__number text-purple-1 text-45 fw-700 lh-12">39</div>
+                  <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Tahun Berdiri</div>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                <div class="counterCard text-center">
+                  <div class="counterCard__number text-purple-1 text-45 fw-700 lh-12">800+</div>
+                  <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Alumni Sukses</div>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                <div class="counterCard text-center">
+                  <div class="counterCard__number text-purple-1 text-45 fw-700 lh-12">15+</div>
+                  <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Penghargaan</div>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                <div class="counterCard text-center">
+                  <div class="counterCard__number text-purple-1 text-45 fw-700 lh-12">A</div>
+                  <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Akreditasi</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+<style>
+.timeline {
+  position: relative;
+  padding: 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: var(--color-purple-1);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+  width: 50%;
+}
+
+.timeline-item-left {
+  left: 0;
+  padding-right: 40px;
+}
+
+.timeline-item-right {
+  left: 50%;
+  padding-left: 40px;
+}
+
+.timeline-marker {
+  position: absolute;
+  top: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+.timeline-item-left .timeline-marker {
+  right: -20px;
+}
+
+.timeline-item-right .timeline-marker {
+  left: -20px;
+}
+
+.timeline-marker-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.timeline-card {
+  position: relative;
+}
+
+.timeline-item-left .timeline-card::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid white;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.timeline-item-right .timeline-card::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-right: 10px solid white;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    padding-left: 60px !important;
+    padding-right: 0 !important;
+  }
+  
+  .timeline-marker {
+    left: 0 !important;
+    right: auto !important;
+  }
+  
+  .timeline-card::after {
+    left: -10px !important;
+    right: auto !important;
+    border-right: 10px solid white !important;
+    border-left: none !important;
+  }
+}
+</style>
+
+  </main>
+  
+  <%- include('partials/footer') %>
+  
+  <!-- Scripts -->
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

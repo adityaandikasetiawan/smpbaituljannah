@@ -1,0 +1,267 @@
+{
+  "beranda": {
+    "welcome_message": "Selamat Datang di SMPTI Baituljannah",
+    "tagline": "Unggul dalam Prestasi, Berkarakter, dan Berwawasan Global",
+    "description": "SMPTI Baituljannah adalah sekolah menengah pertama yang berkomitmen memberikan pendidikan berkualitas dengan mengembangkan potensi akademik dan karakter siswa melalui pembelajaran inovatif dan kegiatan pengembangan diri berbasis teknologi informasi.",
+    "statistics": {
+      "siswa_aktif": "800+",
+      "guru_berpengalaman": "45",
+      "program_unggulan": "12",
+      "prestasi_tahun_ini": "25+"
+    }
+  },
+  "sejarah": {
+    "title": "Sejarah SMPTI Baituljannah",
+    "content": [
+      {
+        "year": "1985",
+        "event": "Pendirian SMPTI Baituljannah berdasarkan SK Yayasan Pendidikan Islam dengan visi menjadi sekolah unggulan berbasis teknologi informasi."
+      },
+      {
+        "year": "1990",
+        "event": "Meraih akreditasi A pertama kali dan mulai mengembangkan program unggulan dalam bidang teknologi informasi dan komunikasi."
+      },
+      {
+        "year": "2000",
+        "event": "Pembangunan laboratorium teknologi informasi dan perpustakaan digital sebagai bagian dari modernisasi fasilitas pendidikan berbasis IT."
+      },
+      {
+        "year": "2010",
+        "event": "Implementasi kurikulum berbasis karakter dan teknologi informasi serta menjalin kerjasama dengan institusi teknologi."
+      },
+      {
+        "year": "2020",
+        "event": "Menjadi pelopor pembelajaran digital dan hybrid learning dengan platform e-learning terintegrasi."
+      },
+      {
+        "year": "2024",
+        "event": "Implementasi Kurikulum Merdeka dengan fokus teknologi informasi dan pengembangan program coding untuk siswa."
+      }
+    ]
+  },
+  "visi_misi": {
+    "visi": "Menjadi sekolah menengah pertama yang unggul dalam prestasi akademik dan teknologi informasi, berkarakter Islami, serta berwawasan global dan inovatif.",
+    "misi": [
+      "Menyelenggarakan pendidikan yang berkualitas dengan mengintegrasikan nilai-nilai Islam dan teknologi informasi dalam setiap pembelajaran",
+      "Mengembangkan potensi siswa melalui program akademik berbasis IT dan ekstrakurikuler yang beragam dan inovatif",
+      "Membangun budaya literasi digital, numerasi, dan penguasaan teknologi informasi dalam proses pembelajaran",
+      "Menciptakan lingkungan sekolah yang kondusif, aman, dan berbasis teknologi smart school",
+      "Menjalin kerjasama dengan orang tua, masyarakat, dan industri teknologi untuk mendukung pendidikan holistik",
+      "Mempersiapkan siswa yang siap menghadapi era digital dengan tetap menjunjung nilai-nilai Islam dan kearifan lokal"
+    ],
+    "tujuan": [
+      "Menghasilkan lulusan yang memiliki kompetensi akademik tinggi, karakter Islami, dan menguasai teknologi informasi",
+      "Meningkatkan prestasi sekolah di bidang teknologi informasi tingkat regional dan nasional",
+      "Mengembangkan kreativitas dan inovasi siswa dalam bidang teknologi informasi dan komunikasi",
+      "Membangun kesadaran digital dan kepedulian sosial pada siswa dalam menggunakan teknologi"
+    ]
+  },
+  "program_unggulan": [
+    {
+      "name": "Program Kelas Unggulan IT",
+      "description": "Program khusus untuk siswa berbakat dalam bidang teknologi informasi dengan kurikulum diperkaya dan praktikum coding intensif",
+      "features": ["Lab komputer canggih", "Guru bersertifikat IT", "Kompetisi programming", "Project development"]
+    },
+    {
+      "name": "Program Bahasa Internasional",
+      "description": "Pengembangan kemampuan bahasa Inggris dan Mandarin dengan native speaker dan sertifikasi internasional",
+      "features": ["Native speaker", "Sertifikasi TOEFL", "Exchange program", "English club"]
+    },
+    {
+      "name": "Program Coding dan Programming",
+      "description": "Pembelajaran coding, web development, dan mobile app untuk mempersiapkan siswa menjadi programmer handal",
+      "features": ["Lab programming", "Web development", "Mobile app development", "Software engineering"]
+    },
+    {
+      "name": "Program Digital Entrepreneurship",
+      "description": "Mengembangkan jiwa entrepreneurship siswa melalui bisnis digital dan e-commerce",
+      "features": ["Digital business plan", "E-commerce project", "Digital marketing", "Startup incubator"]
+    },
+    {
+      "name": "Program Seni dan Budaya",
+      "description": "Pelestarian budaya Indonesia melalui seni tari, musik tradisional, dan teater",
+      "features": ["Sanggar seni", "Festival budaya", "Pentas seni", "Kolaborasi seniman"]
+    },
+    {
+      "name": "Program Olahraga Prestasi",
+      "description": "Pembinaan atlet muda dalam berbagai cabang olahraga dengan pelatih bersertifikat",
+      "features": ["Pelatih profesional", "Fasilitas lengkap", "Kompetisi rutin", "Beasiswa atlet"]
+    }
+  ],
+  "kurikulum": {
+    "jenis": "Kurikulum Merdeka",
+    "deskripsi": "SMPTI Baituljannah menerapkan Kurikulum Merdeka yang terintegrasi dengan teknologi informasi, memberikan fleksibilitas kepada siswa untuk mengembangkan potensi di bidang IT sesuai dengan fase perkembangannya.",
+    "mata_pelajaran": {
+      "wajib": [
+        "Pendidikan Agama dan Budi Pekerti",
+        "Pendidikan Pancasila",
+        "Bahasa Indonesia",
+        "Matematika",
+        "Ilmu Pengetahuan Alam (IPA)",
+        "Ilmu Pengetahuan Sosial (IPS)",
+        "Bahasa Inggris",
+        "Pendidikan Jasmani, Olahraga, dan Kesehatan",
+        "Seni dan Budaya",
+        "Prakarya dan Kewirausahaan",
+        "Informatika"
+      ],
+      "pilihan": [
+        "Bahasa Daerah (Betawi)",
+        "Bahasa Mandarin",
+        "Pemrograman Web dan Mobile",
+        "Jurnalistik",
+        "Tata Boga",
+        "UI/UX Design"
+      ]
+    },
+    "keunggulan": [
+      "Pembelajaran berbasis projek (Project Based Learning)",
+      "Asesmen yang berpusat pada siswa",
+      "Profil Pelajar Pancasila terintegrasi",
+      "Fleksibilitas waktu dan metode pembelajaran",
+      "Kolaborasi dengan industri dan komunitas"
+    ]
+  },
+  "fasilitas": [
+    {
+      "kategori": "Ruang Pembelajaran",
+      "items": [
+        "24 Ruang Kelas ber-AC dengan smart board dan proyektor",
+        "Laboratorium IPA (Fisika, Kimia, Biologi) terintegrasi IT",
+        "Laboratorium Komputer dengan 50 unit PC gaming",
+        "Laboratorium Programming dan Coding",
+        "Laboratorium Bahasa multimedia",
+        "Ruang Seni dan Musik dengan instrumen lengkap",
+        "Studio Desain Grafis dan Multimedia",
+        "Workshop Robotika dan IoT"
+      ]
+    },
+    {
+      "kategori": "Fasilitas Penunjang",
+      "items": [
+        "Perpustakaan digital dengan 5000+ koleksi buku",
+        "Aula serbaguna kapasitas 500 orang",
+        "Masjid dengan kapasitas 300 jamaah",
+        "Kantin sehat dengan menu bergizi",
+        "Koperasi siswa dan toko buku",
+        "Ruang UKS dengan tenaga medis"
+      ]
+    },
+    {
+      "kategori": "Fasilitas Olahraga",
+      "items": [
+        "Lapangan basket indoor",
+        "Lapangan futsal dengan rumput sintetis",
+        "Lapangan voli dan badminton",
+        "Kolam renang semi olimpik",
+        "Gym dan fitness center",
+        "Track lari 200 meter"
+      ]
+    },
+    {
+      "kategori": "Teknologi dan Keamanan",
+      "items": [
+        "WiFi gratis di seluruh area sekolah",
+        "CCTV 24 jam untuk keamanan",
+        "Sistem absensi digital",
+        "E-learning platform",
+        "Sistem informasi akademik online",
+        "Parkir yang aman dan tertata"
+      ]
+    }
+  ],
+  "prestasi": {
+    "akademik": [
+      {
+        "tahun": "2024",
+        "prestasi": "Juara 1 Kompetisi Programming Nasional tingkat SMP se-Indonesia",
+        "siswa": "Ahmad Rizki Pratama - Kelas 9A"
+      },
+      {
+        "tahun": "2024",
+        "prestasi": "Juara 2 Lomba Web Development tingkat Nasional",
+        "siswa": "Siti Nurhaliza - Kelas 9B"
+      },
+      {
+        "tahun": "2023",
+        "prestasi": "Juara 3 Lomba Mobile App Development tingkat Nasional",
+        "siswa": "Tim Developer SMPTI Baituljannah"
+      },
+      {
+        "tahun": "2023",
+        "prestasi": "Juara 1 English Speech Contest tingkat DKI Jakarta",
+        "siswa": "Putri Maharani - Kelas 8C"
+      }
+    ],
+    "non_akademik": [
+      {
+        "tahun": "2024",
+        "prestasi": "Juara 1 Lomba IoT (Internet of Things) tingkat Nasional",
+        "siswa": "Tim IT SMPTI Baituljannah"
+      },
+      {
+        "tahun": "2024",
+        "prestasi": "Juara 2 Festival Tari Tradisional tingkat Provinsi",
+        "siswa": "Sanggar Tari Nusantara"
+      },
+      {
+        "tahun": "2023",
+        "prestasi": "Juara 1 Lomba E-Sports tingkat Nasional",
+        "siswa": "Tim E-Sports SMPTI Baituljannah"
+      },
+      {
+        "tahun": "2023",
+        "prestasi": "Juara 3 Lomba Video Editing tingkat Nasional",
+        "siswa": "Tim Multimedia SMPTI Baituljannah"
+      }
+    ],
+    "sekolah": [
+      {
+        "tahun": "2024",
+        "prestasi": "Sekolah Adiwiyata Nasional - Kategori Sekolah Peduli Lingkungan"
+      },
+      {
+        "tahun": "2023",
+        "prestasi": "Akreditasi A dari Badan Akreditasi Nasional Sekolah/Madrasah (BAN-S/M)"
+      },
+      {
+        "tahun": "2023",
+        "prestasi": "Sekolah Rujukan IT dan Digital Learning tingkat Nasional"
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "Bagaimana cara mendaftar di SMPTI Baituljannah?",
+      "answer": "Pendaftaran dilakukan melalui sistem online di website resmi SMPTI Baituljannah atau datang langsung ke sekolah. Periode pendaftaran biasanya dimulai bulan Januari hingga Mei setiap tahunnya dengan tes seleksi akademik dan wawancara."
+    },
+    {
+      "question": "Apa saja syarat pendaftaran siswa baru?",
+      "answer": "Syarat pendaftaran meliputi: (1) Ijazah SD/sederajat, (2) Akta kelahiran, (3) Kartu Keluarga, (4) Pas foto terbaru, (5) Surat keterangan sehat dari dokter, (6) Surat keterangan kelakuan baik dari sekolah asal."
+    },
+    {
+      "question": "Berapa biaya sekolah di SMPTI Baituljannah?",
+      "answer": "Sebagai sekolah swasta, biaya pendidikan meliputi uang pangkal, SPP bulanan, dan biaya pengembangan fasilitas IT. Tersedia program cicilan dan beasiswa prestasi untuk meringankan biaya pendidikan."
+    },
+    {
+      "question": "Apa saja ekstrakurikuler yang tersedia?",
+      "answer": "Tersedia 20+ ekstrakurikuler meliputi: Programming Club, Robotika, Web Development, E-Sports, English Club, Pramuka, PMR, Rohis, Basket, Futsal, Renang, Tari, Musik, Teater, Jurnalistik Digital, dan Fotografi."
+    },
+    {
+      "question": "Bagaimana sistem pembelajaran di SMPTI Baituljannah?",
+      "answer": "Kami menerapkan Kurikulum Merdeka terintegrasi IT dengan pembelajaran hybrid (tatap muka dan online). Jam belajar dari 07.00-15.30 WIB dengan sistem smart class dan pembelajaran berbasis projek teknologi."
+    },
+    {
+      "question": "Apakah ada program beasiswa?",
+      "answer": "Ya, tersedia beasiswa prestasi akademik, beasiswa IT untuk siswa berbakat di bidang teknologi, dan beasiswa sosial untuk siswa kurang mampu dengan sistem seleksi yang ketat."
+    },
+    {
+      "question": "Bagaimana fasilitas transportasi ke sekolah?",
+      "answer": "Sekolah dapat diakses dengan berbagai transportasi umum seperti TransJakarta, KRL, dan angkot. Tersedia juga area parkir yang aman untuk siswa yang diantar orang tua."
+    },
+    {
+      "question": "Apakah ada program pertukaran siswa?",
+      "answer": "Ya, kami memiliki program sister school dengan beberapa sekolah di Malaysia dan Singapura. Siswa berprestasi berkesempatan mengikuti program pertukaran budaya."
+    }
+  ]
+}

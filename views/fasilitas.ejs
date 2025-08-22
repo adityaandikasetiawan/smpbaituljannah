@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fasilitas - SMPTI Baituljannah</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <i class="icon icon-loading"></i>
+      </div>
+    </div>
+  </div>
+  
+  <%- include('partials/header') %>
+  
+  <main class="main-content layout-pt-lg layout-pb-lg">
+    <section class="page-header -type-1">
+      <div class="container">
+        <div class="page-header__content">
+          <div class="row justify-center text-center">
+            <div class="col-xl-6 col-lg-7 col-md-9">
+              <h1 class="page-header__title">Fasilitas Sekolah</h1>
+              <p class="page-header__text">Fasilitas lengkap dan modern untuk mendukung kegiatan belajar mengajar di SMPTI Baituljannah</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout-pt-md layout-pb-lg">
+      <div class="container">
+        <div class="row y-gap-30">
+          <!-- Laboratorium Komputer -->
+          <div class="col-lg-4 col-md-6">
+            <div class="coursesCard -type-1 text-center pt-50 pb-40 px-30 rounded-8">
+              <div class="coursesCard__image">
+                <i class="fas fa-desktop text-purple-1" style="font-size: 60px;"></i>
+              </div>
+              <div class="coursesCard__content mt-30">
+                <h5 class="coursesCard__title text-18 lh-1 fw-500">Laboratorium Komputer</h5>
+                <p class="coursesCard__text text-14 mt-10">Lab komputer dengan 40 unit PC terbaru, dilengkapi software pembelajaran dan akses internet berkecepatan tinggi.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Perpustakaan -->
+          <div class="col-lg-4 col-md-6">
+            <div class="coursesCard -type-1 text-center pt-50 pb-40 px-30 rounded-8">
+              <div class="coursesCard__image">
+                <i class="fas fa-book text-purple-1" style="font-size: 60px;"></i>
+              </div>
+              <div class="coursesCard__content mt-30">
+                <h5 class="coursesCard__title text-18 lh-1 fw-500">Perpustakaan Digital</h5>
+                <p class="coursesCard__text text-14 mt-10">Perpustakaan modern dengan koleksi buku fisik dan digital, ruang baca yang nyaman, dan akses e-book.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ruang Kelas -->
+          <div class="col-lg-4 col-md-6">
+            <div class="coursesCard -type-1 text-center pt-50 pb-40 px-30 rounded-8">
+              <div class="coursesCard__image">
+                <i class="fas fa-chalkboard-teacher text-purple-1" style="font-size: 60px;"></i>
+              </div>
+              <div class="coursesCard__content mt-30">
+                <h5 class="coursesCard__title text-18 lh-1 fw-500">Ruang Kelas Smart</h5>
+                <p class="coursesCard__text text-14 mt-10">24 ruang kelas ber-AC dengan smart board, proyektor, dan sistem audio yang mendukung pembelajaran interaktif.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lab Sains -->
+          <div class="col-lg-4 col-md-6">
+            <div class="coursesCard -type-1 text-center pt-50 pb-40 px-30 rounded-8">
+              <div class="coursesCard__image">
+                <i class="fas fa-flask text-purple-1" style="font-size: 60px;"></i>
+              </div>
+              <div class="coursesCard__content mt-30">
+                <h5 class="coursesCard__title text-18 lh-1 fw-500">Laboratorium Sains</h5>
+                <p class="coursesCard__text text-14 mt-10">Lab IPA lengkap untuk praktikum Fisika, Kimia, dan Biologi dengan peralatan modern dan aman.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aula -->
+          <div class="col-lg-4 col-md-6">
+            <div class="coursesCard -type-1 text-center pt-50 pb-40 px-30 rounded-8">
+              <div class="coursesCard__image">
+                <i class="fas fa-users text-purple-1" style="font-size: 60px;"></i>
+              </div>
+              <div class="coursesCard__content mt-30">
+                <h5 class="coursesCard__title text-18 lh-1 fw-500">Aula Serbaguna</h5>
+                <p class="coursesCard__text text-14 mt-10">Aula berkapasitas 500 orang dengan sistem sound system dan lighting untuk berbagai acara sekolah.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lapangan Olahraga -->
+          <div class="col-lg-4 col-md-6">
+            <div class="coursesCard -type-1 text-center pt-50 pb-40 px-30 rounded-8">
+              <div class="coursesCard__image">
+                <i class="fas fa-running text-purple-1" style="font-size: 60px;"></i>
+              </div>
+              <div class="coursesCard__content mt-30">
+                <h5 class="coursesCard__title text-18 lh-1 fw-500">Lapangan Olahraga</h5>
+                <p class="coursesCard__text text-14 mt-10">Lapangan basket, voli, dan futsal dengan standar nasional untuk mendukung kegiatan olahraga siswa.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Masjid -->
+          <div class="col-lg-4 col-md-6">
+            <div class="coursesCard -type-1 text-center pt-50 pb-40 px-30 rounded-8">
+              <div class="coursesCard__image">
+                <i class="fas fa-mosque text-purple-1" style="font-size: 60px;"></i>
+              </div>
+              <div class="coursesCard__content mt-30">
+                <h5 class="coursesCard__title text-18 lh-1 fw-500">Masjid Sekolah</h5>
+                <p class="coursesCard__text text-14 mt-10">Masjid dengan kapasitas 300 jamaah, dilengkapi AC dan sound system untuk kegiatan keagamaan.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kantin -->
+          <div class="col-lg-4 col-md-6">
+            <div class="coursesCard -type-1 text-center pt-50 pb-40 px-30 rounded-8">
+              <div class="coursesCard__image">
+                <i class="fas fa-utensils text-purple-1" style="font-size: 60px;"></i>
+              </div>
+              <div class="coursesCard__content mt-30">
+                <h5 class="coursesCard__title text-18 lh-1 fw-500">Kantin Sehat</h5>
+                <p class="coursesCard__text text-14 mt-10">Kantin dengan menu makanan sehat dan bergizi, dikelola dengan standar kebersihan yang tinggi.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Klinik Kesehatan -->
+          <div class="col-lg-4 col-md-6">
+            <div class="coursesCard -type-1 text-center pt-50 pb-40 px-30 rounded-8">
+              <div class="coursesCard__image">
+                <i class="fas fa-heartbeat text-purple-1" style="font-size: 60px;"></i>
+              </div>
+              <div class="coursesCard__content mt-30">
+                <h5 class="coursesCard__title text-18 lh-1 fw-500">Klinik Kesehatan</h5>
+                <p class="coursesCard__text text-14 mt-10">Klinik dengan tenaga medis profesional dan peralatan P3K lengkap untuk kesehatan siswa dan guru.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <%- include('partials/footer') %>
+  
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

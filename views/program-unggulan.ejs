@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program Unggulan - SMPTI Baituljannah</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <i class="icon icon-loading"></i>
+      </div>
+    </div>
+  </div>
+  
+  <%- include('partials/header') %>
+  
+  <main class="main-content layout-pt-lg layout-pb-lg">
+    <section class="page-header -type-1">
+      <div class="container">
+        <div class="page-header__content">
+          <div class="row justify-center text-center">
+            <div class="col-xl-6 col-lg-7 col-md-9">
+              <h1 class="page-header__title">Program Unggulan</h1>
+              <p class="page-header__text">Program-program khusus yang menjadi keunggulan SMPTI Baituljannah dalam mengembangkan potensi siswa</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Teknologi Informasi -->
+    <section class="layout-pt-md layout-pb-md">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Program Teknologi Informasi</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Program unggulan yang mempersiapkan siswa menghadapi era digital</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- Programming -->
+          <div class="col-lg-4 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-purple-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-code text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Pemrograman Komputer</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Pembelajaran bahasa pemrograman Python, JavaScript, dan HTML/CSS untuk membangun aplikasi web dan desktop.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Python Programming</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Web Development</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Mobile App Development</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Robotika -->
+          <div class="col-lg-4 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-orange-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-robot text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Robotika & IoT</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Pembelajaran pembuatan robot dan sistem Internet of Things (IoT) menggunakan Arduino dan Raspberry Pi.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Arduino Programming</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Sensor Integration</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">IoT Projects</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multimedia -->
+          <div class="col-lg-4 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-red-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-video text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Multimedia & Desain</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Pembelajaran desain grafis, video editing, dan animasi menggunakan software profesional.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Adobe Photoshop</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Video Editing</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">3D Animation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Bahasa -->
+    <section class="layout-pt-md layout-pb-md bg-light-6">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Program Bahasa</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Program pengembangan kemampuan bahasa untuk komunikasi global</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- English Club -->
+          <div class="col-lg-6 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-blue-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-globe text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">English Club</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Program intensif bahasa Inggris dengan native speaker dan persiapan sertifikasi internasional.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Conversation Practice</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">TOEFL Preparation</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">English Debate</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arabic Program -->
+          <div class="col-lg-6 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-green-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-mosque text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Program Bahasa Arab</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Pembelajaran bahasa Arab untuk memahami Al-Quran dan Hadits serta komunikasi sehari-hari.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Quranic Arabic</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Modern Arabic</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Arabic Calligraphy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Sains -->
+    <section class="layout-pt-md layout-pb-md">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Program Sains & Matematika</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Program pengembangan kemampuan sains dan matematika untuk olimpiade</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- Olimpiade Matematika -->
+          <div class="col-lg-4 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-yellow-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-calculator text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Olimpiade Matematika</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Persiapan intensif untuk Olimpiade Sains Nasional bidang Matematika tingkat kabupaten hingga nasional.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Problem Solving</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Advanced Mathematics</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Competition Training</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Olimpiade IPA -->
+          <div class="col-lg-4 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-cyan-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-atom text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Olimpiade IPA</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Program persiapan Olimpiade Sains Nasional bidang IPA dengan praktikum laboratorium intensif.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Physics Experiments</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Chemistry Lab</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Biology Research</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Science Fair -->
+          <div class="col-lg-4 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-pink-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-flask text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Science Fair Project</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Program penelitian sains untuk mengikuti kompetisi Science Fair tingkat nasional dan internasional.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Research Methodology</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Scientific Writing</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Presentation Skills</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Keagamaan -->
+    <section class="layout-pt-md layout-pb-md bg-light-6">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Program Keagamaan</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Program pembinaan akhlak dan spiritual siswa</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- Tahfidz -->
+          <div class="col-lg-6 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-green-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-quran text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Program Tahfidz</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Program menghafal Al-Quran dengan target minimal 5 juz selama 3 tahun masa belajar.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Metode Tilawati</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Tahsin & Tajwid</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Muroja'ah Rutin</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Islamic Studies -->
+          <div class="col-lg-6 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-purple-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-book-open text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Islamic Studies</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Pembelajaran mendalam tentang akidah, akhlak, fiqh, dan sejarah Islam dengan pendekatan modern.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Akidah & Akhlak</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Fiqh Kontemporer</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Sejarah Islam</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keunggulan Program -->
+    <section class="layout-pt-md layout-pb-lg">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Keunggulan Program</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Mengapa memilih program unggulan SMPTI Baituljannah</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30 justify-between">
+          <div class="col-lg-3 col-md-6">
+            <div class="featureCard text-center">
+              <div class="featureCard__icon bg-red-1 rounded-8 size-80 d-flex align-items-center justify-center mx-auto mb-20">
+                <i class="fas fa-users text-white text-30"></i>
+              </div>
+              <h4 class="featureCard__title text-17 fw-500 mb-10">Kelas Kecil</h4>
+              <p class="featureCard__text text-14 lh-18 text-light-1">Maksimal 20 siswa per kelas untuk pembelajaran yang lebih efektif</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="featureCard text-center">
+              <div class="featureCard__icon bg-blue-1 rounded-8 size-80 d-flex align-items-center justify-center mx-auto mb-20">
+                <i class="fas fa-chalkboard-teacher text-white text-30"></i>
+              </div>
+              <h4 class="featureCard__title text-17 fw-500 mb-10">Guru Berpengalaman</h4>
+              <p class="featureCard__text text-14 lh-18 text-light-1">Tenaga pengajar bersertifikat dan berpengalaman di bidangnya</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="featureCard text-center">
+              <div class="featureCard__icon bg-green-1 rounded-8 size-80 d-flex align-items-center justify-center mx-auto mb-20">
+                <i class="fas fa-laptop text-white text-30"></i>
+              </div>
+              <h4 class="featureCard__title text-17 fw-500 mb-10">Fasilitas Modern</h4>
+              <p class="featureCard__text text-14 lh-18 text-light-1">Laboratorium komputer dan sains dengan peralatan terkini</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="featureCard text-center">
+              <div class="featureCard__icon bg-orange-1 rounded-8 size-80 d-flex align-items-center justify-center mx-auto mb-20">
+                <i class="fas fa-trophy text-white text-30"></i>
+              </div>
+              <h4 class="featureCard__title text-17 fw-500 mb-10">Prestasi Terbukti</h4>
+              <p class="featureCard__text text-14 lh-18 text-light-1">Siswa meraih berbagai prestasi di tingkat nasional dan internasional</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <%- include('partials/footer') %>
+  
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

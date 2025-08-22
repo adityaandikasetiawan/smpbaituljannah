@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visi & Misi - SMPTI Baituljannah</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <i class="icon icon-loading"></i>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Header -->
+  <%- include('partials/header') %>
+  
+  <main class="main-content">
+        <section class="page-header -type-1">
+          <div class="container">
+            <div class="page-header__content">
+              <div class="row justify-center text-center">
+                <div class="col-xl-6 col-lg-7 col-md-9">
+                  <h1 class="page-header__title">Visi & Misi</h1>
+                  <p class="page-header__text">Landasan filosofis dan arah pengembangan SMPTI Baituljannah</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Visi Section -->
+        <section class="layout-pt-md layout-pb-md">
+          <div class="container">
+            <div class="row justify-center">
+              <div class="col-xl-10">
+                <div class="bg-purple-1 rounded-16 px-40 py-40 md:px-30 md:py-30">
+                  <div class="row align-items-center">
+                    <div class="col-lg-2 col-md-3">
+                      <div class="text-center">
+                        <div class="bg-white rounded-full size-80 d-flex align-items-center justify-center">
+                          <i class="icon icon-eye text-purple-1 text-30"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-10 col-md-9">
+                      <h2 class="text-white text-30 fw-700 mb-20">VISI</h2>
+                      <p class="text-white text-18 lh-18"><%= visiMisi.visi %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Misi Section -->
+        <section class="layout-pb-md">
+          <div class="container">
+            <div class="row justify-center">
+              <div class="col-xl-10">
+                <div class="bg-white shadow-4 rounded-16 px-40 py-40 md:px-30 md:py-30">
+                  <div class="row">
+                    <div class="col-lg-2 col-md-3">
+                      <div class="text-center mb-30">
+                        <div class="bg-purple-1 rounded-full size-80 d-flex align-items-center justify-center">
+                          <i class="icon icon-target text-white text-30"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-10 col-md-9">
+                      <h2 class="text-dark-1 text-30 fw-700 mb-30">MISI</h2>
+                      <div class="row y-gap-20">
+                        <% visiMisi.misi.forEach((item, index) => { %>
+                        <div class="col-12">
+                          <div class="d-flex align-items-start">
+                            <div class="bg-purple-1 rounded-full size-30 d-flex align-items-center justify-center mr-20 mt-5">
+                              <span class="text-white text-14 fw-600"><%= index + 1 %></span>
+                            </div>
+                            <p class="text-dark-1 text-16 lh-18"><%= item %></p>
+                          </div>
+                        </div>
+                        <% }); %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tujuan Section -->
+        <section class="layout-pb-lg bg-light-6">
+          <div class="container">
+            <div class="row justify-center text-center">
+              <div class="col-xl-6 col-lg-8">
+                <div class="sectionTitle">
+                  <h2 class="sectionTitle__title">Tujuan Pendidikan</h2>
+                  <p class="sectionTitle__text">Target pencapaian yang ingin diwujudkan dalam proses pendidikan</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row y-gap-30 pt-60 lg:pt-50">
+              <% visiMisi.tujuan.forEach((tujuan, index) => { %>
+              <div class="col-lg-6">
+                <div class="featureCard -type-4 bg-white shadow-4 rounded-8 px-30 py-30 h-100">
+                  <div class="featureCard__icon bg-purple-1 rounded-8 size-60 d-flex align-items-center justify-center">
+                    <i class="icon icon-<%= index % 2 === 0 ? 'graduation-cap' : 'users' %> text-white text-24"></i>
+                  </div>
+                  <div class="featureCard__content mt-20">
+                    <h4 class="featureCard__title text-18 fw-600 text-dark-1">Tujuan <%= index + 1 %></h4>
+                    <p class="featureCard__text text-15 mt-10 lh-18"><%= tujuan %></p>
+                  </div>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="layout-pt-md layout-pb-lg">
+          <div class="container">
+            <div class="row justify-center text-center">
+              <div class="col-xl-6 col-lg-8">
+                <div class="sectionTitle">
+                  <h2 class="sectionTitle__title">Nilai-Nilai Sekolah</h2>
+                  <p class="sectionTitle__text">Prinsip-prinsip yang menjadi pedoman dalam setiap aktivitas sekolah</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row y-gap-30 justify-center pt-60 lg:pt-50">
+              <div class="col-lg-3 col-md-6">
+                <div class="valueCard text-center">
+                  <div class="valueCard__icon bg-orange-1 rounded-full size-80 d-flex align-items-center justify-center mx-auto">
+                    <i class="icon icon-heart text-white text-30"></i>
+                  </div>
+                  <h5 class="valueCard__title text-18 fw-600 text-dark-1 mt-20">Integritas</h5>
+                  <p class="valueCard__text text-15 mt-10 lh-18">Kejujuran dan konsistensi dalam setiap tindakan</p>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                <div class="valueCard text-center">
+                  <div class="valueCard__icon bg-red-1 rounded-full size-80 d-flex align-items-center justify-center mx-auto">
+                    <i class="icon icon-star text-white text-30"></i>
+                  </div>
+                  <h5 class="valueCard__title text-18 fw-600 text-dark-1 mt-20">Keunggulan</h5>
+                  <p class="valueCard__text text-15 mt-10 lh-18">Selalu berusaha memberikan yang terbaik</p>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                <div class="valueCard text-center">
+                  <div class="valueCard__icon bg-blue-1 rounded-full size-80 d-flex align-items-center justify-center mx-auto">
+                    <i class="icon icon-users text-white text-30"></i>
+                  </div>
+                  <h5 class="valueCard__title text-18 fw-600 text-dark-1 mt-20">Kerjasama</h5>
+                  <p class="valueCard__text text-15 mt-10 lh-18">Membangun sinergi untuk mencapai tujuan bersama</p>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                <div class="valueCard text-center">
+                  <div class="valueCard__icon bg-green-1 rounded-full size-80 d-flex align-items-center justify-center mx-auto">
+                    <i class="icon icon-leaf text-white text-30"></i>
+                  </div>
+                  <h5 class="valueCard__title text-18 fw-600 text-dark-1 mt-20">Peduli Lingkungan</h5>
+                  <p class="valueCard__text text-15 mt-10 lh-18">Menjaga dan melestarikan lingkungan hidup</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+  </main>
+  
+  <%- include('partials/footer') %>
+  
+  <!-- Scripts -->
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

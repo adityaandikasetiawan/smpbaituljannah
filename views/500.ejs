@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Error - Baituljannah</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <div class="preloader__img"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <%- include('partials/header') %>
+
+  <div class="content-wrapper js-content-wrapper">
+    <!-- 500 Section -->
+    <section class="layout-pt-lg layout-pb-lg">
+      <div class="container">
+        <div class="row justify-center text-center">
+          <div class="col-xl-5 col-lg-6 col-md-7">
+            <div class="500">
+              <div class="500__content">
+                <h1 class="500__title">500</h1>
+                <h2 class="500__subtitle">Internal Server Error</h2>
+                <p class="500__text">Something went wrong on our end. We're working to fix this issue. Please try again later.</p>
+                <div class="500__button">
+                  <a href="/" class="button -md -purple-1 text-white">Go Back Home</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+
+  <!-- Scripts -->
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

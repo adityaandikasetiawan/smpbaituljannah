@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pendaftaran Siswa Baru - SMPTI Baituljannah</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
+  
+  <style>
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+    
+    .header__container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .preloader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .registration-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .registration-form {
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #1e88e5;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .btn-primary {
+      background: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+    }
+    
+    .btn-primary:hover {
+      background: #1565c0;
+    }
+    
+    .alert {
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .alert-danger {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .required {
+      color: #e74c3c;
+    }
+    
+    .documents-info {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    
+    .documents-info h4 {
+      color: #1e88e5;
+      margin-bottom: 15px;
+    }
+    
+    .documents-info ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .documents-info li {
+      padding: 5px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .documents-info li:last-child {
+      border-bottom: none;
+    }
+    
+    .documents-info i {
+      color: #1e88e5;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body class="preloader-visible" data-barba="wrapper">
+  <!-- Preloader -->
+  <div class="preloader js-preloader" id="preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <div class="preloader__img"></div>
+      </div>
+    </div>
+    <div class="preloader__title">SMPTI Baituljannah</div>
+  </div>
+
+  <!-- Header -->
+  <header data-anim="fade" data-add-bg="" class="header -type-4 -shadow bg-white border-bottom-light js-header">
+    <div class="header__container py-10">
+      <div class="row justify-between items-center">
+        
+        <div class="col-auto">
+          <div class="header-left d-flex items-center">
+            
+            <div class="header__logo pr-30 xl:pr-20 md:pr-0">
+              <a data-barba href="/">
+                <img src="/img/logo smp.png" alt="SMPTI Baituljannah" style="max-height: 50px; width: auto;">
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-auto">
+          <div class="d-flex items-center">
+            <div class="header-menu">
+              <div class="header-menu__content">
+                <div class="d-flex items-center">
+                  <a href="/login" class="button -sm -outline-blue-1 text-blue-1 ml-30">Portal Siswa</a>
+                  <a href="/" class="button -sm -blue-1 text-white ml-30">Beranda</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="registration-container">
+    <div class="registration-form">
+      <div class="text-center mb-40">
+        <h1 class="text-30 lh-14 fw-700">Pendaftaran Siswa Baru</h1>
+        <p class="text-15 text-light-1 mt-10">SMPTI Baituljannah Tahun Ajaran 2024/2025</p>
+      </div>
+
+      <% if (typeof success !== 'undefined' && success) { %>
+        <div class="alert alert-success">
+          <i class="fas fa-check-circle"></i>
+          Pendaftaran berhasil! Data Anda telah kami terima dan akan segera diproses.
+        </div>
+      <% } %>
+
+      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+        <div class="alert alert-danger">
+          <i class="fas fa-exclamation-triangle"></i>
+          <ul style="margin: 0; padding-left: 20px;">
+            <% errors.forEach(error => { %>
+              <li><%= error %></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% } %>
+
+      <!-- Informasi Dokumen yang Diperlukan -->
+      <div class="documents-info">
+        <h4><i class="fas fa-file-alt"></i> Dokumen yang Diperlukan</h4>
+        <ul>
+          <li><i class="fas fa-check"></i> Fotokopi Ijazah SD/MI yang telah dilegalisir</li>
+          <li><i class="fas fa-check"></i> Fotokopi SKHUN (Surat Keterangan Hasil Ujian Nasional)</li>
+          <li><i class="fas fa-check"></i> Fotokopi Akta Kelahiran</li>
+          <li><i class="fas fa-check"></i> Fotokopi Kartu Keluarga (KK)</li>
+          <li><i class="fas fa-check"></i> Pas foto terbaru ukuran 3x4 (3 lembar)</li>
+          <li><i class="fas fa-check"></i> Fotokopi KTP Orang Tua/Wali</li>
+        </ul>
+        <p class="mt-15 text-14 text-light-1">
+          <i class="fas fa-info-circle"></i>
+          Dokumen-dokumen di atas harus diserahkan saat verifikasi data di sekolah.
+        </p>
+      </div>
+
+      <form action="/daftar-siswa" method="POST" id="registrationForm">
+        <!-- Data Siswa -->
+        <h3 class="text-20 fw-600 mb-20">Data Siswa</h3>
+        
+        <div class="form-group">
+          <label for="namaLengkap">Nama Lengkap <span class="required">*</span></label>
+          <input type="text" id="namaLengkap" name="namaLengkap" required 
+                 value="<%= typeof formData !== 'undefined' ? formData.namaLengkap || '' : '' %>">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tempatLahir">Tempat Lahir <span class="required">*</span></label>
+            <input type="text" id="tempatLahir" name="tempatLahir" required
+                   value="<%= typeof formData !== 'undefined' ? formData.tempatLahir || '' : '' %>">
+          </div>
+          <div class="form-group">
+            <label for="tanggalLahir">Tanggal Lahir <span class="required">*</span></label>
+            <input type="date" id="tanggalLahir" name="tanggalLahir" required
+                   value="<%= typeof formData !== 'undefined' ? formData.tanggalLahir || '' : '' %>">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="jenisKelamin">Jenis Kelamin <span class="required">*</span></label>
+            <select id="jenisKelamin" name="jenisKelamin" required>
+              <option value="">Pilih Jenis Kelamin</option>
+              <option value="Laki-laki" <%= typeof formData !== 'undefined' && formData.jenisKelamin === 'Laki-laki' ? 'selected' : '' %>>Laki-laki</option>
+              <option value="Perempuan" <%= typeof formData !== 'undefined' && formData.jenisKelamin === 'Perempuan' ? 'selected' : '' %>>Perempuan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="agama">Agama <span class="required">*</span></label>
+            <select id="agama" name="agama" required>
+              <option value="">Pilih Agama</option>
+              <option value="Islam" <%= typeof formData !== 'undefined' && formData.agama === 'Islam' ? 'selected' : '' %>>Islam</option>
+              <option value="Kristen" <%= typeof formData !== 'undefined' && formData.agama === 'Kristen' ? 'selected' : '' %>>Kristen</option>
+              <option value="Katolik" <%= typeof formData !== 'undefined' && formData.agama === 'Katolik' ? 'selected' : '' %>>Katolik</option>
+              <option value="Hindu" <%= typeof formData !== 'undefined' && formData.agama === 'Hindu' ? 'selected' : '' %>>Hindu</option>
+              <option value="Buddha" <%= typeof formData !== 'undefined' && formData.agama === 'Buddha' ? 'selected' : '' %>>Buddha</option>
+              <option value="Konghucu" <%= typeof formData !== 'undefined' && formData.agama === 'Konghucu' ? 'selected' : '' %>>Konghucu</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="alamat">Alamat Lengkap <span class="required">*</span></label>
+          <textarea id="alamat" name="alamat" rows="3" required><%= typeof formData !== 'undefined' ? formData.alamat || '' : '' %></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="noTelepon">No. Telepon Siswa</label>
+            <input type="tel" id="noTelepon" name="noTelepon"
+                   value="<%= typeof formData !== 'undefined' ? formData.noTelepon || '' : '' %>">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Siswa</label>
+            <input type="email" id="email" name="email"
+                   value="<%= typeof formData !== 'undefined' ? formData.email || '' : '' %>">
+          </div>
+        </div>
+
+        <!-- Data Sekolah Asal -->
+        <h3 class="text-20 fw-600 mb-20 mt-40">Data Sekolah Asal</h3>
+        
+        <div class="form-group">
+          <label for="asalSekolah">Nama Sekolah Asal <span class="required">*</span></label>
+          <input type="text" id="asalSekolah" name="asalSekolah" required
+                 value="<%= typeof formData !== 'undefined' ? formData.asalSekolah || '' : '' %>">
+        </div>
+
+        <div class="form-group">
+          <label for="alamatSekolah">Alamat Sekolah Asal <span class="required">*</span></label>
+          <textarea id="alamatSekolah" name="alamatSekolah" rows="2" required><%= typeof formData !== 'undefined' ? formData.alamatSekolah || '' : '' %></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="tahunLulus">Tahun Lulus <span class="required">*</span></label>
+          <input type="number" id="tahunLulus" name="tahunLulus" min="2020" max="2024" required
+                 value="<%= typeof formData !== 'undefined' ? formData.tahunLulus || '' : '' %>">
+        </div>
+
+        <!-- Data Orang Tua/Wali -->
+        <h3 class="text-20 fw-600 mb-20 mt-40">Data Orang Tua/Wali</h3>
+        
+        <div class="form-group">
+          <label for="namaAyah">Nama Ayah <span class="required">*</span></label>
+          <input type="text" id="namaAyah" name="namaAyah" required
+                 value="<%= typeof formData !== 'undefined' ? formData.namaAyah || '' : '' %>">
+        </div>
+
+        <div class="form-group">
+          <label for="namaIbu">Nama Ibu <span class="required">*</span></label>
+          <input type="text" id="namaIbu" name="namaIbu" required
+                 value="<%= typeof formData !== 'undefined' ? formData.namaIbu || '' : '' %>">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pekerjaanAyah">Pekerjaan Ayah <span class="required">*</span></label>
+            <input type="text" id="pekerjaanAyah" name="pekerjaanAyah" required
+                   value="<%= typeof formData !== 'undefined' ? formData.pekerjaanAyah || '' : '' %>">
+          </div>
+          <div class="form-group">
+            <label for="pekerjaanIbu">Pekerjaan Ibu <span class="required">*</span></label>
+            <input type="text" id="pekerjaanIbu" name="pekerjaanIbu" required
+                   value="<%= typeof formData !== 'undefined' ? formData.pekerjaanIbu || '' : '' %>">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="noTeleponOrtu">No. Telepon Orang Tua <span class="required">*</span></label>
+            <input type="tel" id="noTeleponOrtu" name="noTeleponOrtu" required
+                   value="<%= typeof formData !== 'undefined' ? formData.noTeleponOrtu || '' : '' %>">
+          </div>
+          <div class="form-group">
+            <label for="emailOrtu">Email Orang Tua</label>
+            <input type="email" id="emailOrtu" name="emailOrtu"
+                   value="<%= typeof formData !== 'undefined' ? formData.emailOrtu || '' : '' %>">
+          </div>
+        </div>
+
+        <!-- Program Pilihan -->
+        <h3 class="text-20 fw-600 mb-20 mt-40">Program Pilihan</h3>
+        
+        <div class="form-group">
+          <label for="programPilihan">Program yang Diminati <span class="required">*</span></label>
+          <select id="programPilihan" name="programPilihan" required>
+            <option value="">Pilih Program</option>
+            <option value="Reguler" <%= typeof formData !== 'undefined' && formData.programPilihan === 'Reguler' ? 'selected' : '' %>>Program Reguler</option>
+            <option value="Tahfidz" <%= typeof formData !== 'undefined' && formData.programPilihan === 'Tahfidz' ? 'selected' : '' %>>Program Tahfidz</option>
+            <option value="Sains" <%= typeof formData !== 'undefined' && formData.programPilihan === 'Sains' ? 'selected' : '' %>>Program Sains</option>
+            <option value="Bahasa" <%= typeof formData !== 'undefined' && formData.programPilihan === 'Bahasa' ? 'selected' : '' %>>Program Bahasa</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="motivasi">Motivasi Memilih SMPTI Baituljannah</label>
+          <textarea id="motivasi" name="motivasi" rows="3" placeholder="Ceritakan alasan Anda memilih sekolah kami..."><%= typeof formData !== 'undefined' ? formData.motivasi || '' : '' %></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group mt-40">
+          <button type="submit" class="btn-primary">
+            <i class="fas fa-paper-plane"></i>
+            Kirim Pendaftaran
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer -type-1 bg-dark-1">
+    <div class="container">
+      <div class="row y-gap-30 justify-between pt-60 pb-60">
+        <div class="col-xl-3 col-lg-3 col-md-6">
+          <div class="footer-header">
+            <div class="footer-header__logo">
+              <img src="/img/general/logo-white.svg" alt="SMPTI Baituljannah">
+            </div>
+            <p class="footer-header__text text-17 text-white mt-20">
+              SMPTI Baituljannah - Membentuk Generasi Islami yang Cerdas dan Berakhlak Mulia
+            </p>
+          </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-3 col-md-6">
+          <div class="footer-header">
+            <h4 class="footer-header__title text-white">Kontak Kami</h4>
+            <div class="footer-header__content mt-20">
+              <p class="text-white"><i class="fas fa-map-marker-alt"></i> Jl. Pendidikan No. 123, Jakarta Selatan</p>
+              <p class="text-white"><i class="fas fa-phone"></i> (021) 1234-5678</p>
+              <p class="text-white"><i class="fas fa-envelope"></i> info@smptibaituljannah.sch.id</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-3 col-md-6">
+          <div class="footer-header">
+            <h4 class="footer-header__title text-white">Jam Operasional</h4>
+            <div class="footer-header__content mt-20">
+              <p class="text-white">Senin - Jumat: 07:00 - 16:00</p>
+              <p class="text-white">Sabtu: 07:00 - 12:00</p>
+              <p class="text-white">Minggu: Tutup</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-3 col-md-6">
+          <div class="footer-header">
+            <h4 class="footer-header__title text-white">Media Sosial</h4>
+            <div class="footer-header__content mt-20">
+              <div class="footer-header-socials">
+                <a href="#" class="size-40 d-flex justify-center items-center rounded-8 bg-white">
+                  <i class="fab fa-facebook-f text-dark-1"></i>
+                </a>
+                <a href="#" class="size-40 d-flex justify-center items-center rounded-8 bg-white ml-10">
+                  <i class="fab fa-instagram text-dark-1"></i>
+                </a>
+                <a href="#" class="size-40 d-flex justify-center items-center rounded-8 bg-white ml-10">
+                  <i class="fab fa-youtube text-dark-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="py-30 border-top-light">
+        <div class="row justify-between items-center">
+          <div class="col-auto">
+            <p class="text-13 text-white">© 2024 SMPTI Baituljannah. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="/js/vendors.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Hide preloader
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+          setTimeout(() => {
+            preloader.style.display = 'none';
+          }, 300);
+        }, 500);
+      }
+
+      // Form validation
+      const form = document.getElementById('registrationForm');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          const requiredFields = form.querySelectorAll('[required]');
+          let isValid = true;
+          
+          requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+              field.style.borderColor = '#e74c3c';
+              isValid = false;
+            } else {
+              field.style.borderColor = '#e0e0e0';
+            }
+          });
+          
+          if (!isValid) {
+            e.preventDefault();
+            alert('Mohon lengkapi semua field yang wajib diisi!');
+          }
+        });
+      }
+    });
+  </script>
+  
+  <!-- Scripts -->
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

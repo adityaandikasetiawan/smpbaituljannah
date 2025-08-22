@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Siswa - SMPTI Baituljannah</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
+  
+  <style>
+    .preloader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .header__container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .portal-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      min-height: 80vh;
+    }
+    
+    .portal-hero {
+      background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+      margin-bottom: 40px;
+      border-radius: 15px;
+    }
+    
+    .portal-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .portal-hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .portal-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .feature-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #1e88e5, #1565c0);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+      color: white;
+    }
+    
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .btn-feature {
+      background: #1e88e5;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    
+    .btn-feature:hover {
+      background: #1565c0;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .login-section {
+      background: #f8f9fa;
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+    }
+    
+    .login-section h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    
+    .login-section p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    .btn-login {
+      background: #28a745;
+      color: white;
+      padding: 15px 40px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+    
+    .btn-login:hover {
+      background: #218838;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .info-section {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      margin-top: 30px;
+    }
+    
+    .info-section h3 {
+      color: #1e88e5;
+      margin-bottom: 20px;
+    }
+    
+    .info-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .info-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+    
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .info-list i {
+      color: #1e88e5;
+      margin-right: 15px;
+      width: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .portal-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .portal-features {
+        grid-template-columns: 1fr;
+      }
+      
+      .feature-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body class="preloader-visible" data-barba="wrapper">
+  <!-- Preloader -->
+  <div class="preloader js-preloader" id="preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <div class="preloader__img"></div>
+      </div>
+    </div>
+    <div class="preloader__title">SMPTI Baituljannah</div>
+  </div>
+
+  <!-- Header -->
+  <header data-anim="fade" data-add-bg="" class="header -type-4 -shadow bg-white border-bottom-light js-header">
+    <div class="header__container py-10">
+      <div class="row justify-between items-center">
+        
+        <div class="col-auto">
+          <div class="header-left d-flex items-center">
+            
+            <div class="header__logo pr-30 xl:pr-20 md:pr-0">
+              <a data-barba href="/">
+                <img src="/img/logo smp.png" alt="SMPTI Baituljannah" style="max-height: 50px; width: auto;">
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-auto">
+          <div class="d-flex items-center">
+            <div class="header-menu">
+              <div class="header-menu__content">
+                <div class="d-flex items-center">
+                  <a href="/daftar-siswa" class="button -sm -outline-blue-1 text-blue-1 ml-30">Pendaftaran</a>
+                  <a href="/" class="button -sm -blue-1 text-white ml-30">Beranda</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="portal-container">
+    <!-- Hero Section -->
+    <div class="portal-hero">
+      <h1><i class="fas fa-graduation-cap"></i> Portal Siswa</h1>
+      <p>Akses mudah untuk informasi akademik dan layanan siswa SMPTI Baituljannah</p>
+    </div>
+
+    <!-- Features Section -->
+    <div class="portal-features">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3>Nilai & Rapor</h3>
+        <p>Lihat nilai harian, ulangan, dan rapor semester secara real-time</p>
+        <a href="#" class="btn-feature">Lihat Nilai</a>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <h3>Jadwal Pelajaran</h3>
+        <p>Akses jadwal pelajaran harian dan mingguan</p>
+        <a href="#" class="btn-feature">Lihat Jadwal</a>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-tasks"></i>
+        </div>
+        <h3>Tugas & PR</h3>
+        <p>Pantau tugas yang diberikan guru dan deadline pengumpulan</p>
+        <a href="#" class="btn-feature">Lihat Tugas</a>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3>Absensi</h3>
+        <p>Cek rekap kehadiran dan izin tidak masuk sekolah</p>
+        <a href="#" class="btn-feature">Lihat Absensi</a>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-bell"></i>
+        </div>
+        <h3>Pengumuman</h3>
+        <p>Dapatkan informasi terbaru dari sekolah</p>
+        <a href="#" class="btn-feature">Lihat Pengumuman</a>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <h3>Profil Siswa</h3>
+        <p>Kelola data pribadi dan informasi kontak</p>
+        <a href="#" class="btn-feature">Edit Profil</a>
+      </div>
+    </div>
+
+    <!-- Login Section -->
+    <div class="login-section">
+      <h2><i class="fas fa-sign-in-alt"></i> Masuk ke Portal Siswa</h2>
+      <p>Silakan login menggunakan NISN dan password yang telah diberikan oleh sekolah</p>
+      <a href="/login" class="btn-login">Login Sekarang</a>
+    </div>
+
+    <!-- Information Section -->
+    <div class="info-section">
+      <h3><i class="fas fa-info-circle"></i> Informasi Penting</h3>
+      <ul class="info-list">
+        <li>
+          <i class="fas fa-key"></i>
+          <span>Password default adalah tanggal lahir siswa (DDMMYYYY)</span>
+        </li>
+        <li>
+          <i class="fas fa-shield-alt"></i>
+          <span>Ganti password setelah login pertama untuk keamanan akun</span>
+        </li>
+        <li>
+          <i class="fas fa-mobile-alt"></i>
+          <span>Portal dapat diakses melalui komputer, tablet, atau smartphone</span>
+        </li>
+        <li>
+          <i class="fas fa-clock"></i>
+          <span>Data nilai dan absensi diperbarui setiap hari pada pukul 16:00 WIB</span>
+        </li>
+        <li>
+          <i class="fas fa-question-circle"></i>
+          <span>Hubungi admin sekolah jika mengalami kesulitan login</span>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer -type-1 bg-dark-2">
+    <div class="container">
+      <div class="footer-header">
+        <div class="row justify-between items-center py-30">
+          <div class="col-auto">
+            <div class="d-flex items-center">
+              <div class="footer-logo mr-30">
+                <img src="/img/logo smp.png" alt="SMPTI Baituljannah" style="max-height: 40px; width: auto;">
+              </div>
+              <div class="text-17 text-white">SMPTI Baituljannah</div>
+            </div>
+          </div>
+          
+          <div class="col-auto">
+            <div class="footer-socials">
+              <a href="#" class="d-flex items-center justify-center rounded-full size-40">
+                <i class="fab fa-facebook-f text-white"></i>
+              </a>
+              <a href="#" class="d-flex items-center justify-center rounded-full size-40">
+                <i class="fab fa-instagram text-white"></i>
+              </a>
+              <a href="#" class="d-flex items-center justify-center rounded-full size-40">
+                <i class="fab fa-youtube text-white"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="py-20 border-top-light-15">
+        <div class="row justify-between items-center">
+          <div class="col-auto">
+            <p class="text-13 text-white">© 2024 SMPTI Baituljannah. All rights reserved.</p>
+          </div>
+          
+          <div class="col-auto">
+            <div class="d-flex items-center">
+              <div class="text-13 text-white mr-30">
+                <i class="fas fa-phone mr-10"></i>
+                (021) 123-4567
+              </div>
+              <div class="text-13 text-white">
+                <i class="fas fa-envelope mr-10"></i>
+                info@baituljannah.sch.id
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Preloader
+    window.addEventListener('load', function() {
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 300);
+      }
+    });
+  </script>
+  
+  <!-- Scripts -->
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= course.title %> - Baituljannah</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <div class="preloader__img"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <%- include('partials/header') %>
+
+  <div class="content-wrapper js-content-wrapper">
+    <!-- Breadcrumbs -->
+    <section data-anim="fade" class="breadcrumbs">
+      <div class="container">
+        <div class="row">
+          <div class="col-auto">
+            <div class="breadcrumbs__content">
+              <div class="breadcrumbs__item">
+                <a href="/">Home</a>
+              </div>
+              <div class="breadcrumbs__item">
+                <a href="/courses">All courses</a>
+              </div>
+              <div class="breadcrumbs__item">
+                <a href="#"><%= course.category %></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course Header -->
+    <div class="js-pin-container">
+      <section class="page-header -type-5 bg-light-6">
+        <div class="page-header__bg">
+          <div class="bg-image js-lazy" data-bg="<%= course.backgroundImage %>"></div>
+        </div>
+
+        <div class="container">
+          <div class="page-header__content pt-90 pb-90">
+            <div class="row y-gap-30 relative">
+              <div class="col-xl-7 col-lg-8">
+                <!-- Course Badges -->
+                <div class="d-flex x-gap-15 y-gap-10 pb-20">
+                  <% if (course.badges && course.badges.length > 0) { %>
+                    <% course.badges.forEach(badge => { %>
+                      <div>
+                        <div class="badge px-15 py-8 text-11 <%= badge.class %> fw-400"><%= badge.text %></div>
+                      </div>
+                    <% }) %>
+                  <% } %>
+                </div>
+
+                <!-- Course Title -->
+                <div data-anim="slide-up delay-1">
+                  <h1 class="text-30 lh-14 pr-60 lg:pr-0"><%= course.title %></h1>
+                </div>
+
+                <p class="col-xl-9 mt-20"><%= course.description %></p>
+
+                <!-- Course Stats -->
+                <div class="d-flex x-gap-30 y-gap-10 items-center flex-wrap pt-20">
+                  <div class="d-flex items-center">
+                    <div class="text-14 lh-1 text-yellow-1 mr-10"><%= course.rating %></div>
+                    <div class="d-flex x-gap-5 items-center">
+                      <% for (let i = 1; i <= 5; i++) { %>
+                        <div class="icon-star text-11 <%= i <= Math.floor(course.rating) ? 'text-yellow-1' : 'text-light-1' %>"></div>
+                      <% } %>
+                    </div>
+                    <div class="text-14 lh-1 text-light-1 ml-10">(<%= course.reviewCount %>)</div>
+                  </div>
+
+                  <div class="d-flex items-center text-light-1">
+                    <div class="icon icon-person-3 text-13"></div>
+                    <div class="text-14 ml-8"><%= course.enrolledCount %> enrolled on this course</div>
+                  </div>
+
+                  <div class="d-flex items-center text-light-1">
+                    <div class="icon icon-wall-clock text-13"></div>
+                    <div class="text-14 ml-8">Last updated <%= course.lastUpdated %></div>
+                  </div>
+                </div>
+
+                <!-- Course Author -->
+                <div class="d-flex items-center pt-20">
+                  <div class="bg-image size-30 rounded-full js-lazy" data-bg="<%= course.author.avatar %>"></div>
+                  <div class="text-14 lh-1 ml-10"><%= course.author.name %></div>
+                </div>
+              </div>
+
+              <!-- Course Info Card -->
+              <div class="courses-single-info js-pin-content">
+                <div class="bg-white shadow-2 rounded-8 border-light py-10 px-10">
+                  <div class="relative">
+                    <img class="w-1/1" src="<%= course.image %>" alt="<%= course.title %>">
+                    <div class="absolute-full-center d-flex justify-center items-center">
+                      <a href="<%= course.previewVideo %>" class="d-flex justify-center items-center size-60 rounded-full bg-white js-gallery" data-gallery="gallery1">
+                        <div class="icon-play text-18"></div>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="courses-single-info__content scroll-bar-1 pt-30 pb-20 px-20">
+                    <div class="d-flex justify-between items-center mb-30">
+                      <div class="text-24 lh-1 text-dark-1 fw-500">$<%= course.price %></div>
+                      <% if (course.originalPrice) { %>
+                        <div class="lh-1 line-through">$<%= course.originalPrice %></div>
+                      <% } %>
+                    </div>
+
+                    <button class="button -md -purple-1 text-white w-1/1">Add To Cart</button>
+                    <button class="button -md -outline-dark-1 text-dark-1 w-1/1 mt-10">Buy Now</button>
+
+                    <div class="text-14 lh-1 text-center mt-30">30-Day Money-Back Guarantee</div>
+
+                    <!-- Course Details -->
+                    <div class="mt-25">
+                      <div class="d-flex justify-between py-8">
+                        <div class="d-flex items-center text-dark-1">
+                          <div class="icon-video-file"></div>
+                          <div class="ml-10">Lessons</div>
+                        </div>
+                        <div><%= course.lessons %></div>
+                      </div>
+
+                      <div class="d-flex justify-between py-8 border-top-light">
+                        <div class="d-flex items-center text-dark-1">
+                          <div class="icon-puzzle"></div>
+                          <div class="ml-10">Quizzes</div>
+                        </div>
+                        <div><%= course.quizzes %></div>
+                      </div>
+
+                      <div class="d-flex justify-between py-8 border-top-light">
+                        <div class="d-flex items-center text-dark-1">
+                          <div class="icon-clock-2"></div>
+                          <div class="ml-10">Duration</div>
+                        </div>
+                        <div><%= course.duration %></div>
+                      </div>
+
+                      <div class="d-flex justify-between py-8 border-top-light">
+                        <div class="d-flex items-center text-dark-1">
+                          <div class="icon-bar-chart-2"></div>
+                          <div class="ml-10">Skill level</div>
+                        </div>
+                        <div><%= course.level %></div>
+                      </div>
+
+                      <div class="d-flex justify-between py-8 border-top-light">
+                        <div class="d-flex items-center text-dark-1">
+                          <div class="icon-translate"></div>
+                          <div class="ml-10">Language</div>
+                        </div>
+                        <div><%= course.language %></div>
+                      </div>
+
+                      <div class="d-flex justify-between py-8 border-top-light">
+                        <div class="d-flex items-center text-dark-1">
+                          <div class="icon-badge"></div>
+                          <div class="ml-10">Certificate</div>
+                        </div>
+                        <div><%= course.certificate ? 'Yes' : 'No' %></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Course Content -->
+      <section class="layout-pt-md layout-pb-lg">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8">
+              <!-- Course Description -->
+              <div class="pt-60 lg:pt-40">
+                <h2 class="text-22 fw-500">Course Description</h2>
+                <p class="mt-30"><%= course.fullDescription %></p>
+              </div>
+
+              <!-- What You'll Learn -->
+              <div class="pt-60 lg:pt-40">
+                <h2 class="text-22 fw-500">What you'll learn</h2>
+                <div class="row x-gap-30 y-gap-10 pt-30">
+                  <% if (course.learningOutcomes && course.learningOutcomes.length > 0) { %>
+                    <% course.learningOutcomes.forEach(outcome => { %>
+                      <div class="col-lg-6">
+                        <div class="d-flex">
+                          <div class="d-flex justify-center items-center size-20 rounded-full bg-purple-3 mr-10">
+                            <div class="icon-check text-10 text-purple-1"></div>
+                          </div>
+                          <div class="text-15 lh-15"><%= outcome %></div>
+                        </div>
+                      </div>
+                    <% }) %>
+                  <% } %>
+                </div>
+              </div>
+
+              <!-- Course Content -->
+              <div class="pt-60 lg:pt-40">
+                <h2 class="text-22 fw-500">Course Content</h2>
+                <div class="mt-30">
+                  <div class="accordion -block-2 text-left js-accordion">
+                    <% if (course.curriculum && course.curriculum.length > 0) { %>
+                      <% course.curriculum.forEach((section, index) => { %>
+                        <div class="accordion__item">
+                          <div class="accordion__button py-20 px-30 bg-light-4">
+                            <div class="d-flex items-center">
+                              <div class="accordion__icon">
+                                <div class="icon" data-feather="chevron-down"></div>
+                                <div class="icon" data-feather="chevron-up"></div>
+                              </div>
+                              <span class="text-17 fw-500 text-dark-1"><%= section.title %></span>
+                            </div>
+                            <div><%= section.lectures %> lectures • <%= section.duration %></div>
+                          </div>
+
+                          <div class="accordion__content">
+                            <div class="accordion__content__inner px-30 py-30">
+                              <div class="y-gap-20">
+                                <% if (section.lessons && section.lessons.length > 0) { %>
+                                  <% section.lessons.forEach(lesson => { %>
+                                    <div class="d-flex justify-between">
+                                      <div class="d-flex items-center">
+                                        <div class="d-flex justify-center items-center size-30 rounded-full bg-purple-3 mr-10">
+                                          <div class="icon-play text-9"></div>
+                                        </div>
+                                        <div><%= lesson.title %></div>
+                                      </div>
+                                      <div class="d-flex x-gap-20 items-center">
+                                        <% if (lesson.preview) { %>
+                                          <a href="#" class="text-14 lh-1 text-purple-1 underline">Preview</a>
+                                        <% } %>
+                                        <% if (lesson.quiz) { %>
+                                          <a href="#" class="text-14 lh-1 text-purple-1 underline"><%= lesson.quiz %> question</a>
+                                        <% } %>
+                                        <a href="#" class="text-14 lh-1 text-purple-1 underline"><%= lesson.duration %></a>
+                                      </div>
+                                    </div>
+                                  <% }) %>
+                                <% } %>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <% }) %>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+
+  <!-- Scripts -->
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

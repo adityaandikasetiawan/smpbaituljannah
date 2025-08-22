@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - SMPTI Baituljannah</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <!-- FAQ Accordion Styles -->
+  <style>
+    .accordion__item {
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .accordion__item:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .accordion__button {
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .accordion__button:hover {
+      background-color: #f9fafb;
+    }
+    
+    .accordion__item.is-active .accordion__button {
+      background-color: #f3f4f6;
+    }
+    
+    .accordion__icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #6366f1;
+      color: white;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+    
+    .accordion__item.is-active .accordion__icon {
+      transform: rotate(180deg);
+    }
+    
+    .accordion__content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .accordion__content__inner {
+      padding: 0 20px 20px 20px;
+    }
+    
+    .accordion__item.is-active .accordion__content {
+      border-top: 1px solid #e5e7eb;
+    }
+  </style>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <i class="icon icon-loading"></i>
+      </div>
+    </div>
+  </div>
+  
+  <%- include('partials/header') %>
+  
+  <main class="main-content layout-pt-lg layout-pb-lg">
+    <section class="page-header -type-1">
+      <div class="container">
+        <div class="page-header__content">
+          <div class="row justify-center text-center">
+            <div class="col-xl-6 col-lg-7 col-md-9">
+              <h1 class="page-header__title">FAQ</h1>
+              <p class="page-header__text">Pertanyaan yang sering diajukan tentang SMPTI Baituljannah</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="layout-pt-md layout-pb-lg">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-8 col-lg-9">
+            <h2 class="text-30 lh-16 fw-700">Pertanyaan yang Sering Diajukan</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Temukan jawaban atas pertanyaan umum tentang pendaftaran, kurikulum, dan kehidupan sekolah di SMPTI Baituljannah</p>
+          </div>
+        </div>
+        
+        <div class="row justify-center">
+          <div class="col-xl-10">
+            <div class="accordion -type-1 js-accordion">
+              
+              <!-- FAQ 1 -->
+              <div class="accordion__item">
+                <div class="accordion__button js-accordion-button">
+                  <span class="text-17 fw-500 text-dark-1">Bagaimana cara mendaftar di SMPTI Baituljannah?</span>
+                  <div class="accordion__icon">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content__inner">
+                    <p class="text-15 lh-18">Pendaftaran dapat dilakukan secara online melalui website resmi sekolah atau datang langsung ke sekolah. Persyaratan meliputi:</p>
+                    <ul class="list-disc ml-30 mt-15">
+                      <li class="text-15 lh-18 mb-10">Fotocopy ijazah SD/MI yang telah dilegalisir</li>
+                      <li class="text-15 lh-18 mb-10">Fotocopy SKHUN SD/MI yang telah dilegalisir</li>
+                      <li class="text-15 lh-18 mb-10">Fotocopy akta kelahiran</li>
+                      <li class="text-15 lh-18 mb-10">Fotocopy kartu keluarga</li>
+                      <li class="text-15 lh-18 mb-10">Pas foto 3x4 sebanyak 4 lembar</li>
+                      <li class="text-15 lh-18">Surat keterangan sehat dari dokter</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 2 -->
+              <div class="accordion__item">
+                <div class="accordion__button js-accordion-button">
+                  <span class="text-17 fw-500 text-dark-1">Kapan waktu pendaftaran siswa baru?</span>
+                  <div class="accordion__icon">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content__inner">
+                    <p class="text-15 lh-18">Pendaftaran siswa baru dibuka setiap tahun pada:</p>
+                    <ul class="list-disc ml-30 mt-15">
+                      <li class="text-15 lh-18 mb-10">Gelombang 1: Januari - Maret</li>
+                      <li class="text-15 lh-18 mb-10">Gelombang 2: April - Mei</li>
+                      <li class="text-15 lh-18">Gelombang 3: Juni - Juli (jika masih ada kuota)</li>
+                    </ul>
+                    <p class="text-15 lh-18 mt-15">Kami menyarankan untuk mendaftar pada gelombang pertama untuk mendapatkan kesempatan yang lebih baik.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 3 -->
+              <div class="accordion__item">
+                <div class="accordion__button js-accordion-button">
+                  <span class="text-17 fw-500 text-dark-1">Berapa biaya sekolah di SMPTI Baituljannah?</span>
+                  <div class="accordion__icon">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content__inner">
+                    <p class="text-15 lh-18">Struktur biaya sekolah meliputi:</p>
+                    <ul class="list-disc ml-30 mt-15">
+                      <li class="text-15 lh-18 mb-10">Uang pangkal: Rp 15.000.000 (dapat diangsur)</li>
+                      <li class="text-15 lh-18 mb-10">SPP bulanan: Rp 1.200.000</li>
+                      <li class="text-15 lh-18 mb-10">Biaya kegiatan: Rp 500.000/semester</li>
+                      <li class="text-15 lh-18">Seragam dan buku: Rp 2.000.000 (sekali bayar)</li>
+                    </ul>
+                    <p class="text-15 lh-18 mt-15">Tersedia program beasiswa untuk siswa berprestasi dan kurang mampu.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 4 -->
+              <div class="accordion__item">
+                <div class="accordion__button js-accordion-button">
+                  <span class="text-17 fw-500 text-dark-1">Apa keunggulan SMPTI Baituljannah dibanding sekolah lain?</span>
+                  <div class="accordion__icon">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content__inner">
+                    <p class="text-15 lh-18">Keunggulan SMPTI Baituljannah antara lain:</p>
+                    <ul class="list-disc ml-30 mt-15">
+                      <li class="text-15 lh-18 mb-10">Kurikulum terintegrasi dengan nilai-nilai Islam</li>
+                      <li class="text-15 lh-18 mb-10">Program unggulan Teknologi Informasi</li>
+                      <li class="text-15 lh-18 mb-10">Fasilitas modern dan lengkap</li>
+                      <li class="text-15 lh-18 mb-10">Tenaga pengajar berkualitas dan berpengalaman</li>
+                      <li class="text-15 lh-18 mb-10">Program tahfidz Al-Quran</li>
+                      <li class="text-15 lh-18 mb-10">Ekstrakurikuler yang beragam</li>
+                      <li class="text-15 lh-18">Lingkungan belajar yang kondusif dan Islami</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 5 -->
+              <div class="accordion__item">
+                <div class="accordion__button js-accordion-button">
+                  <span class="text-17 fw-500 text-dark-1">Apakah ada program beasiswa?</span>
+                  <div class="accordion__icon">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content__inner">
+                    <p class="text-15 lh-18">Ya, SMPTI Baituljannah menyediakan beberapa jenis beasiswa:</p>
+                    <ul class="list-disc ml-30 mt-15">
+                      <li class="text-15 lh-18 mb-10">Beasiswa prestasi akademik (potongan 25-50% SPP)</li>
+                      <li class="text-15 lh-18 mb-10">Beasiswa prestasi non-akademik (potongan 25% SPP)</li>
+                      <li class="text-15 lh-18 mb-10">Beasiswa ekonomi untuk keluarga kurang mampu</li>
+                      <li class="text-15 lh-18">Beasiswa tahfidz untuk hafidz/hafidzah</li>
+                    </ul>
+                    <p class="text-15 lh-18 mt-15">Informasi lengkap dapat diperoleh di bagian administrasi sekolah.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 6 -->
+              <div class="accordion__item">
+                <div class="accordion__button js-accordion-button">
+                  <span class="text-17 fw-500 text-dark-1">Bagaimana sistem pembelajaran di SMPTI Baituljannah?</span>
+                  <div class="accordion__icon">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content__inner">
+                    <p class="text-15 lh-18">Sistem pembelajaran di SMPTI Baituljannah menggunakan:</p>
+                    <ul class="list-disc ml-30 mt-15">
+                      <li class="text-15 lh-18 mb-10">Kurikulum Merdeka yang terintegrasi dengan nilai Islam</li>
+                      <li class="text-15 lh-18 mb-10">Metode pembelajaran aktif dan interaktif</li>
+                      <li class="text-15 lh-18 mb-10">Teknologi digital dalam proses belajar mengajar</li>
+                      <li class="text-15 lh-18 mb-10">Pembelajaran berbasis proyek dan praktik</li>
+                      <li class="text-15 lh-18 mb-10">Evaluasi komprehensif (pengetahuan, keterampilan, sikap)</li>
+                      <li class="text-15 lh-18">Jam belajar: 07.00 - 15.30 WIB</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 7 -->
+              <div class="accordion__item">
+                <div class="accordion__button js-accordion-button">
+                  <span class="text-17 fw-500 text-dark-1">Apa saja ekstrakurikuler yang tersedia?</span>
+                  <div class="accordion__icon">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content__inner">
+                    <p class="text-15 lh-18">SMPTI Baituljannah menyediakan berbagai ekstrakurikuler:</p>
+                    <div class="row mt-15">
+                      <div class="col-md-6">
+                        <p class="text-15 fw-500 mb-10">Bidang Akademik:</p>
+                        <ul class="list-disc ml-30">
+                          <li class="text-15 lh-18 mb-5">Olimpiade Matematika</li>
+                          <li class="text-15 lh-18 mb-5">Olimpiade IPA</li>
+                          <li class="text-15 lh-18 mb-5">English Club</li>
+                          <li class="text-15 lh-18 mb-5">Robotika</li>
+                          <li class="text-15 lh-18 mb-5">Programming Club</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <p class="text-15 fw-500 mb-10">Bidang Non-Akademik:</p>
+                        <ul class="list-disc ml-30">
+                          <li class="text-15 lh-18 mb-5">Pramuka</li>
+                          <li class="text-15 lh-18 mb-5">Futsal</li>
+                          <li class="text-15 lh-18 mb-5">Basket</li>
+                          <li class="text-15 lh-18 mb-5">Badminton</li>
+                          <li class="text-15 lh-18 mb-5">Seni Musik</li>
+                          <li class="text-15 lh-18 mb-5">Seni Tari</li>
+                          <li class="text-15 lh-18 mb-5">Jurnalistik</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 8 -->
+              <div class="accordion__item">
+                <div class="accordion__button js-accordion-button">
+                  <span class="text-17 fw-500 text-dark-1">Bagaimana fasilitas di SMPTI Baituljannah?</span>
+                  <div class="accordion__icon">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content__inner">
+                    <p class="text-15 lh-18">SMPTI Baituljannah dilengkapi dengan fasilitas modern:</p>
+                    <ul class="list-disc ml-30 mt-15">
+                      <li class="text-15 lh-18 mb-10">Ruang kelas ber-AC dengan smart board</li>
+                      <li class="text-15 lh-18 mb-10">Laboratorium komputer dan multimedia</li>
+                      <li class="text-15 lh-18 mb-10">Laboratorium IPA (Fisika, Kimia, Biologi)</li>
+                      <li class="text-15 lh-18 mb-10">Perpustakaan digital</li>
+                      <li class="text-15 lh-18 mb-10">Masjid untuk kegiatan ibadah</li>
+                      <li class="text-15 lh-18 mb-10">Lapangan olahraga (futsal, basket, badminton)</li>
+                      <li class="text-15 lh-18 mb-10">Kantin sehat</li>
+                      <li class="text-15 lh-18">Area parkir yang luas dan aman</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 9 -->
+              <div class="accordion__item">
+                <div class="accordion__button js-accordion-button">
+                  <span class="text-17 fw-500 text-dark-1">Apakah ada layanan antar jemput?</span>
+                  <div class="accordion__icon">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content__inner">
+                    <p class="text-15 lh-18">Ya, SMPTI Baituljannah menyediakan layanan antar jemput dengan:</p>
+                    <ul class="list-disc ml-30 mt-15">
+                      <li class="text-15 lh-18 mb-10">Bus sekolah yang aman dan nyaman</li>
+                      <li class="text-15 lh-18 mb-10">Rute yang mencakup berbagai area di Jakarta</li>
+                      <li class="text-15 lh-18 mb-10">Sopir berpengalaman dan terpercaya</li>
+                      <li class="text-15 lh-18 mb-10">Biaya transportasi: Rp 300.000/bulan</li>
+                      <li class="text-15 lh-18">Jadwal penjemputan disesuaikan dengan jam sekolah</li>
+                    </ul>
+                    <p class="text-15 lh-18 mt-15">Informasi rute dan pendaftaran dapat menghubungi bagian administrasi.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 10 -->
+              <div class="accordion__item">
+                <div class="accordion__button js-accordion-button">
+                  <span class="text-17 fw-500 text-dark-1">Bagaimana cara menghubungi sekolah?</span>
+                  <div class="accordion__icon">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <div class="accordion__content">
+                  <div class="accordion__content__inner">
+                    <p class="text-15 lh-18">Anda dapat menghubungi SMPTI Baituljannah melalui:</p>
+                    <ul class="list-disc ml-30 mt-15">
+                      <li class="text-15 lh-18 mb-10">Telepon: (021) 1234-5678</li>
+                      <li class="text-15 lh-18 mb-10">WhatsApp: 0812-3456-7890</li>
+                      <li class="text-15 lh-18 mb-10">Email: info@baituljannah.sch.id</li>
+                      <li class="text-15 lh-18 mb-10">Website: www.baituljannah.sch.id</li>
+                      <li class="text-15 lh-18">Alamat: Jl. Pendidikan No. 123, Jakarta Selatan</li>
+                    </ul>
+                    <p class="text-15 lh-18 mt-15">Jam operasional: Senin - Jumat (07.00 - 16.00 WIB), Sabtu (08.00 - 12.00 WIB)</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="layout-pt-md layout-pb-lg bg-light-6">
+      <div class="container">
+        <div class="row justify-center text-center">
+          <div class="col-xl-8 col-lg-9">
+            <h2 class="text-30 lh-16 fw-700 mb-20">Masih Ada Pertanyaan?</h2>
+            <p class="text-15 lh-18 text-light-1 mb-40">Jika Anda memiliki pertanyaan lain yang belum terjawab, jangan ragu untuk menghubungi kami</p>
+            <div class="row y-gap-20 justify-center">
+              <div class="col-auto">
+                <a href="/contact" class="button -md -purple-1 text-white">
+                  Hubungi Kami
+                  <i class="fas fa-arrow-right ml-10"></i>
+                </a>
+              </div>
+              <div class="col-auto">
+                <a href="tel:+622112345678" class="button -md -outline-purple-1 text-purple-1">
+                  <i class="fas fa-phone mr-10"></i>
+                  Telepon Sekarang
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <%- include('partials/footer') %>
+  
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+  
+  <!-- FAQ Accordion Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const accordionButtons = document.querySelectorAll('.js-accordion-button');
+      
+      accordionButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const accordionItem = this.closest('.accordion__item');
+          const accordionContent = accordionItem.querySelector('.accordion__content');
+          const icon = this.querySelector('.accordion__icon i');
+          
+          // Close all other accordion items
+          accordionButtons.forEach(otherButton => {
+            if (otherButton !== this) {
+              const otherItem = otherButton.closest('.accordion__item');
+              const otherContent = otherItem.querySelector('.accordion__content');
+              const otherIcon = otherButton.querySelector('.accordion__icon i');
+              
+              otherItem.classList.remove('is-active');
+              otherContent.style.maxHeight = null;
+              otherIcon.classList.remove('fa-minus');
+              otherIcon.classList.add('fa-plus');
+            }
+          });
+          
+          // Toggle current accordion item
+          if (accordionItem.classList.contains('is-active')) {
+            accordionItem.classList.remove('is-active');
+            accordionContent.style.maxHeight = null;
+            icon.classList.remove('fa-minus');
+            icon.classList.add('fa-plus');
+          } else {
+            accordionItem.classList.add('is-active');
+            accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+            icon.classList.remove('fa-plus');
+            icon.classList.add('fa-minus');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

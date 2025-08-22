@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsultasi - SMPTI Baituljannah</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
+  
+  <style>
+    
+    .consultation-hero {
+      background: linear-gradient(135deg, #1967D2 0%, #0052CC 100%);
+      padding: 200px 0 80px;
+      color: white;
+      text-align: center;
+    }
+    
+    .consultation-form {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      padding: 40px;
+      margin-top: -50px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .service-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #1967D2, #0052CC);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .contact-info {
+      background: #f8fafc;
+      border-radius: 15px;
+      padding: 30px;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .contact-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: #1967D2;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-right: 15px;
+    }
+    
+    .alert {
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    
+    .alert-success {
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+    }
+    
+    .alert-danger {
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+    }
+    
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .consultation-hero {
+        padding: 100px 0 60px;
+      }
+      
+      .consultation-form {
+        padding: 30px 20px;
+        margin-top: -30px;
+        border-radius: 15px;
+      }
+      
+      .service-card {
+        padding: 25px 20px;
+        margin-bottom: 20px;
+      }
+      
+      .contact-info {
+        padding: 25px 20px;
+      }
+      
+      .text-40 {
+        font-size: 28px !important;
+      }
+      
+      .text-18 {
+        font-size: 16px !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .consultation-hero {
+        padding: 80px 0 40px;
+      }
+      
+      .consultation-form {
+        padding: 25px 15px;
+      }
+      
+      .service-card {
+        padding: 20px 15px;
+      }
+      
+      .contact-info {
+        padding: 20px 15px;
+      }
+      
+      .text-40 {
+        font-size: 24px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <i class="icon icon-loading"></i>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Header -->
+  <%- include('partials/header') %>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="consultation-hero">
+      <div class="container">
+        <div class="row justify-center text-center">
+          <div class="col-xl-8 col-lg-10">
+            <h1 class="text-40 lg:text-50 text-white fw-700 mb-20">Konsultasi Pendidikan</h1>
+            <p class="text-18 text-white opacity-80 mb-30">
+              Dapatkan bimbingan dan konsultasi terbaik untuk masa depan pendidikan putra-putri Anda
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultation Form -->
+    <section class="pt-50 pb-80">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-xl-10">
+            <div class="consultation-form">
+              <div class="row">
+                <div class="col-lg-8">
+                  <h3 class="text-24 fw-600 text-dark-1 mb-30">Form Konsultasi</h3>
+                  
+                  <% if (typeof success !== 'undefined' && success) { %>
+                    <div class="alert alert-success">
+                      <p class="text-green-1">Pesan konsultasi Anda telah berhasil dikirim! Tim kami akan menghubungi Anda segera.</p>
+                    </div>
+                  <% } %>
+
+                  <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+                    <div class="alert alert-danger">
+                      <% errors.forEach(error => { %>
+                        <p class="text-red-1"><%= error %></p>
+                      <% }) %>
+                    </div>
+                  <% } %>
+                  
+                  <form class="contact-form respondForm__form row y-gap-20" action="/konsultasi" method="POST">
+                    <div class="col-lg-6">
+                      <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Nama Lengkap *</label>
+                      <input type="text" name="name" placeholder="Nama Lengkap" value="<%= typeof formData !== 'undefined' ? formData.name || '' : '' %>" required>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email *</label>
+                      <input type="email" name="email" placeholder="Email" value="<%= typeof formData !== 'undefined' ? formData.email || '' : '' %>" required>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Nomor Telepon *</label>
+                      <input type="tel" name="phone" placeholder="Nomor Telepon" value="<%= typeof formData !== 'undefined' ? formData.phone || '' : '' %>" required>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Jenis Konsultasi *</label>
+                      <select name="consultationType" required>
+                        <option value="">Pilih Jenis Konsultasi</option>
+                        <option value="akademik" <%= typeof formData !== 'undefined' && formData.consultationType === 'akademik' ? 'selected' : '' %>>Konsultasi Akademik</option>
+                        <option value="karir" <%= typeof formData !== 'undefined' && formData.consultationType === 'karir' ? 'selected' : '' %>>Konsultasi Karir</option>
+                        <option value="psikologi" <%= typeof formData !== 'undefined' && formData.consultationType === 'psikologi' ? 'selected' : '' %>>Konsultasi Psikologi</option>
+                        <option value="pendaftaran" <%= typeof formData !== 'undefined' && formData.consultationType === 'pendaftaran' ? 'selected' : '' %>>Konsultasi Pendaftaran</option>
+                        <option value="lainnya" <%= typeof formData !== 'undefined' && formData.consultationType === 'lainnya' ? 'selected' : '' %>>Lainnya</option>
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Pesan/Pertanyaan *</label>
+                      <textarea name="message" placeholder="Jelaskan pertanyaan atau masalah yang ingin dikonsultasikan..." rows="6" required><%= typeof formData !== 'undefined' ? formData.message || '' : '' %></textarea>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="button -md -purple-1 text-white fw-500">
+                        <i class="fas fa-paper-plane mr-10"></i>
+                        Kirim Konsultasi
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                
+                <div class="col-lg-4">
+                  <div class="contact-info">
+                    <h4 class="text-20 fw-600 text-dark-1 mb-25">Informasi Kontak</h4>
+                    
+                    <div class="contact-item">
+                      <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                      </div>
+                      <div>
+                        <p class="text-15 fw-500 text-dark-1">Telepon</p>
+                        <p class="text-14 text-light-1">(021) 1234-5678</p>
+                      </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                      <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                      </div>
+                      <div>
+                        <p class="text-15 fw-500 text-dark-1">WhatsApp</p>
+                        <p class="text-14 text-light-1">+62 812-3456-7890</p>
+                      </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                      <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                      </div>
+                      <div>
+                        <p class="text-15 fw-500 text-dark-1">Email</p>
+                        <p class="text-14 text-light-1">konsultasi@smpbaituljannah.sch.id</p>
+                      </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                      <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                      </div>
+                      <div>
+                        <p class="text-15 fw-500 text-dark-1">Jam Konsultasi</p>
+                        <p class="text-14 text-light-1">Senin - Jumat: 08:00 - 16:00 WIB</p>
+                        <p class="text-14 text-light-1">Sabtu: 08:00 - 12:00 WIB</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="pt-60 pb-80 bg-light-6">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lg:text-40 fw-700 text-dark-1 mb-20">Layanan Konsultasi Kami</h2>
+            <p class="text-16 text-light-1">
+              Kami menyediakan berbagai layanan konsultasi untuk mendukung perkembangan optimal siswa
+            </p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <div class="col-lg-3 col-md-6">
+            <div class="service-card text-center">
+              <div class="service-icon mx-auto">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h5 class="text-18 fw-600 text-dark-1 mb-15">Konsultasi Akademik</h5>
+              <p class="text-14 text-light-1">
+                Bimbingan untuk meningkatkan prestasi akademik dan mengatasi kesulitan belajar
+              </p>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-6">
+            <div class="service-card text-center">
+              <div class="service-icon mx-auto">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <h5 class="text-18 fw-600 text-dark-1 mb-15">Konsultasi Karir</h5>
+              <p class="text-14 text-light-1">
+                Panduan memilih jurusan dan merencanakan masa depan karir yang sesuai minat dan bakat
+              </p>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-6">
+            <div class="service-card text-center">
+              <div class="service-icon mx-auto">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h5 class="text-18 fw-600 text-dark-1 mb-15">Konsultasi Psikologi</h5>
+              <p class="text-14 text-light-1">
+                Dukungan psikologis untuk mengatasi masalah emosional dan sosial siswa
+              </p>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-6">
+            <div class="service-card text-center">
+              <div class="service-icon mx-auto">
+                <i class="fas fa-user-plus"></i>
+              </div>
+              <h5 class="text-18 fw-600 text-dark-1 mb-15">Konsultasi Pendaftaran</h5>
+              <p class="text-14 text-light-1">
+                Bantuan proses pendaftaran siswa baru dan informasi program sekolah
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+
+  <!-- Scripts -->
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
