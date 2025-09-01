@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berita - SMPIT Baituljannah</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/general/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/general/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/general/apple-touch-icon.png">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <i class="icon icon-loading"></i>
+      </div>
+    </div>
+  </div>
+  
+  <%- include('partials/header') %>
+  
+  <main class="main-content layout-pt-lg layout-pb-lg">
+    <section class="page-header -type-1">
+      <div class="container">
+        <div class="page-header__content">
+          <div class="row justify-center text-center">
+            <!-- <div class="col-xl-6 col-lg-7 col-md-9">
+              <h1 class="page-header__title">Berita Sekolah</h1>
+              <p class="page-header__text">Berita terkini dan informasi penting dari SMPIT Baituljannah</p>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Berita Utama -->
+    <section class="layout-pt-md layout-pb-md">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Berita Terbaru</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Informasi terkini kegiatan dan acara SMPIT Baituljannah</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- Dauroh Qur'an -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 overflow-hidden">
+              <div class="eventCard__img">
+                <img src="/img/berita/dauroh qur'an.jpg" alt="Dauroh Qur'an" class="w-100" style="height: 200px; object-fit: cover;">
+              </div>
+              <div class="eventCard__content px-30 py-30">
+                <h4 class="eventCard__title text-17 fw-500">Dauroh Qur'an Intensif</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">15 Januari 2025</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">SMPIT Baituljannah mengadakan program Dauroh Qur'an intensif untuk meningkatkan kemampuan membaca dan menghafal Al-Qur'an siswa.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wisuda Kelas 2025 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 overflow-hidden">
+              <div class="eventCard__img">
+                <img src="/img/berita/granduation class 2025.jpg" alt="Wisuda Kelas 2025" class="w-100" style="height: 200px; object-fit: cover;">
+              </div>
+              <div class="eventCard__content px-30 py-30">
+                <h4 class="eventCard__title text-17 fw-500">Wisuda Angkatan 2025</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">20 Juni 2025</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Upacara wisuda siswa kelas IX angkatan 2025 dilaksanakan dengan khidmat. Selamat kepada seluruh lulusan yang telah menyelesaikan pendidikan di SMPIT Baituljannah.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hari Guru -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 overflow-hidden">
+              <div class="eventCard__img">
+                <img src="/img/berita/hari guru.jpg" alt="Peringatan Hari Guru" class="w-100" style="height: 200px; object-fit: cover;">
+              </div>
+              <div class="eventCard__content px-30 py-30">
+                <h4 class="eventCard__title text-17 fw-500">Peringatan Hari Guru Nasional</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">25 November 2024</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">SMPIT Baituljannah memperingati Hari Guru Nasional dengan berbagai kegiatan apresiasi kepada para guru yang telah berdedikasi dalam mendidik siswa.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kegiatan Sekolah -->
+    <section class="layout-pt-md layout-pb-md bg-light-6">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Kegiatan Sekolah</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Berbagai aktivitas dan program unggulan SMPIT Baituljannah</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- Program Tahfidz -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-green-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-quran text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Program Tahfidz Al-Qur'an</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">Program Unggulan</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Program menghafal Al-Qur'an dengan target minimal 5 juz untuk setiap siswa dengan metode pembelajaran yang menyenangkan.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Boarding School -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-blue-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-home text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Program Boarding School</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">Asrama Putra & Putri</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Fasilitas asrama dengan pembinaan karakter 24 jam, pengawasan ketat, dan lingkungan Islami yang kondusif.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Program Bilingual -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-orange-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-language text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Program Bilingual</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">Bahasa Inggris & Arab</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Pembelajaran dwi bahasa dengan native speaker untuk meningkatkan kemampuan komunikasi internasional siswa.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kegiatan Ekstrakurikuler -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-purple-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-users text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Ekstrakurikuler Beragam</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">15+ Pilihan Ekskul</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Berbagai pilihan ekstrakurikuler mulai dari olahraga, seni, teknologi, hingga keagamaan untuk mengembangkan bakat siswa.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pembelajaran Digital -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-red-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-laptop text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Pembelajaran Digital</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">Smart Learning</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Integrasi teknologi dalam pembelajaran dengan fasilitas lab komputer, LCD proyektor, dan platform e-learning.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pembinaan Karakter -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-yellow-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-heart text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Pembinaan Karakter Islami</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">Character Building</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Program pembentukan karakter Islami melalui pembiasaan ibadah, akhlak mulia, dan nilai-nilai keislaman dalam kehidupan sehari-hari.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistik Sekolah -->
+    <section class="layout-pt-md layout-pb-lg">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Statistik SMPIT Baituljannah</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Data dan pencapaian sekolah dalam angka</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30 justify-between">
+          <div class="col-lg-3 col-md-6">
+            <div class="counterCard text-center">
+              <div class="counterCard__number text-green-1 text-45 fw-700 lh-12">450+</div>
+              <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Total Siswa</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="counterCard text-center">
+              <div class="counterCard__number text-blue-1 text-45 fw-700 lh-12">35+</div>
+              <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Guru Berkualitas</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="counterCard text-center">
+              <div class="counterCard__number text-orange-1 text-45 fw-700 lh-12">15+</div>
+              <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Program Unggulan</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="counterCard text-center">
+              <div class="counterCard__number text-purple-1 text-45 fw-700 lh-12">98%</div>
+              <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Tingkat Kelulusan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <%- include('partials/footer') %>
+  
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

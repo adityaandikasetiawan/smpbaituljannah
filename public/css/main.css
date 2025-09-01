@@ -2745,7 +2745,7 @@ form.contact-form input[type="email"] {
   width: 100%;
   background-color: transparent;
   border-radius: 8px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dc3545;
   font-size: 15px;
   line-height: 1.5;
   padding: 15px 22px;
@@ -3704,7 +3704,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid #EDEDED;
+  border-top: 1px solid #dc3545;
 }
 
 .coursesCard.-type-1 .coursesCard-footer__author {
@@ -4747,7 +4747,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   line-height: 1;
   background-color: white;
-  border: 1px solid #EDEDED;
+  border: 1px solid #dc3545;
   border-radius: 100px;
   padding: 17px 28px;
 }
@@ -4965,7 +4965,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .header .header-search__field input {
   padding: 18px 36px;
-  border-bottom: 1px solid #EDEDED;
+  border-bottom: 1px solid #dc3545;
 }
 
 .header .header-search__field input:focus {
@@ -5559,7 +5559,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 80px;
   border-radius: 100px;
   box-shadow: 0px 6px 15px 0px #404F680D;
-  border: 1px solid #ECEDF2;
+  border: 1px solid #dc3545;
   padding: 0 40px;
 }
 
@@ -8077,7 +8077,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   padding: 30px 0;
   padding-left: 70px;
-  border-bottom: 1px solid #E4E4E4;
+  border-bottom: 1px solid #dc3545;
 }
 
 @media (max-width: 991px) {
@@ -8159,7 +8159,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .shopCart-sidebar__totals {
-  border: 1px solid #E4E4E4;
+  border: 1px solid #dc3545;
   padding: 30px;
 }
 
@@ -8185,7 +8185,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .shopCart-sidebar__totals .item + .item {
-  border-top: 1px solid #E4E4E4;
+  border-top: 1px solid #dc3545;
 }
 
 .shopCart-sidebar__button {
@@ -8251,7 +8251,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
-  border: 2px solid #EDEDED;
+  border: 2px solid #dc3545;
   border-radius: 8px;
 }
 
@@ -8611,7 +8611,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar.-courses > * + * {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid #dc3545;
   padding-top: 30px;
   margin-top: 30px;
 }

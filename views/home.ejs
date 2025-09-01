@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
   <title><%= title %></title>
+=======
+  <title>SMPIT Baituljannah - Sekolah Menengah Pertama Islam Terpadu</title>
+>>>>>>> 8c55ffe61e5c0c9456492735463c02188b196e86
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,133 +45,414 @@
   
   <!-- Main Content -->
   <main class="main-content">
-    <!-- Masthead Section -->
-    <section data-anim-wrap class="masthead -type-3 bg-light-6 js-mouse-move-container">
-      <div class="container">
-        <div class="row y-gap-30 items-center justify-center">
-          <div class="col-xl-7 col-lg-11 relative z-5">
-            <div class="masthead__content pl-32 lg:pl-0">
-              <h1 data-anim-child="slide-up delay-1" class="masthead__title">
-                <%= schoolContent.beranda.welcome_message %>
-              </h1>
-
-              <p data-anim-child="slide-up delay-2" class="masthead__text text-17 text-dark-1 mt-25">
-                <%= schoolContent.beranda.description %>
-              </p>
-
-              <div data-anim-child="slide-up delay-3" class="masthead-search mt-30">
-                <div class="masthead-search__form">
-                  <form action="/search" method="GET">
-                    <input type="text" name="q" placeholder="Cari informasi sekolah, program, atau fasilitas...">
-                    <button type="submit" class="button -purple-1 text-white">
-                      <i class="icon icon-search"></i>
-                    </button>
-                  </form>
-                </div>
-
-                <div class="masthead-search__searches mt-40">
-                  Program Unggulan:
-                  <% schoolContent.program_unggulan.slice(0, 4).forEach((program, index) => { %>
-                    <a href="/program-unggulan#<%= program.name.toLowerCase().replace(/\s+/g, '-') %>"><%= program.name %></a><%= index < 3 ? ',' : '' %>
-                  <% }); %>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div data-anim-child="slide-up delay-5" class="col-xl-5 col-lg-7 relative z-2">
-            <div class="masthead-image">
-              <div class="masthead-image__img1">
-                <div class="masthead-image__shape xl:d-none">
-                  <img src="/img/home-4/masthead/shape.svg" alt="image">
-                </div>
-                <img data-move="20" class="js-mouse-move" src="/img/home-4/masthead/1.png" alt="image">
-              </div>
-
-              <div class="masthead-image__el1">
-                <div data-move="40" class="lg:d-none img-el -w-250 px-20 py-20 d-flex items-center bg-white rounded-8 js-mouse-move">
-                  <div class="size-50 d-flex justify-center items-center bg-red-2 rounded-full">
-                    <img src="/img/masthead/1.svg" alt="icon">
-                  </div>
-                  <div class="ml-20">
-                    <div class="text-orange-1 text-16 fw-500 lh-1"><%= schoolContent.beranda.statistics.siswa_aktif %></div>
-                    <div class="mt-3">Siswa Aktif</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="masthead-image__el2">
-                <div data-move="40" class="shadow-4 img-el -w-260 px-40 py-20 d-flex items-center bg-white rounded-8 js-mouse-move">
-                  <div class="img-el__side">
-                    <div class="size-50 d-flex justify-center items-center bg-dark-1 rounded-full">
-                      <img src="/img/masthead/2.svg" alt="icon">
-                    </div>
-                  </div>
-                  <div class="ml-20">
-                    <div class="text-purple-1 text-16 fw-500 lh-1">Terakreditasi A</div>
-                    <div class="mt-3">Kualitas Pendidikan Terjamin</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <!-- Banner Slider Section -->
+    <section class="banner-slider-section" style="min-height: 70vh; position: relative; overflow: hidden; margin-top: 20px;">
+      <div class="banner-slider-container" id="bannerSlider">
+        <!-- Slide 1 -->
+        <div class="banner-slide active" style="background: url('/img/slider/DSC09013.JPG'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
         </div>
+
+        <!-- Slide 2 -->
+        <div class="banner-slide" style="background: url('/img/slider/DSC09327.JPG'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="banner-slide" style="background: url('/img/slider/PKLN2292 (2).jpg'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="banner-slide" style="background: url('/img/slider/WhatsApp Image 2024-10-11 at 08.47.53 (1).jpg'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="banner-slide" style="background: url('/img/slider/ini.jpg'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="banner-nav-buttons">
+        <button class="banner-nav-btn banner-nav-prev" id="prevBtn">
+          <i class="fas fa-chevron-up"></i>
+        </button>
+        <button class="banner-nav-btn banner-nav-next" id="nextBtn">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+
+      <!-- Slide Indicators -->
+      <div class="banner-indicators">
+        <span class="indicator active" data-slide="1"></span>
+        <span class="indicator" data-slide="2"></span>
+        <span class="indicator" data-slide="3"></span>
+        <span class="indicator" data-slide="4"></span>
+        <span class="indicator" data-slide="5"></span>
       </div>
     </section>
 
-    <!-- Mitra Industri Section -->
-    <section class="layout-pt-md layout-pb-md border-bottom-light">
-      <div class="container">
-        <div class="row justify-center">
-          <div class="col text-center">
-            <p class="text-lg text-dark-1">Bekerjasama dengan Mitra Industri Terpercaya</p>
-          </div>
-        </div>
+    <!-- Custom CSS for Banner Slider -->
+    <style>
+      .banner-slider-section {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .banner-slider-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .banner-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.8s ease-in-out;
+      }
+      
+      .banner-slide.active {
+        opacity: 1;
+        visibility: visible;
+        position: relative;
+      }
+      
+      .banner-nav-buttons {
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 10;
+      }
+      
+      .banner-nav-btn {
+        width: 35px;
+        height: 35px;
+        border: 2px solid rgba(255,255,255,0.8);
+        background: rgba(255,255,255,0.2);
+        color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        font-size: 12px;
+      }
+      
+      .banner-nav-btn:hover {
+        background: rgba(255,255,255,0.3);
+        border-color: white;
+        transform: scale(1.1);
+      }
+      
+      .banner-indicators {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+      }
+      
+      .indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .indicator.active {
+        background: white;
+        transform: scale(1.2);
+      }
+      
+      @media (max-width: 768px) {
+        .banner-nav-buttons {
+          right: 15px;
+        }
+        
+        .banner-nav-btn {
+          width: 30px;
+          height: 30px;
+          font-size: 10px;
+        }
+        
+        .text-60 {
+          font-size: 36px !important;
+        }
+      }
+    </style>
 
-        <div class="row y-gap-30 justify-between sm:justify-start items-center pt-60 md:pt-50">
-          <% for(let i = 1; i <= 6; i++) { %>
-          <div class="col-lg-auto col-md-2 col-sm-3 col-4">
-            <div class="d-flex justify-center items-center px-4">
-              <img class="w-1/1" src="/img/clients/<%= i %>.svg" alt="clients image">
-            </div>
-          </div>
-          <% } %>
-        </div>
-      </div>
-    </section>
+    <!-- JavaScript for Banner Slider -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.banner-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalSlides = slides.length;
+        
+        // Initialize first slide
+        if (slides.length > 0) {
+          slides[0].classList.add('active');
+          if (indicators.length > 0) {
+            indicators[0].classList.add('active');
+          }
+        }
+        
+        function showSlide(index) {
+          slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (indicators[i]) {
+              indicators[i].classList.remove('active');
+            }
+          });
+          
+          if (slides[index]) {
+            slides[index].classList.add('active');
+          }
+          if (indicators[index]) {
+            indicators[index].classList.add('active');
+          }
+        }
+        
+        function changeSlide(direction) {
+          currentSlideIndex += direction;
+          
+          if (currentSlideIndex >= totalSlides) {
+            currentSlideIndex = 0;
+          } else if (currentSlideIndex < 0) {
+            currentSlideIndex = totalSlides - 1;
+          }
+          
+          showSlide(currentSlideIndex);
+        }
+        
+        function goToSlide(index) {
+          currentSlideIndex = index - 1;
+          showSlide(currentSlideIndex);
+        }
+        
+        // Add event listeners to navigation buttons
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        if (prevBtn) {
+          prevBtn.addEventListener('click', () => changeSlide(-1));
+        }
+        if (nextBtn) {
+          nextBtn.addEventListener('click', () => changeSlide(1));
+        }
+        
+        // Add event listeners to indicators
+        indicators.forEach((indicator, index) => {
+          indicator.addEventListener('click', () => goToSlide(index + 1));
+        });
+        
+        // Auto slide every 10 seconds
+        setInterval(() => {
+          changeSlide(1);
+        }, 10000);
+      });
+    </script>
 
-    <!-- Program Keahlian Section -->
-    <section class="layout-pt-lg layout-pb-lg">
+    <!-- Berita Terbaru Section -->
+    <section class="layout-pt-lg layout-pb-lg bg-light-3">
       <div class="container">
         <div class="row justify-center text-center">
           <div class="col-auto">
             <div class="sectionTitle">
-              <h2 class="sectionTitle__title">Program Keahlian</h2>
-              <p class="sectionTitle__text">Pilihan program keahlian yang sesuai dengan minat dan bakat siswa.</p>
+              <h2 class="sectionTitle__title">Berita Terbaru</h2>
+              <p class="sectionTitle__text">Informasi dan kegiatan terkini dari SMPIT Baituljannah</p>
             </div>
           </div>
         </div>
 
         <div class="row y-gap-30 pt-60 lg:pt-50">
-          <% schoolContent.program_unggulan.slice(0, 6).forEach((program, index) => { %>
-          <div class="col-xl-4 col-lg-6 col-md-6">
-            <div class="categoryCard -type-3">
-              <div class="categoryCard__icon bg-<%= ['purple', 'orange', 'red', 'blue', 'green', 'yellow'][index % 6] %>-1 mr-20">
-                <i class="icon icon-<%= program.icon %> text-35 text-white"></i>
+          <% 
+            // Data berita terbaru dengan gambar asli
+            const beritaTerbaru = [
+              {
+                judul: "Dauroh Qur'an Intensif",
+                tanggal: "15 Januari 2025",
+                ringkasan: "SMPIT Baituljannah mengadakan program Dauroh Qur'an intensif untuk meningkatkan kemampuan membaca dan menghafal Al-Qur'an siswa.",
+                gambar: "/img/berita/dauroh qur'an.jpg",
+                kategori: "Kegiatan"
+              },
+              {
+                judul: "Wisuda Angkatan 2025",
+                tanggal: "20 Juni 2025",
+                ringkasan: "Upacara wisuda siswa kelas IX angkatan 2025 dilaksanakan dengan khidmat. Selamat kepada seluruh lulusan yang telah menyelesaikan pendidikan di SMPIT Baituljannah.",
+                gambar: "/img/berita/granduation class 2025.jpg",
+                kategori: "Acara"
+              },
+              {
+                judul: "Peringatan Hari Guru Nasional",
+                tanggal: "25 November 2024",
+                ringkasan: "SMPIT Baituljannah memperingati Hari Guru Nasional dengan berbagai kegiatan apresiasi kepada para guru yang telah berdedikasi dalam mendidik siswa.",
+                gambar: "/img/berita/hari guru.jpg",
+                kategori: "Peringatan"
+              }
+            ];
+            beritaTerbaru.forEach((berita, index) => { 
+          %>
+          <div class="col-lg-4 col-md-6">
+            <div class="blogCard -type-1">
+              <div class="blogCard__image">
+                <img src="<%= berita.gambar %>" alt="<%= berita.judul %>" class="w-100" style="height: 200px; object-fit: cover; border-radius: 8px;">
               </div>
-              <div class="categoryCard__content">
-                <h4 class="categoryCard__title text-17 fw-500"><%= program.name %></h4>
-                <div class="categoryCard__text text-13 lh-1 mt-5"><%= program.features.length %> Keunggulan</div>
+
+              <div class="blogCard__content mt-20">
+                <div class="blogCard__category text-13 fw-500 text-<%= ['blue', 'green', 'red'][index % 3] %>-1">
+                  <%= berita.kategori %>
+                </div>
+                <h4 class="blogCard__title text-17 lh-15 fw-500 mt-5">
+                  <a href="/berita#<%= berita.judul.toLowerCase().replace(/\s+/g, '-') %>"><%= berita.judul %></a>
+                </h4>
+                <p class="blogCard__text text-14 lh-18 text-light-1 mt-10">
+                  <%= berita.ringkasan %>
+                </p>
+                <div class="blogCard__date text-13 text-light-1 mt-15">
+                  <i class="icon icon-calendar mr-8"></i>
+                  <%= berita.tanggal %>
+                </div>
               </div>
             </div>
           </div>
           <% }) %>
         </div>
+
+        <div class="row justify-center pt-60 lg:pt-40">
+          <div class="col-auto">
+            <a href="/berita" class="button -blue-1 text-white">Lihat Semua Berita</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Karya Inspiratif Section -->
+    <section class="layout-pt-lg layout-pb-lg bg-white">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-8 col-lg-10">
+            <h2 class="text-30 lh-16 fw-700">Program Unggulan SMPIT Baituljannah</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Program-program khusus yang menjadi keunggulan dan ciri khas SMPIT Baituljannah dalam membentuk generasi Islami yang unggul</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- Program Tahfidz Al-Quran -->
+          <div class="col-lg-4 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-green-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-book-quran text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Program Tahfidz Al-Quran</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Program unggulan menghafal Al-Quran dengan metode yang mudah dan menyenangkan, dibimbing oleh ustadz dan ustadzah yang berpengalaman.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Target hafalan 5-10 Juz</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Metode pembelajaran menyenangkan</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Pembinaan akhlak Islami</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Program Boarding School -->
+          <div class="col-lg-4 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-blue-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-home text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Program Boarding School</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Program asrama dengan pendampingan 24 jam untuk membentuk karakter mandiri, disiplin, dan berakhlak mulia sesuai ajaran Islam.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Asrama modern lengkap</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Pendampingan 24 jam</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Pembinaan karakter Islami</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Program Bilingual -->
+          <div class="col-lg-4 col-md-6">
+            <div class="courseCard -type-1 bg-white rounded-8 shadow-4">
+              <div class="courseCard__image">
+                <div class="bg-purple-1 rounded-8 size-90 d-flex align-items-center justify-center mx-auto mt-30">
+                  <i class="fas fa-language text-white text-30"></i>
+                </div>
+              </div>
+              <div class="courseCard__content px-30 py-30">
+                <h4 class="courseCard__title text-17 fw-500 mb-10">Program Bilingual (Arab-Inggris)</h4>
+                <p class="courseCard__text text-14 lh-18 text-light-1 mb-20">Program pembelajaran bahasa Arab dan Inggris intensif untuk mempersiapkan siswa menjadi generasi yang mampu berkomunikasi global.</p>
+                <div class="courseCard__features">
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Bahasa Arab fusha</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-10">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">English conversation</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check text-green-1 text-12 mr-10"></i>
+                    <span class="text-13">Sertifikat internasional</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row justify-center pt-50">
+          <div class="col-auto">
+            <a href="/program-unggulan" class="button -sm -outline-blue-1 text-blue-1 px-30 py-12 rounded-6 transition-all duration-200" 
+               onmouseover="this.style.backgroundColor='#3b82f6'; this.style.color='white'; this.style.borderColor='#3b82f6';" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#3b82f6'; this.style.borderColor='#3b82f6';">
+              Lihat Semua Program
+              <i class="fas fa-arrow-right ml-8 text-11"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Fasilitas Unggulan Section -->
-    <section class="layout-pt-lg layout-pb-lg bg-light-3">
+    <!-- <section class="layout-pt-lg layout-pb-lg bg-light-3">
       <div class="container">
         <div class="row justify-center text-center">
           <div class="col-auto">
@@ -190,7 +475,7 @@
           %>
           <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="courseCard -type-1 border-light rounded-8">
-              <div class="courseCard__image bg-<%= ['purple', 'orange', 'red', 'blue', 'green', 'yellow', 'pink', 'cyan'][index % 8] %>-1 d-flex align-items-center justify-center" style="height: 200px;">
+              <div class="courseCard__image bg-<%= ['blue', 'green', 'red', 'blue', 'green', 'red', 'blue', 'green'][index % 8] %>-1 d-flex align-items-center justify-center" style="height: 200px;">
                 <i class="icon icon-<%= fasilitas.icon %> text-white text-60"></i>
               </div>
 
@@ -204,7 +489,7 @@
                 </p>
 
                 <div class="courseCard__specs mt-15">
-                  <div class="text-13 text-purple-1">Fasilitas Lengkap</div>
+                  <div class="text-13 text-blue-1">Fasilitas Lengkap</div>
                 </div>
               </div>
             </div>
@@ -214,7 +499,152 @@
 
         <div class="row justify-center pt-60 lg:pt-40">
           <div class="col-auto">
-            <a href="/fasilitas" class="button -purple-1 text-white">Lihat Semua Fasilitas</a>
+            <a href="/fasilitas" class="button -blue-1 text-white">Lihat Semua Fasilitas</a>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Penerimaan Peserta Didik Baru Section -->
+    <section class="layout-pt-lg layout-pb-lg bg-light-3">
+      <style>
+        .bg-light-3 {
+          background: #f8fafc;
+          position: relative;
+        }
+      </style>
+      <div class="container">
+        <div class="row justify-center text-center">
+          <div class="col-lg-8">
+            <div class="text-center">
+              <h2 class="text-30 lh-16 fw-700 text-dark-1 mb-30">Penerimaan Peserta Didik Baru</h2>
+              <p class="text-16 lh-18 text-light-1 mb-40">
+                Bergabunglah dengan SMPIT Baituljannah, sekolah Islam terpadu yang mengintegrasikan pendidikan akademik modern dengan pembinaan spiritual Islam. Lingkungan kondusif dengan fasilitas terdepan untuk membentuk generasi Qur'ani yang cerdas, mandiri, dan berakhlakul karimah.
+              </p>
+              
+              <div class="d-flex flex-wrap justify-center y-gap-20">
+                <a href="/daftar-siswa" class="btn btn-boarding-primary mr-20">
+                  <i class="fas fa-user-plus mr-10"></i>
+                  Daftar Sekarang
+                </a>
+                <a href="/program-unggulan" class="btn btn-boarding-secondary">
+                  <i class="fas fa-info-circle mr-10"></i>
+                  Info Lengkap
+                </a>
+              </div>
+              
+              <style>
+                .btn-boarding-primary {
+                   display: inline-flex;
+                   align-items: center;
+                   padding: 15px 30px;
+                   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                   color: #ffffff !important;
+                   border: 2px solid #3b82f6;
+                   border-radius: 50px;
+                   font-weight: 600;
+                   font-size: 16px;
+                   text-decoration: none;
+                   transition: all 0.3s ease;
+                   box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+                   position: relative;
+                   overflow: hidden;
+                 }
+                 
+                 .btn-boarding-primary i {
+                   color: #ffffff !important;
+                 }
+                 
+                 .btn-boarding-primary:hover {
+                   transform: translateY(-3px);
+                   box-shadow: 0 8px 30px rgba(59, 130, 246, 0.35);
+                   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+                   color: #ffffff !important;
+                   text-decoration: none;
+                   border-color: #2563eb;
+                 }
+                 
+                 .btn-boarding-primary:hover i {
+                   color: #ffffff !important;
+                 }
+                
+                .btn-boarding-primary::before {
+                   content: '';
+                   position: absolute;
+                   top: 0;
+                   left: -100%;
+                   width: 100%;
+                   height: 100%;
+                   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                   transition: left 0.5s;
+                 }
+                
+                .btn-boarding-primary:hover::before {
+                  left: 100%;
+                }
+                
+                .btn-boarding-secondary {
+                  display: inline-flex;
+                  align-items: center;
+                  padding: 15px 30px;
+                  background: transparent;
+                  color: #64748b;
+                  border: 2px solid #64748b;
+                  border-radius: 50px;
+                  font-weight: 600;
+                  font-size: 16px;
+                  text-decoration: none;
+                  transition: all 0.3s ease;
+                  position: relative;
+                  overflow: hidden;
+                }
+                
+                .btn-boarding-secondary:hover {
+                   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                   color: #ffffff !important;
+                   transform: translateY(-3px);
+                   box-shadow: 0 8px 30px rgba(59, 130, 246, 0.35);
+                   text-decoration: none;
+                   border-color: #3b82f6;
+                 }
+                 
+                 .btn-boarding-secondary:hover i {
+                   color: #ffffff !important;
+                 }
+                
+                .btn-boarding-secondary::before {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  left: -100%;
+                  width: 100%;
+                  height: 100%;
+                  background: rgba(255, 255, 255, 0.1);
+                  transition: left 0.5s;
+                }
+                
+                .btn-boarding-secondary:hover::before {
+                  left: 100%;
+                }
+                
+                @media (max-width: 768px) {
+                  .btn-boarding-primary,
+                  .btn-boarding-secondary {
+                    padding: 12px 24px;
+                    font-size: 14px;
+                    width: 100%;
+                    justify-content: center;
+                    margin-bottom: 10px;
+                  }
+                  
+                  .btn-boarding-primary {
+                    margin-right: 0 !important;
+                  }
+                }
+              </style>
+            </div>
+          </div>
+            </div>
           </div>
         </div>
       </div>
@@ -226,8 +656,13 @@
         <div class="row justify-center text-center">
           <div class="col-auto">
             <div class="sectionTitle">
+<<<<<<< HEAD
               <h2 class="sectionTitle__title">Testimoni Siswa & Orang Tua</h2>
               <p class="sectionTitle__text">Pengalaman nyata dari keluarga besar SMPTI Baituljannah</p>
+=======
+              <h2 class="sectionTitle__title">Testimoni Alumni</h2>
+              <p class="sectionTitle__text">Kisah sukses para alumni SMPIT Baituljannah</p>
+>>>>>>> 8c55ffe61e5c0c9456492735463c02188b196e86
             </div>
           </div>
         </div>
@@ -236,9 +671,15 @@
           <% 
                 // Menggunakan data testimoni placeholder karena belum ada di JSON
                 const testimoniPlaceholder = [
+<<<<<<< HEAD
                   {judul: "Sekolah IT Terbaik", isi: "SMPTI Baituljannah memberikan pendidikan teknologi informasi berkualitas dengan fasilitas modern dan guru yang kompeten di bidang IT.", nama: "Budi Santoso", peran: "Orang Tua Siswa"},
                   {judul: "Prestasi IT Membanggakan", isi: "Anak saya berkembang pesat di bidang programming dan teknologi berkat program unggulan IT di sekolah.", nama: "Sari Dewi", peran: "Orang Tua Siswa"},
                   {judul: "Lingkungan Digital Kondusif", isi: "Suasana belajar teknologi yang modern dan fasilitas lab komputer canggih membuat anak-anak semangat belajar coding.", nama: "Ahmad Rahman", peran: "Komite Sekolah"}
+=======
+                  {judul: "Fondasi Kuat untuk Masa Depan", isi: "SMPIT Baituljannah memberikan bekal ilmu agama dan umum yang seimbang. Sekarang saya berhasil melanjutkan ke SMA favorit dengan nilai terbaik.", nama: "Ahmad Fauzi", peran: "Alumni 2023"},
+                  {judul: "Karakter Islami Terbentuk", isi: "Program tahfidz dan pembinaan akhlak di SMPIT Baituljannah membentuk kepribadian saya. Alhamdulillah sekarang saya aktif di organisasi dakwah kampus.", nama: "Fatimah Zahra", peran: "Alumni 2022"},
+                  {judul: "Prestasi yang Membanggakan", isi: "Berkat bimbingan guru-guru terbaik, saya berhasil meraih juara olimpiade sains tingkat nasional dan melanjutkan ke sekolah impian.", nama: "Muhammad Rizki", peran: "Alumni 2024"}
+>>>>>>> 8c55ffe61e5c0c9456492735463c02188b196e86
                 ];
                 testimoniPlaceholder.forEach((testimoni, index) => { 
               %>
@@ -254,7 +695,7 @@
               </div>
 
               <div class="testimonialCard__author d-flex items-center mt-30">
-                <div class="size-60 rounded-full bg-<%= ['purple', 'orange', 'red'][index % 3] %>-1 d-flex align-items-center justify-center text-white fw-500 text-20">
+                <div class="size-60 rounded-full bg-<%= ['blue', 'green', 'red'][index % 3] %>-1 d-flex align-items-center justify-center text-white fw-500 text-20">
                   <%= testimoni.nama.charAt(0) %>
                 </div>
                 <div class="ml-20">
@@ -265,6 +706,27 @@
             </div>
           </div>
           <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mitra Industri Section -->
+    <section class="layout-pt-md layout-pb-md border-bottom-light bg-light-6">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col text-center">
+            <h2 class="text-40 lg:text-30 text-dark-1 fw-700">Partnership</h2>
+          </div>
+        </div>
+
+        <div class="row y-gap-30 justify-between sm:justify-start items-center pt-60 md:pt-50">
+          <% for(let i = 1; i <= 6; i++) { %>
+          <div class="col-lg-auto col-md-2 col-sm-3 col-4">
+            <div class="d-flex justify-center items-center px-4">
+              <img class="w-1/1" src="/img/clients/<%= i %>.svg" alt="clients image">
+            </div>
+          </div>
+          <% } %>
         </div>
       </div>
     </section>
