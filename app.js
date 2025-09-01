@@ -13,7 +13,8 @@ const fs = require('fs');
 const schoolContentPath = path.join(__dirname, 'data', 'school-content.json');
 const schoolContent = JSON.parse(fs.readFileSync(schoolContentPath, 'utf8'));
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
+const HOST = process.env.HOST || 'localhost';
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Security middleware
@@ -471,12 +472,17 @@ let messages = [];
 
 // Routes
 app.get('/', (req, res) => {
+  console.log('=== SMP HOME ROUTE CALLED ===');
+  console.log('Request received at:', new Date().toISOString());
+  console.log('School content title:', schoolContent.beranda.welcome_message);
   res.render('home', {
+    title: 'SMPTI Baituljannah - Sekolah Teknologi Informasi',
     categories: categoriesData,
     courses: coursesData,
     testimonials: testimonialsData,
     schoolContent: schoolContent
   });
+  console.log('=== RESPONSE SENT ===');
 });
 
 app.get('/courses', (req, res) => {
@@ -829,8 +835,8 @@ app.use((err, req, res, next) => {
   res.status(500).render('500', { title: 'Server Error' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server is running on http://${HOST}:${PORT}`);
 });
 
 module.exports = app;

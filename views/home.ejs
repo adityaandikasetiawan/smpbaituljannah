@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SMPTI Baituljannah - Sekolah Teknologi Informasi</title>
+  <title><%= title %></title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,9 @@
   
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/general/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/general/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/general/apple-touch-icon.png">
 </head>
 <body>
   <!-- Preloader -->
@@ -224,7 +227,7 @@
           <div class="col-auto">
             <div class="sectionTitle">
               <h2 class="sectionTitle__title">Testimoni Siswa & Orang Tua</h2>
-              <p class="sectionTitle__text">Pengalaman nyata dari keluarga besar SMP Negeri</p>
+              <p class="sectionTitle__text">Pengalaman nyata dari keluarga besar SMPTI Baituljannah</p>
             </div>
           </div>
         </div>
@@ -233,9 +236,9 @@
           <% 
                 // Menggunakan data testimoni placeholder karena belum ada di JSON
                 const testimoniPlaceholder = [
-                  {judul: "Sekolah Terbaik", isi: "SMP Negeri 1 Jakarta memberikan pendidikan berkualitas dengan fasilitas lengkap dan guru yang kompeten.", nama: "Budi Santoso", peran: "Orang Tua Siswa"},
-                  {judul: "Prestasi Membanggakan", isi: "Anak saya berkembang pesat di bidang akademik dan non-akademik berkat program unggulan sekolah.", nama: "Sari Dewi", peran: "Orang Tua Siswa"},
-                  {judul: "Lingkungan Kondusif", isi: "Suasana belajar yang nyaman dan aman membuat anak-anak betah belajar di sekolah.", nama: "Ahmad Rahman", peran: "Komite Sekolah"}
+                  {judul: "Sekolah IT Terbaik", isi: "SMPTI Baituljannah memberikan pendidikan teknologi informasi berkualitas dengan fasilitas modern dan guru yang kompeten di bidang IT.", nama: "Budi Santoso", peran: "Orang Tua Siswa"},
+                  {judul: "Prestasi IT Membanggakan", isi: "Anak saya berkembang pesat di bidang programming dan teknologi berkat program unggulan IT di sekolah.", nama: "Sari Dewi", peran: "Orang Tua Siswa"},
+                  {judul: "Lingkungan Digital Kondusif", isi: "Suasana belajar teknologi yang modern dan fasilitas lab komputer canggih membuat anak-anak semangat belajar coding.", nama: "Ahmad Rahman", peran: "Komite Sekolah"}
                 ];
                 testimoniPlaceholder.forEach((testimoni, index) => { 
               %>
