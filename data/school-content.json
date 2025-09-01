@@ -1,8 +1,8 @@
 {
   "beranda": {
-    "welcome_message": "Selamat Datang di SMPTI Baituljannah",
+    "welcome_message": "Selamat Datang di SMPIT Baituljannah",
     "tagline": "Unggul dalam Prestasi, Berkarakter, dan Berwawasan Global",
-    "description": "SMPTI Baituljannah adalah sekolah menengah pertama yang berkomitmen memberikan pendidikan berkualitas dengan mengembangkan potensi akademik dan karakter siswa melalui pembelajaran inovatif dan kegiatan pengembangan diri berbasis teknologi informasi.",
+    "description": "SMPIT Baituljannah adalah sekolah menengah pertama Islam terpadu yang berkomitmen memberikan pendidikan berkualitas dengan mengembangkan potensi akademik dan karakter siswa melalui pembelajaran inovatif yang mengintegrasikan nilai-nilai Islam.",
     "statistics": {
       "siswa_aktif": "800+",
       "guru_berpengalaman": "45",
@@ -11,11 +11,11 @@
     }
   },
   "sejarah": {
-    "title": "Sejarah SMPTI Baituljannah",
+    "title": "Sejarah SMPIT Baituljannah",
     "content": [
       {
         "year": "1985",
-        "event": "Pendirian SMPTI Baituljannah berdasarkan SK Yayasan Pendidikan Islam dengan visi menjadi sekolah unggulan berbasis teknologi informasi."
+        "event": "Pendirian SMPIT Baituljannah berdasarkan SK Yayasan Pendidikan Islam dengan visi menjadi sekolah unggulan Islam terpadu."
       },
       {
         "year": "1990",
@@ -54,38 +54,82 @@
       "Meningkatkan prestasi sekolah di bidang teknologi informasi tingkat regional dan nasional",
       "Mengembangkan kreativitas dan inovasi siswa dalam bidang teknologi informasi dan komunikasi",
       "Membangun kesadaran digital dan kepedulian sosial pada siswa dalam menggunakan teknologi"
+    ],
+    "nilai": [
+      {
+        "nama": "Integritas",
+        "deskripsi": "Kejujuran dan konsistensi dalam setiap tindakan",
+        "icon": "icon-heart",
+        "color": "bg-orange-1"
+      },
+      {
+        "nama": "Keunggulan",
+        "deskripsi": "Selalu berusaha memberikan yang terbaik",
+        "icon": "icon-star",
+        "color": "bg-red-1"
+      },
+      {
+        "nama": "Kerjasama",
+        "deskripsi": "Membangun sinergi untuk mencapai tujuan bersama",
+        "icon": "icon-users",
+        "color": "bg-blue-1"
+      },
+      {
+        "nama": "Peduli Lingkungan",
+        "deskripsi": "Menjaga dan melestarikan lingkungan hidup",
+        "icon": "icon-leaf",
+        "color": "bg-green-1"
+      },
+      {
+        "nama": "Inovasi",
+        "deskripsi": "Mengembangkan kreativitas dan pemikiran maju",
+        "icon": "icon-lightbulb",
+        "color": "bg-purple-1"
+      },
+      {
+        "nama": "Religius",
+        "deskripsi": "Mengamalkan nilai-nilai Islam dalam kehidupan",
+        "icon": "icon-book-open",
+        "color": "bg-yellow-1"
+      }
     ]
   },
   "program_unggulan": [
     {
       "name": "Program Kelas Unggulan IT",
       "description": "Program khusus untuk siswa berbakat dalam bidang teknologi informasi dengan kurikulum diperkaya dan praktikum coding intensif",
-      "features": ["Lab komputer canggih", "Guru bersertifikat IT", "Kompetisi programming", "Project development"]
+      "features": ["Lab komputer canggih", "Guru bersertifikat IT", "Kompetisi programming", "Project development"],
+      "icon": "laptop"
     },
     {
       "name": "Program Bahasa Internasional",
       "description": "Pengembangan kemampuan bahasa Inggris dan Mandarin dengan native speaker dan sertifikasi internasional",
-      "features": ["Native speaker", "Sertifikasi TOEFL", "Exchange program", "English club"]
+      "features": ["Native speaker", "Sertifikasi TOEFL", "Exchange program", "English club"],
+      "icon": "globe"
     },
     {
       "name": "Program Coding dan Programming",
       "description": "Pembelajaran coding, web development, dan mobile app untuk mempersiapkan siswa menjadi programmer handal",
-      "features": ["Lab programming", "Web development", "Mobile app development", "Software engineering"]
+      "features": ["Lab programming", "Web development", "Mobile app development", "Software engineering"],
+      "icon": "code"
     },
     {
       "name": "Program Digital Entrepreneurship",
       "description": "Mengembangkan jiwa entrepreneurship siswa melalui bisnis digital dan e-commerce",
-      "features": ["Digital business plan", "E-commerce project", "Digital marketing", "Startup incubator"]
+      "features": ["Digital business plan", "E-commerce project", "Digital marketing", "Startup incubator"],
+      "icon": "chart-bar"
     },
     {
       "name": "Program Seni dan Budaya",
       "description": "Pelestarian budaya Indonesia melalui seni tari, musik tradisional, dan teater",
-      "features": ["Sanggar seni", "Festival budaya", "Pentas seni", "Kolaborasi seniman"]
+      "features": ["Sanggar seni", "Festival budaya", "Pentas seni", "Kolaborasi seniman"],
+      "icon": "palette"
     },
     {
       "name": "Program Olahraga Prestasi",
       "description": "Pembinaan atlet muda dalam berbagai cabang olahraga dengan pelatih bersertifikat",
-      "features": ["Pelatih profesional", "Fasilitas lengkap", "Kompetisi rutin", "Beasiswa atlet"]
+      "features": ["Pelatih profesional", "Fasilitas lengkap", "Kompetisi rutin", "Beasiswa atlet"],
+      "icon": "trophy"
     }
   ],
   "kurikulum": {
