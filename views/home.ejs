@@ -700,21 +700,240 @@
       <div class="container">
         <div class="row justify-center">
           <div class="col text-center">
-            <h2 class="text-40 lg:text-30 text-dark-1 fw-700">Partnership</h2>
+            <h2 class="text-40 lg:text-30 text-dark-1 fw-700">Galeri Prestasi</h2>
+            <p class="text-17 text-dark-1 mt-10">Dokumentasi pencapaian siswa-siswi SMPIT Baituljannah</p>
           </div>
         </div>
 
-        <div class="row y-gap-30 justify-between sm:justify-start items-center pt-60 md:pt-50">
-          <% for(let i = 1; i <= 6; i++) { %>
-          <div class="col-lg-auto col-md-2 col-sm-3 col-4">
-            <div class="d-flex justify-center items-center px-4">
-              <img class="w-1/1" src="/img/clients/<%= i %>.svg" alt="clients image">
+        <div class="row justify-center pt-60 md:pt-50">
+          <div class="col-lg-10">
+            <div class="galeri-carousel position-relative">
+              <!-- Carousel Container -->
+              <div class="carousel-container-galeri overflow-hidden rounded-8">
+                <div class="carousel-track-galeri d-flex transition-all" id="galeriTrack">
+                  <!-- Slide 1 -->
+                  <div class="carousel-slide-galeri flex-shrink-0 w-100">
+                    <div class="row g-3">
+                      <div class="col-lg-4 col-md-4">
+                        <img class="w-100 object-cover rounded-8" style="width: 300px; height: 350px;" src="/img/prestasi/IMG-20250901-WA0299.webp" alt="Prestasi 1">
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                        <img class="w-100 object-cover rounded-8" style="width: 300px; height: 350px;" src="/img/prestasi/IMG-20250901-WA0300.webp" alt="Prestasi 2">
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                        <img class="w-100 object-cover rounded-8" style="width: 300px; height: 350px;" src="/img/prestasi/IMG-20250901-WA0301.webp" alt="Prestasi 3">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Slide 2 -->
+                  <div class="carousel-slide-galeri flex-shrink-0 w-100">
+                    <div class="row g-3">
+                      <div class="col-lg-4 col-md-4">
+                        <img class="w-100 object-cover rounded-8" style="width: 300px; height: 350px;" src="/img/prestasi/IMG-20250901-WA0302.webp" alt="Prestasi 4">
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                        <img class="w-100 object-cover rounded-8" style="width: 300px; height: 350px;" src="/img/prestasi/IMG-20250901-WA0299.webp" alt="Prestasi 5">
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                        <img class="w-100 object-cover rounded-8" style="width: 300px; height: 350px;" src="/img/prestasi/IMG-20250901-WA0300.webp" alt="Prestasi 6">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Slide 3 -->
+                  <div class="carousel-slide-galeri flex-shrink-0 w-100">
+                    <div class="row g-3">
+                      <div class="col-lg-4 col-md-4">
+                        <img class="w-100 object-cover rounded-8" style="width: 300px; height: 350px;" src="/img/prestasi/IMG-20250901-WA0301.webp" alt="Prestasi 7">
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                        <img class="w-100 object-cover rounded-8" style="width: 300px; height: 350px;" src="/img/prestasi/IMG-20250901-WA0302.webp" alt="Prestasi 8">
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                        <img class="w-100 object-cover rounded-8" style="width: 300px; height: 350px;" src="/img/prestasi/IMG-20250901-WA0299.webp" alt="Prestasi 9">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Navigation Pagination -->
+              <div class="carousel-pagination d-flex justify-center align-items-center mt-30">
+                <button class="carousel-nav-btn" id="prevBtn" onclick="previousSlide()">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="pagination-numbers d-flex mx-3">
+                  <button class="page-number active" data-slide="0">1</button>
+                  <button class="page-number" data-slide="1">2</button>
+                  <button class="page-number" data-slide="2">3</button>
+                </div>
+                <button class="carousel-nav-btn" id="nextBtn" onclick="nextSlide()">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
             </div>
           </div>
-          <% } %>
         </div>
+        
+        <style>
+        .carousel-pagination {
+          gap: 10px;
+        }
+        
+        .carousel-nav-btn {
+          background: #f8f9fa;
+          border: 1px solid #dee2e6;
+          border-radius: 6px;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        
+        .carousel-nav-btn:hover {
+          background: #e9ecef;
+          border-color: #adb5bd;
+        }
+        
+        .pagination-numbers {
+          gap: 5px;
+        }
+        
+        .page-number {
+          background: #f8f9fa;
+          border: 1px solid #dee2e6;
+          border-radius: 6px;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-weight: 500;
+        }
+        
+        .page-number:hover {
+          background: #e9ecef;
+          border-color: #adb5bd;
+        }
+        
+        .page-number.active {
+          background: #007bff;
+          border-color: #007bff;
+          color: white;
+        }
+        
+        .carousel-track-galeri {
+          transition: transform 0.5s ease;
+        }
+        </style>
+        
+        <script>
+        let currentSlideGaleri = 0;
+        const totalSlidesGaleri = 3;
+        
+        function updateCarouselGaleri() {
+          const track = document.getElementById('galeriTrack');
+          const pageNumbers = document.querySelectorAll('.page-number');
+          
+          track.style.transform = `translateX(-${currentSlideGaleri * 100}%)`;
+          
+          pageNumbers.forEach((btn, index) => {
+            btn.classList.toggle('active', index === currentSlideGaleri);
+          });
+        }
+        
+        function nextSlide() {
+          currentSlideGaleri = (currentSlideGaleri + 1) % totalSlidesGaleri;
+          updateCarouselGaleri();
+        }
+        
+        function previousSlide() {
+          currentSlideGaleri = (currentSlideGaleri - 1 + totalSlidesGaleri) % totalSlidesGaleri;
+          updateCarouselGaleri();
+        }
+        
+        // Page number click handlers
+        document.querySelectorAll('.page-number').forEach((btn, index) => {
+          btn.addEventListener('click', () => {
+            currentSlideGaleri = index;
+            updateCarouselGaleri();
+          });
+        });
+        
+        // Auto-play functionality
+        setInterval(() => {
+          nextSlide();
+        }, 5000);
+        </script>
       </div>
     </section>
+
+    <style>
+      .carousel-container-galeri {
+        position: relative;
+      }
+      
+      .carousel-track-galeri {
+        transition: transform 0.5s ease;
+      }
+      
+      .carousel-slide-galeri {
+        min-width: 100%;
+      }
+      
+      .carousel-dot-galeri {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #6440fb;
+        background: white;
+        color: #6440fb;
+        font-weight: 600;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .carousel-dot-galeri:hover,
+      .carousel-dot-galeri.active {
+        background: #6440fb;
+        color: white;
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const trackGaleri = document.getElementById('galeriTrack');
+        const dotsGaleri = document.querySelectorAll('.carousel-dot-galeri');
+        let currentSlideGaleri = 0;
+        
+        function showSlideGaleri(index) {
+          trackGaleri.style.transform = `translateX(-${index * 100}%)`;
+          
+          dotsGaleri.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+          });
+          
+          currentSlideGaleri = index;
+        }
+        
+        dotsGaleri.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            showSlideGaleri(index);
+          });
+        });
+        
+        // Auto-play carousel
+        setInterval(() => {
+          currentSlideGaleri = (currentSlideGaleri + 1) % dotsGaleri.length;
+          showSlideGaleri(currentSlideGaleri);
+        }, 4000);
+      });
+    </script>
   </main>
   
   <!-- Footer -->
