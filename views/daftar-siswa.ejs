@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pendaftaran Siswa Baru - SMPIT Baituljannah</title>
+  <title>Pendaftaran Siswa Baru - SMPTI Baituljannah</title>
   
   <!-- CSS -->
   <link rel="stylesheet" href="/css/vendors.css">
@@ -46,7 +46,6 @@
       max-width: 800px;
       margin: 0 auto;
       padding: 40px 20px;
-      margin-bottom: 80px;
     }
     
     .registration-form {
@@ -54,7 +53,6 @@
       padding: 40px;
       border-radius: 10px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      margin-top: 80px;
     }
     
     .form-group {
@@ -177,28 +175,48 @@
         <div class="preloader__img"></div>
       </div>
     </div>
-    <div class="preloader__title">SMPIT Baituljannah</div>
+    <div class="preloader__title">SMPTI Baituljannah</div>
   </div>
 
   <!-- Header -->
-  <%- include('partials/header') %>
-  
-  <main class="main-content">
-        <section class="page-header -type-1" style="margin-top: 80px;">
-          <div class="container">
-            <div class="page-header__content">
-              <div class="row justify-center text-center">
-                <div class="col-xl-6 col-lg-7 col-md-9">
-                  <h1 class="page-header__title">Pendaftaran Siswa Baru</h1>
-                  <p class="page-header__text">SMPIT Baituljannah Tahun Ajaran 2025/2026</p>
+  <header data-anim="fade" data-add-bg="" class="header -type-4 -shadow bg-white border-bottom-light js-header">
+    <div class="header__container py-10">
+      <div class="row justify-between items-center">
+        
+        <div class="col-auto">
+          <div class="header-left d-flex items-center">
+            
+            <div class="header__logo pr-30 xl:pr-20 md:pr-0">
+              <a data-barba href="/">
+                <img src="/img/logo smp.png" alt="SMPTI Baituljannah" style="max-height: 50px; width: auto;">
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-auto">
+          <div class="d-flex items-center">
+            <div class="header-menu">
+              <div class="header-menu__content">
+                <div class="d-flex items-center">
+                  <a href="/login" class="button -sm -outline-blue-1 text-blue-1 ml-30">Portal Siswa</a>
+                  <a href="/" class="button -sm -blue-1 text-white ml-30">Beranda</a>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <div class="registration-container">
+  <!-- Main Content -->
+  <main class="registration-container">
     <div class="registration-form">
+      <div class="text-center mb-40">
+        <h1 class="text-30 lh-14 fw-700">Pendaftaran Siswa Baru</h1>
+        <p class="text-15 text-light-1 mt-10">SMPTI Baituljannah Tahun Ajaran 2024/2025</p>
+      </div>
 
       <% if (typeof success !== 'undefined' && success) { %>
         <div class="alert alert-success">
@@ -315,7 +333,7 @@
 
         <div class="form-group">
           <label for="tahunLulus">Tahun Lulus <span class="required">*</span></label>
-          <input type="number" id="tahunLulus" name="tahunLulus" min="2020" max="2025" required
+          <input type="number" id="tahunLulus" name="tahunLulus" min="2020" max="2024" required
                  value="<%= typeof formData !== 'undefined' ? formData.tahunLulus || '' : '' %>">
         </div>
 
@@ -375,7 +393,7 @@
         </div>
 
         <div class="form-group">
-          <label for="motivasi">Motivasi Memilih SMPIT Baituljannah</label>
+          <label for="motivasi">Motivasi Memilih SMPTI Baituljannah</label>
           <textarea id="motivasi" name="motivasi" rows="3" placeholder="Ceritakan alasan Anda memilih sekolah kami..."><%= typeof formData !== 'undefined' ? formData.motivasi || '' : '' %></textarea>
         </div>
 
@@ -390,7 +408,72 @@
     </div>
   </main>
 
-  <%- include('partials/footer') %>
+  <!-- Footer -->
+  <footer class="footer -type-1 bg-dark-1">
+    <div class="container">
+      <div class="row y-gap-30 justify-between pt-60 pb-60">
+        <div class="col-xl-3 col-lg-3 col-md-6">
+          <div class="footer-header">
+            <div class="footer-header__logo">
+              <img src="/img/general/logo-white.svg" alt="SMPTI Baituljannah">
+            </div>
+            <p class="footer-header__text text-17 text-white mt-20">
+              SMPTI Baituljannah - Membentuk Generasi Islami yang Cerdas dan Berakhlak Mulia
+            </p>
+          </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-3 col-md-6">
+          <div class="footer-header">
+            <h4 class="footer-header__title text-white">Kontak Kami</h4>
+            <div class="footer-header__content mt-20">
+              <p class="text-white"><i class="fas fa-map-marker-alt"></i> Jl. Pendidikan No. 123, Jakarta Selatan</p>
+              <p class="text-white"><i class="fas fa-phone"></i> (021) 1234-5678</p>
+              <p class="text-white"><i class="fas fa-envelope"></i> info@smptibaituljannah.sch.id</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-3 col-md-6">
+          <div class="footer-header">
+            <h4 class="footer-header__title text-white">Jam Operasional</h4>
+            <div class="footer-header__content mt-20">
+              <p class="text-white">Senin - Jumat: 07:00 - 16:00</p>
+              <p class="text-white">Sabtu: 07:00 - 12:00</p>
+              <p class="text-white">Minggu: Tutup</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-3 col-md-6">
+          <div class="footer-header">
+            <h4 class="footer-header__title text-white">Media Sosial</h4>
+            <div class="footer-header__content mt-20">
+              <div class="footer-header-socials">
+                <a href="#" class="size-40 d-flex justify-center items-center rounded-8 bg-white">
+                  <i class="fab fa-facebook-f text-dark-1"></i>
+                </a>
+                <a href="#" class="size-40 d-flex justify-center items-center rounded-8 bg-white ml-10">
+                  <i class="fab fa-instagram text-dark-1"></i>
+                </a>
+                <a href="#" class="size-40 d-flex justify-center items-center rounded-8 bg-white ml-10">
+                  <i class="fab fa-youtube text-dark-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="py-30 border-top-light">
+        <div class="row justify-between items-center">
+          <div class="col-auto">
+            <p class="text-13 text-white">© 2024 SMPTI Baituljannah. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <!-- JavaScript -->
   <script src="/js/vendors.js"></script>
@@ -432,9 +515,6 @@
       }
     });
   </script>
-  
-  </div>
-  </main>
   
   <!-- Scripts -->
   <script src="/js/vendors.js"></script>

@@ -11,17 +11,9 @@ const fs = require('fs');
 
 // Load school content data
 const schoolContentPath = path.join(__dirname, 'data', 'school-content.json');
-let schoolContent;
-try {
-  schoolContent = JSON.parse(fs.readFileSync(schoolContentPath, 'utf8'));
-  console.log('School content loaded successfully');
-} catch (error) {
-  console.error('Error loading school content:', error);
-  process.exit(1);
-}
+const schoolContent = JSON.parse(fs.readFileSync(schoolContentPath, 'utf8'));
 const app = express();
 const PORT = process.env.PORT || 80;
-const HOST = process.env.HOST || 'localhost';
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Security middleware
@@ -34,7 +26,6 @@ app.use(helmet({
       scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://unpkg.com"],
       imgSrc: ["'self'", "data:", "https:"],
       connectSrc: ["'self'", "https:"],
-      frameSrc: ["'self'", "https://www.google.com", "https://maps.google.com"],
     },
   },
 }));
@@ -192,7 +183,7 @@ const testimonialsData = [
     role: 'Web Developer',
     image: '/img/testimonials/1.png',
     rating: 5,
-    text: 'SMPIT Baituljannah telah mengubah pengalaman belajar saya. Program-programnya terstruktur dengan baik dan para pengajar sangat berkualitas.'
+    text: 'SMPTI Baituljannah telah mengubah pengalaman belajar saya. Program-programnya terstruktur dengan baik dan para pengajar sangat berkualitas.'
   },
   {
     id: 2,
@@ -480,17 +471,13 @@ let messages = [];
 
 // Routes
 app.get('/', (req, res) => {
-  console.log('=== SMP HOME ROUTE CALLED ===');
-  console.log('Request received at:', new Date().toISOString());
-  console.log('School content title:', schoolContent.beranda.welcome_message);
   res.render('home', {
-    title: 'SMPTI Baituljannah - Sekolah Teknologi Informasi',
+    title: 'SMPIT Baituljannah - Sekolah Islam Terpadu',
     categories: categoriesData,
     courses: coursesData,
     testimonials: testimonialsData,
     schoolContent: schoolContent
   });
-  console.log('=== RESPONSE SENT ===');
 });
 
 app.get('/courses', (req, res) => {
@@ -588,8 +575,8 @@ app.get('/fasilitas', (req, res) => {
   });
 });
 
-app.get('/berita', (req, res) => {
-  res.render('berita', {
+app.get('/prestasi', (req, res) => {
+  res.render('prestasi', {
     prestasi: schoolContent.prestasi
   });
 });
@@ -681,7 +668,7 @@ app.post('/login', [
 });
 
 app.get('/signup', (req, res) => {
-  res.render('signup', { title: 'Daftar Akun - SMPIT Baituljannah' });
+  res.render('signup', { title: 'Daftar Akun - SMPTI Baituljannah' });
 });
 
 app.post('/signup', [
@@ -733,7 +720,7 @@ app.post('/signup', [
 
 // Consultation routes
 app.get('/konsultasi', (req, res) => {
-  res.render('konsultasi', { title: 'Konsultasi - SMPIT Baituljannah' });
+  res.render('konsultasi', { title: 'Konsultasi - SMPTI Baituljannah' });
 });
 
 app.post('/konsultasi', [
@@ -747,7 +734,7 @@ app.post('/konsultasi', [
   
   if (!errors.isEmpty()) {
     return res.render('konsultasi', {
-      title: 'Konsultasi - SMPIT Baituljannah',
+      title: 'Konsultasi - SMPTI Baituljannah',
       errors: errors.array().map(err => err.msg),
       formData: req.body
     });
@@ -769,7 +756,7 @@ app.post('/konsultasi', [
   console.log('New consultation request:', consultation);
   
   res.render('konsultasi', {
-    title: 'Konsultasi - SMPIT Baituljannah',
+    title: 'Konsultasi - SMPTI Baituljannah',
     success: true
   });
 });
@@ -786,12 +773,12 @@ app.get('/logout', (req, res) => {
 
 // Portal siswa route
 app.get('/portal-siswa', (req, res) => {
-  res.render('portal-siswa', { title: 'Portal Siswa - SMPIT Baituljannah' });
+  res.render('portal-siswa', { title: 'Portal Siswa - SMPTI Baituljannah' });
 });
 
 // Student registration routes
 app.get('/daftar-siswa', (req, res) => {
-  res.render('daftar-siswa', { title: 'Pendaftaran Siswa Baru - SMPIT Baituljannah' });
+  res.render('daftar-siswa', { title: 'Pendaftaran Siswa Baru - SMPTI Baituljannah' });
 });
 
 app.post('/daftar-siswa', [
@@ -815,7 +802,7 @@ app.post('/daftar-siswa', [
   
   if (!errors.isEmpty()) {
     return res.render('daftar-siswa', {
-      title: 'Pendaftaran Siswa Baru - SMPIT Baituljannah',
+      title: 'Pendaftaran Siswa Baru - SMPTI Baituljannah',
       errors: errors.array().map(err => err.msg),
       formData: req.body
     });
@@ -826,7 +813,7 @@ app.post('/daftar-siswa', [
   console.log('Student registration data:', req.body);
   
   res.render('daftar-siswa', {
-    title: 'Pendaftaran Siswa Baru - SMPIT Baituljannah',
+    title: 'Pendaftaran Siswa Baru - SMPTI Baituljannah',
     success: true,
     formData: {}
   });
@@ -843,8 +830,8 @@ app.use((err, req, res, next) => {
   res.status(500).render('500', { title: 'Server Error' });
 });
 
-app.listen(PORT, HOST, () => {
-  console.log(`Server is running on http://${HOST}:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 module.exports = app;
