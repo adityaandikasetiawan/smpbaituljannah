@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berita - SMPIT Baituljannah</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/general/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/general/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/general/apple-touch-icon.png">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <i class="icon icon-loading"></i>
+      </div>
+    </div>
+  </div>
+  
+  <header data-anim="fade" data-add-bg="" class="header -type-4 -shadow bg-white border-bottom-light js-header">
+  <div class="header__container py-10">
+    <div class="row justify-between items-center">
+      
+      <div class="col-auto">
+        <div class="header-left d-flex items-center">
+          
+          <div class="header__logo pr-30 xl:pr-20 md:pr-0">
+            <a data-barba href="/" class="d-flex items-center">
+              <img src="/img/logo smp.png" alt="logo" style="max-height: 50px; width: auto;">
+            </a>
+          </div>
+          
+
+          
+          <div class="header-menu js-mobile-menu-toggle pl-30 xl:pl-20">
+            <div class="header-menu__content">
+              <div class="mobile-bg js-mobile-bg"></div>
+              
+              <div class="d-none xl:d-flex items-center px-20 py-20 border-bottom-light">
+                <a href="/portal-siswa" class="text-dark-1">Portal Siswa</a>
+                <a href="/signup" class="text-dark-1 ml-30">Pendaftaran</a>
+              </div>
+              
+              <div class="menu js-navList">
+                <ul class="menu__nav text-dark-1 -is-active">
+                  <li><a data-barba href="/">Beranda</a></li>
+                  
+                  <li class="menu-item-has-children">
+                    <a data-barba href="#">
+                      Profil <i class="icon-chevron-right text-13 ml-10"></i>
+                    </a>
+                    <ul class="subnav">
+                      <li class="menu__backButton js-nav-list-back">
+                        <a href="#"><i class="icon-chevron-left text-13 mr-10"></i> Profil</a>
+                      </li>
+                      <li><a href="/visi-misi">Visi & Misi</a></li>
+                      <li><a href="/fasilitas">Fasilitas</a></li>
+                      <li><a href="/berita">Berita</a></li>
+                    </ul>
+                  </li>
+                  
+                  <li class="menu-item-has-children">
+                    <a data-barba href="#">
+                      Program Unggulan <i class="icon-chevron-right text-13 ml-10"></i>
+                    </a>
+                    <ul class="subnav">
+                      <li class="menu__backButton js-nav-list-back">
+                        <a href="#"><i class="icon-chevron-left text-13 mr-10"></i> Program Unggulan</a>
+                      </li>
+                      <li><a href="/program-unggulan">Kelas Unggulan IT</a></li>
+                      <!-- <li><a href="/program-unggulan">Coding Dasar</a></li>
+                      <li><a href="/program-unggulan">Digital Literacy</a></li>
+                      <li><a href="/courses">Robotika Sederhana</a></li>
+                      <li><a href="/courses">Multimedia</a></li> -->
+                    </ul>
+                  </li>
+                  
+                  <li><a data-barba href="/kurikulum">Kurikulum</a></li>
+                  <li><a data-barba href="/faq">FAQ</a></li>              
+                                 
+                  <!-- Pendaftaran Online telah dinonaktifkan -->
+
+                  <li><a data-barba href="/contact">Kontak</a></li>
+                </ul>
+              </div>
+              
+              <div class="mobile-footer px-20 py-20 border-top-light js-mobile-footer">
+                <div class="mobile-footer__number">
+                  <div class="text-17 fw-500 text-dark-1">Call us</div>
+                  <div class="text-17 fw-500 text-purple-1">(0721) 8050145</div>
+                </div>
+                
+                <div class="lh-2 mt-10">
+                  <div>Jl. Pramuka No.43 Kemiling Raya,<br> Bandar Lampung 35153.</div>
+                  <div>smpitbaja@smpitbaituljannah.sch.id</div>
+                </div>
+                
+                <div class="mobile-socials mt-10">
+                  <a href="#" class="d-flex items-center justify-center rounded-full size-40">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                  <a href="#" class="d-flex items-center justify-center rounded-full size-40">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                  <a href="#" class="d-flex items-center justify-center rounded-full size-40">
+                    <i class="fa fa-instagram"></i>
+                  </a>
+                  <a href="#" class="d-flex items-center justify-center rounded-full size-40">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="header-menu-close" data-el-toggle=".js-mobile-menu-toggle">
+              <div class="size-40 d-flex items-center justify-center rounded-full bg-white">
+                <div class="icon-close text-dark-1 text-16"></div>
+              </div>
+            </div>
+            
+            <div class="header-menu-bg"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-auto">
+        <div class="header-right d-flex items-center">
+          <!-- Logo Asrama di pojok kanan -->
+          <div class="pr-20">
+            <img src="/img/LOGO ASRAMA.png" alt="logo asrama" style="max-height: 45px; width: auto;">
+          </div>
+          
+          <!-- <div class="header-right__icons text-white d-flex items-center">
+            
+            <div class="pr-20 sm:pr-15">
+              <button class="d-flex items-center text-dark-1" data-el-toggle=".js-search-toggle">
+                <i class="text-20 icon icon-search"></i>
+              </button>
+              
+              <div class="toggle-element js-search-toggle">
+                <div class="header-search pt-90 bg-white shadow-4">
+                  <div class="container">
+                    <div class="header-search__field">
+                      <div class="icon icon-search text-dark-1"></div>
+                      <input type="text" class="col-12 text-18 lh-12 text-dark-1 fw-500" placeholder="What do you want to learn?">
+                      
+                      <button class="d-flex items-center justify-center size-40 rounded-full bg-purple-3" data-el-toggle=".js-search-toggle">
+                        <img src="/img/menus/close.svg" alt="icon">
+                      </button>
+                    </div>
+                    
+                    <div class="header-search__content mt-30">
+                      <div class="text-17 text-dark-1 fw-500">Popular Right Now</div>
+                      
+                      <div class="d-flex y-gap-5 flex-column mt-20">
+                        <a href="/courses/drawing-course" class="text-dark-1">The Ultimate Drawing Course - Beginner to Advanced</a>
+                        <a href="/courses/character-art" class="text-dark-1">Character Art School: Complete Character Drawing Course</a>
+                        <a href="/courses/blender-creator" class="text-dark-1">Complete Blender Creator: Learn 3D Modelling for Beginners</a>
+                        <a href="/courses/ux-design-essentials" class="text-dark-1">User Experience Design Essentials - Adobe XD UI UX Design</a>
+                        <a href="/courses/graphic-design-masterclass" class="text-dark-1">Graphic Design Masterclass - Learn GREAT Design</a>
+                        <a href="/courses/photoshop-essentials" class="text-dark-1">Adobe Photoshop CC – Essentials Training Course</a>
+                      </div>
+                      
+                      <div class="mt-30">
+                        <button class="uppercase underline">PRESS ENTER TO SEE ALL SEARCH RESULTS</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="header-search__bg" data-el-toggle=".js-search-toggle"></div>
+              </div>
+            </div>
+            
+            <div class="relative -before-border px-20 sm:px-15">
+              <button class="d-flex items-center text-dark-1" data-el-toggle=".js-cart-toggle">
+                <i class="text-20 icon icon-basket"></i>
+              </button>
+              
+              <div class="toggle-element js-cart-toggle">
+                <div class="header-cart bg-white -dark-bg-dark-1 rounded-8">
+                  <div class="px-30 pt-30 pb-10">
+                    <div class="text-center">
+                      <div class="text-17 fw-500 text-dark-1">Your cart is empty</div>
+                      <div class="text-15 text-light-1 mt-5">Add some courses to get started</div>
+                    </div>
+                    
+                    <div class="row x-gap-20 y-gap-10 pt-30">
+                      <div class="col-sm-6">
+                        <button class="button py-20 -dark-1 text-white -dark-button-white col-12">View Cart</button>
+                      </div>
+                      <div class="col-sm-6">
+                        <button class="button py-20 -purple-1 text-white col-12">Checkout</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="d-none xl:d-block -before-border pl-20 sm:pl-15">
+              <button class="text-dark-1 items-center" data-el-toggle=".js-mobile-menu-toggle">
+                <i class="text-11 icon icon-mobile-menu"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="header-right__buttons d-flex items-center lg:d-none" style="display: none !important;">
+            <a href="/login" class="button -underline text-dark-1 -before-border py-3 pl-30 xl:pl-20">Log in</a>
+            <a href="/signup" class="button h-50 px-25 -purple-3 -rounded text-purple-1 ml-20">Sign up</a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+  
+  <main class="main-content layout-pt-lg layout-pb-lg">
+    <section class="page-header -type-1">
+      <div class="container">
+        <div class="page-header__content">
+          <div class="row justify-center text-center">
+            <!-- <div class="col-xl-6 col-lg-7 col-md-9">
+              <h1 class="page-header__title">Berita Sekolah</h1>
+              <p class="page-header__text">Berita terkini dan informasi penting dari SMPIT Baituljannah</p>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Berita Utama -->
+    <section class="layout-pt-md layout-pb-md">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Berita Terbaru</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Informasi terkini kegiatan dan acara SMPIT Baituljannah</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          
+            <div class="col-12 text-center py-60">
+              <div class="text-light-1">
+                <i class="fas fa-newspaper text-60 mb-20"></i>
+                <h4 class="text-20 fw-500 mb-10">Belum Ada Berita</h4>
+                <p class="text-15">Berita terbaru akan segera hadir di sini.</p>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Kegiatan Sekolah -->
+    <section class="layout-pt-md layout-pb-md bg-light-6">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Kegiatan Sekolah</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Berbagai aktivitas dan program unggulan SMPIT Baituljannah</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30">
+          <!-- Program Tahfidz -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-green-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-quran text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Program Tahfidz Al-Qur'an</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">Program Unggulan</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Program menghafal Al-Qur'an dengan target minimal 5 juz untuk setiap siswa dengan metode pembelajaran yang menyenangkan.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Boarding School -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-blue-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-home text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Program Boarding School</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">Asrama Putra & Putri</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Fasilitas asrama dengan pembinaan karakter 24 jam, pengawasan ketat, dan lingkungan Islami yang kondusif.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Program Bilingual -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-orange-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-language text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Program Bilingual</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">Bahasa Inggris & Arab</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Pembelajaran dwi bahasa dengan native speaker untuk meningkatkan kemampuan komunikasi internasional siswa.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kegiatan Ekstrakurikuler -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-purple-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-users text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Ekstrakurikuler Beragam</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">15+ Pilihan Ekskul</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Berbagai pilihan ekstrakurikuler mulai dari olahraga, seni, teknologi, hingga keagamaan untuk mengembangkan bakat siswa.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pembelajaran Digital -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-red-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-laptop text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Pembelajaran Digital</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">Smart Learning</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Integrasi teknologi dalam pembelajaran dengan fasilitas lab komputer, LCD proyektor, dan platform e-learning.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pembinaan Karakter -->
+          <div class="col-lg-4 col-md-6">
+            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 px-30 py-30">
+              <div class="eventCard__img">
+                <div class="bg-yellow-1 rounded-8 size-90 d-flex align-items-center justify-center">
+                  <i class="fas fa-heart text-white text-30"></i>
+                </div>
+              </div>
+              <div class="eventCard__content mt-20">
+                <h4 class="eventCard__title text-17 fw-500">Pembinaan Karakter Islami</h4>
+                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">Character Building</div>
+                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Program pembentukan karakter Islami melalui pembiasaan ibadah, akhlak mulia, dan nilai-nilai keislaman dalam kehidupan sehari-hari.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistik Sekolah -->
+    <section class="layout-pt-md layout-pb-lg">
+      <div class="container">
+        <div class="row justify-center text-center mb-60">
+          <div class="col-xl-6 col-lg-8">
+            <h2 class="text-30 lh-16 fw-700">Statistik SMPIT Baituljannah</h2>
+            <p class="text-15 lh-18 text-light-1 mt-10">Data dan pencapaian sekolah dalam angka</p>
+          </div>
+        </div>
+        
+        <div class="row y-gap-30 justify-between">
+          <div class="col-lg-3 col-md-6">
+            <div class="counterCard text-center">
+              <div class="counterCard__number text-green-1 text-45 fw-700 lh-12">450+</div>
+              <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Total Siswa</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="counterCard text-center">
+              <div class="counterCard__number text-blue-1 text-45 fw-700 lh-12">35+</div>
+              <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Guru Berkualitas</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="counterCard text-center">
+              <div class="counterCard__number text-orange-1 text-45 fw-700 lh-12">15+</div>
+              <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Program Unggulan</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="counterCard text-center">
+              <div class="counterCard__number text-purple-1 text-45 fw-700 lh-12">98%</div>
+              <div class="counterCard__content text-17 lh-15 fw-500 text-dark-1 mt-5">Tingkat Kelulusan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="footer -type-1 -dark bg-light-9">
+  <div class="container">
+    <div class="footer-header border-bottom-dark">
+      <div class="row y-gap-20 justify-between items-center">
+        <div class="col-auto">
+          <div class="footer-header__logo">
+            <img src="/img/logo smp.png" alt="logo" style="max-height: 40px; width: auto;">
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="footer-header-socials">
+            <div class="footer-header-socials__title text-dark-1">Ikuti kami di media sosial</div>
+            <div class="footer-header-socials__list">
+              <a href="https://www.facebook.com/smpit.baitul.jannah" target="_blank"><i class="text-14 fa fa-facebook"></i></a>
+              <a href="https://www.instagram.com/smpit.baituljannah?igsh=MWN3b2JyZ3p3ZWlsbA==" target="_blank"><i class="text-14 fa fa-instagram"></i></a>
+              <a href="https://www.youtube.com/@BaitulJannahIslamicSchool" target="_blank"><i class="text-14 fa fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-columns">
+      <div class="row y-gap-30">
+        <div class="col-xl-2 col-md-4">
+          <div class="text-17 fw-500 uppercase mb-25">TENTANG</div>
+          <div class="d-flex y-gap-10 flex-column">
+            <a href="/sejarah">Sejarah</a>
+            <a href="/visi-misi">Visi & Misi</a>
+            <a href="/fasilitas">Fasilitas</a>
+            <a href="/berita">Berita</a>
+            <a href="/kurikulum">Kurikulum</a>
+            <a href="/contact">Kontak</a>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-8 col-md-8">
+          <div class="text-17 fw-500 uppercase mb-25">PROGRAM UNGGULAN</div>
+          <div class="row justify-between y-gap-20">
+            <div class="col-md-6">
+              <div class="d-flex y-gap-10 flex-column">
+                <a href="/program-unggulan">Kelas Unggulan IT</a>
+                <!-- <a href="/program-unggulan">Coding Dasar</a>
+                <a href="/program-unggulan">Digital Literacy</a>
+                <a href="/courses">Komputer Grafis</a>
+                <a href="/courses">Multimedia</a>
+                <a href="/courses">Robotika Sederhana</a> -->
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="d-flex y-gap-10 flex-column">
+                <!-- <a href="/courses">Desain Grafis</a>
+                <a href="/courses">Video Editing</a>
+                <a href="/courses">Presentasi Digital</a>
+                <a href="/courses">Game Edukasi</a>
+                <a href="/courses">Internet Safety</a>
+                <a href="/courses">Office Application</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-2 offset-xl-1 col-md-4 col-sm-6">
+          <div class="text-17 fw-500 uppercase mb-25">INFORMASI</div>
+          <div class="d-flex y-gap-10 flex-column">
+            <a href="/faq">FAQ</a>
+            <a href="/contact">Kontak</a>
+            <a href="/portal-siswa">Portal Siswa</a>
+            <!-- Pendaftaran telah dinonaktifkan -->
+          </div>
+        </div>
+
+        <div class="col-xl-3 ol-md-4 col-sm-6">
+          <div class="text-17 fw-500 uppercase mb-25">HUBUNGI KAMI</div>
+          <div class="footer-columns-form">
+            <div class="mb-15">
+              <div class="text-14 mb-5"><i class="fa fa-map-marker mr-10"></i>Jl. Pramuka No.43 Kemiling Raya Bandar Lampung 35153</div>
+              <div class="text-14 mb-5"><i class="fa fa-phone mr-10"></i>(0721) 8050145</div>
+              <div class="text-14 mb-5"><i class="fa fa-envelope mr-10"></i>smpitbaja@smpitbaituljannah.sch.id</div>
+              <div class="text-14 mb-5"><a href="https://wa.me/6282378537170" target="_blank" style="text-decoration: none; color: #000;"><i class="fab fa-whatsapp mr-10" style="color: #25D366;"></i>082378537170</a></div>
+            </div>
+            <div class="text-13">Bergabunglah dengan komunitas IT terdepan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-footer border-top-dark">
+      <div class="row justify-between y-gap-20">
+        <div class="col-md-6">
+          <div class="footer-footer__copyright">© 2025 Baituljannah. All Right Reserved.</div>
+        </div>
+
+        <div class="col-auto">
+          <div class="footer-footer__right">
+            <div class="footer-footer__list">
+              <a href="/faq">Bantuan</a>
+              <a href="/privacy">Kebijakan Privasi</a>
+              <a href="/terms">Syarat & Ketentuan</a>
+              <a href="/contact">Kontak</a>
+            </div>
+
+            <div class="ml-20">
+              <a href="#" class="button -white px-30 py-20 rounded-200 text-black">Bahasa Indonesia</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+  
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="/js/vendors.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

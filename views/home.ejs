@@ -519,10 +519,7 @@
               </p>
               
               <div class="d-flex flex-wrap justify-center y-gap-20">
-                <a href="/daftar-siswa" class="btn btn-boarding-primary mr-20">
-                  <i class="fas fa-user-plus mr-10"></i>
-                  Daftar Sekarang
-                </a>
+                <!-- Tombol Daftar Sekarang telah dinonaktifkan -->
                 <a href="/program-unggulan" class="btn btn-boarding-secondary">
                   <i class="fas fa-info-circle mr-10"></i>
                   Info Lengkap
@@ -758,16 +755,16 @@
               
               <!-- Navigation Pagination -->
               <div class="carousel-pagination d-flex justify-center align-items-center mt-30">
-                <button class="carousel-nav-btn" id="prevBtn" onclick="previousSlide()">
-                  <i class="fas fa-chevron-left"></i>
+                <button class="carousel-nav-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
                 </button>
                 <div class="pagination-numbers d-flex mx-3">
                   <button class="page-number active" data-slide="0">1</button>
                   <button class="page-number" data-slide="1">2</button>
                   <button class="page-number" data-slide="2">3</button>
                 </div>
-                <button class="carousel-nav-btn" id="nextBtn" onclick="nextSlide()">
-                  <i class="fas fa-chevron-right"></i>
+                <button class="carousel-nav-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
                 </button>
               </div>
             </div>
@@ -863,6 +860,10 @@
             updateCarouselGaleri();
           });
         });
+        
+        // Navigation button event listeners
+        document.getElementById('prevBtn').addEventListener('click', previousSlide);
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
         
         // Auto-play functionality
         setInterval(() => {

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SMPIT Baituljannah</title>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/datatables/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --secondary-blue: #1e40af;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --border-light: #e2e8f0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f1f5f9 100%);
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+        }
+        .sidebar {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            min-height: 100vh;
+            color: white;
+            box-shadow: 4px 0 20px rgba(37, 99, 235, 0.15);
+        }
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.9);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 0.25rem 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .main-content {
+            padding: 2rem;
+        }
+        .stats-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.08);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .stats-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.12);
+        }
+        .stats-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin: 0 auto 1rem;
+        }
+        .table-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.08);
+            border: 1px solid var(--border-light);
+            margin-top: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .table-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.12);
+        }
+        .btn-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .status-approved {
+            background-color: #d1edff;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .status-rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .header-title {
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .header-subtitle {
+            color: #64748b;
+            font-size: 1rem;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0">
+                <div class="sidebar">
+                    <div class="p-3">
+                        <h4 class="mb-0">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            Admin Panel
+                        </h4>
+                        <small class="opacity-75">SMPIT Baituljannah</small>
+                    </div>
+                    <nav class="nav flex-column px-3">
+                        <a class="nav-link active" href="/admin/dashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="/admin/registrations">
+                            <i class="fas fa-users me-2"></i>
+                            Data Pendaftaran
+                        </a>
+                        <a class="nav-link" href="/admin/news">
+                            <i class="fas fa-newspaper me-2"></i>
+                            Manajemen Berita
+                        </a>
+                        <a class="nav-link" href="/admin/settings">
+                            <i class="fas fa-cog me-2"></i>
+                            Pengaturan
+                        </a>
+                        <hr class="my-3" style="border-color: rgba(255,255,255,0.2);">
+                        <a class="nav-link" href="/admin/logout">
+                            <i class="fas fa-sign-out-alt me-2"></i>
+                            Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10">
+                <div class="main-content">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2 class="header-title">Dashboard Admin</h2>
+                            <p class="header-subtitle">Selamat datang, <%= adminUser.full_name %>!</p>
+                        </div>
+                        <div class="text-muted">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            <%= new Date().toLocaleDateString('id-ID', { 
+                                weekday: 'long', 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            }) %>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3 mb-3">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="stat-value"><%= stats.total %></div>
+                                        <div class="stat-label">Total Pendaftar</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon" style="background: linear-gradient(135deg, var(--accent-blue) 0%, var(--primary-blue) 100%);">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="stat-value"><%= stats.pending %></div>
+                                        <div class="stat-label">Menunggu Review</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon" style="background: linear-gradient(135deg, var(--light-blue) 0%, var(--accent-blue) 100%);">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="stat-value"><%= stats.approved %></div>
+                                        <div class="stat-label">Diterima</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon" style="background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--light-blue) 100%);">
+                                        <i class="fas fa-calendar-day"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="stat-value"><%= stats.today %></div>
+                                        <div class="stat-label">Hari Ini</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Registrations Table -->
+                    <div class="table-container">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">
+                                <i class="fas fa-list me-2"></i>
+                                Pendaftaran Terbaru
+                            </h4>
+                            <a href="/admin/registrations" class="btn btn-primary">
+                                <i class="fas fa-eye me-2"></i>
+                                Lihat Semua
+                            </a>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="registrationsTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Program Pilihan</th>
+                                        <th>Tanggal Daftar</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (recentRegistrations && recentRegistrations.length > 0) { %>
+                                        <% recentRegistrations.forEach((registration, index) => { %>
+                                            <tr>
+                                                <td><%= index + 1 %></td>
+                                                <td>
+                                                    <strong><%= registration.nama_lengkap %></strong><br>
+                                                    <small class="text-muted"><%= registration.email || '-' %></small>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info"><%= registration.program_pilihan %></span>
+                                                </td>
+                                                <td>
+                                                    <%= new Date(registration.created_at).toLocaleDateString('id-ID') %>
+                                                </td>
+                                                <td>
+                                                    <% if (registration.status === 'pending') { %>
+                                                        <span class="btn-status status-pending">Menunggu</span>
+                                                    <% } else if (registration.status === 'approved') { %>
+                                                        <span class="btn-status status-approved">Diterima</span>
+                                                    <% } else if (registration.status === 'rejected') { %>
+                                                        <span class="btn-status status-rejected">Ditolak</span>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <a href="/admin/registrations/<%= registration.id %>" class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="6" class="text-center text-muted py-4">
+                                                <i class="fas fa-inbox fa-2x mb-3 d-block"></i>
+                                                Belum ada data pendaftaran
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery/jquery-3.7.0.min.js"></script>
+    <script src="/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/js/datatables/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#registrationsTable').DataTable({
+                "pageLength": 10,
+                "ordering": true,
+                "searching": false,
+                "lengthChange": false,
+                "info": false,
+                "paging": false
+            });
+        });
+    </script>
+</body>
+</html>

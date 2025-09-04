@@ -63,47 +63,44 @@
         </div>
         
         <div class="row y-gap-30">
-          <!-- Dauroh Qur'an -->
-          <div class="col-lg-4 col-md-6">
-            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 overflow-hidden">
-              <div class="eventCard__img">
-                <img src="/img/berita/dauroh qur'an.webp" alt="Dauroh Qur'an" class="w-100" style="height: 200px; object-fit: cover;">
+          <% if (news && news.length > 0) { %>
+            <% news.forEach(function(article) { %>
+              <div class="col-lg-4 col-md-6">
+                <div class="eventCard -type-1 bg-white rounded-8 shadow-4 overflow-hidden">
+                  <div class="eventCard__img">
+                    <% if (article.featured_image) { %>
+                      <img src="<%= article.featured_image %>" alt="<%= article.title %>" class="w-100" style="height: 200px; object-fit: cover;">
+                    <% } else { %>
+                      <div class="bg-light-6 d-flex align-items-center justify-center" style="height: 200px;">
+                        <i class="fas fa-newspaper text-light-1 text-40"></i>
+                      </div>
+                    <% } %>
+                  </div>
+                  <div class="eventCard__content px-30 py-30">
+                    <h4 class="eventCard__title text-17 fw-500"><%= article.title %></h4>
+                    <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">
+                      <%= new Date(article.created_at).toLocaleDateString('id-ID', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      }) %>
+                    </div>
+                    <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">
+                      <%= article.excerpt || article.content.substring(0, 150) + '...' %>
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="eventCard__content px-30 py-30">
-                <h4 class="eventCard__title text-17 fw-500">Dauroh Qur'an Intensif</h4>
-                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">15 Januari 2025</div>
-                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">SMPIT Baituljannah mengadakan program Dauroh Qur'an intensif untuk meningkatkan kemampuan membaca dan menghafal Al-Qur'an siswa.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Wisuda Kelas 2025 -->
-          <div class="col-lg-4 col-md-6">
-            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 overflow-hidden">
-              <div class="eventCard__img">
-                <img src="/img/berita/granduation class 2025.webp" alt="Wisuda Kelas 2025" class="w-100" style="height: 200px; object-fit: cover;">
-              </div>
-              <div class="eventCard__content px-30 py-30">
-                <h4 class="eventCard__title text-17 fw-500">Wisuda Angkatan 2025</h4>
-                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">20 Juni 2025</div>
-                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">Upacara wisuda siswa kelas IX angkatan 2025 dilaksanakan dengan khidmat. Selamat kepada seluruh lulusan yang telah menyelesaikan pendidikan di SMPIT Baituljannah.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Hari Guru -->
-          <div class="col-lg-4 col-md-6">
-            <div class="eventCard -type-1 bg-white rounded-8 shadow-4 overflow-hidden">
-              <div class="eventCard__img">
-                <img src="/img/berita/hari guru.webp" alt="Peringatan Hari Guru" class="w-100" style="height: 200px; object-fit: cover;">
-              </div>
-              <div class="eventCard__content px-30 py-30">
-                <h4 class="eventCard__title text-17 fw-500">Peringatan Hari Guru Nasional</h4>
-                <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">25 November 2024</div>
-                <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">SMPIT Baituljannah memperingati Hari Guru Nasional dengan berbagai kegiatan apresiasi kepada para guru yang telah berdedikasi dalam mendidik siswa.</p>
+            <% }); %>
+          <% } else { %>
+            <div class="col-12 text-center py-60">
+              <div class="text-light-1">
+                <i class="fas fa-newspaper text-60 mb-20"></i>
+                <h4 class="text-20 fw-500 mb-10">Belum Ada Berita</h4>
+                <p class="text-15">Berita terbaru akan segera hadir di sini.</p>
               </div>
             </div>
-          </div>
+          <% } %>
         </div>
       </div>
     </section>

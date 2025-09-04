@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title>Admin Login - SMPIT Baituljannah</title>
+    <link rel="icon" type="image/x-icon" href="/img/general/favicon.ico">
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -34,7 +35,7 @@
         }
         
         .login-header {
-            background: #059669;
+            background: #4f46e5;
             color: white;
             padding: 2.5rem 2rem;
             text-align: center;
@@ -98,85 +99,105 @@
             border-radius: 8px;
             padding: 0.75rem 0.75rem 0.75rem 2.5rem;
             transition: all 0.2s ease;
-            width: 100%;
             font-size: 0.9rem;
-            background: #ffffff;
+            height: 48px;
+            width: 100%;
+            max-width: 320px;
+            background: white;
         }
         
         .form-control:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
             outline: none;
-            border-color: #059669;
-            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
         }
         
-        .input-icon {
+        .form-control::placeholder {
+            color: #9ca3af;
+        }
+        
+        .input-group-text {
             position: absolute;
             left: 0.75rem;
             top: 50%;
             transform: translateY(-50%);
+            background: transparent;
+            border: none;
             color: #9ca3af;
+            z-index: 10;
             font-size: 0.9rem;
         }
         
         .btn-login {
-            background: #059669;
-            color: white;
+            background: #4f46e5;
             border: none;
             border-radius: 8px;
-            padding: 0.75rem 2rem;
-            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
             font-size: 0.9rem;
-            cursor: pointer;
             transition: all 0.2s ease;
             width: 100%;
             max-width: 320px;
+            color: white;
+            height: 48px;
         }
         
         .btn-login:hover {
-            background: #047857;
+            background: #4338ca;
             transform: translateY(-1px);
-        }
-        
-        .btn-login:active {
-            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
         }
         
         .alert {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #dc2626;
-            padding: 0.75rem;
             border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
+            border: none;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem 1rem;
+            font-weight: 400;
+            width: 100%;
+            max-width: 320px;
+            font-size: 0.9rem;
+        }
+        
+        .alert-danger {
+            background: #fef2f2;
+            color: #dc2626;
+            border-left: 3px solid #ef4444;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
             width: 100%;
             max-width: 320px;
         }
         
-        .alert i {
-            margin-right: 0.5rem;
-        }
-        
-        .links {
-            margin-top: 1.5rem;
-            text-align: center;
-            width: 100%;
-        }
-        
-        .links a {
-            color: #059669;
+        .back-link a {
+            color: #6b7280;
             text-decoration: none;
-            font-size: 0.85rem;
-            margin: 0 0.5rem;
+            transition: color 0.2s ease;
+            font-size: 0.9rem;
+            font-weight: 400;
         }
         
-        .links a:hover {
-            text-decoration: underline;
+        .back-link a:hover {
+            color: #4f46e5;
         }
         
-        .divider {
-            margin: 0 0.5rem;
-            color: #9ca3af;
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 0 10px;
+            }
+            
+            .login-header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .login-body {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -184,60 +205,69 @@
     <div class="login-container">
         <div class="login-header">
             <div class="icon-wrapper">
-                <i class="fas fa-user-circle"></i>
+                <i class="fas fa-shield-alt"></i>
             </div>
-            <h2>Login Siswa</h2>
-            <p>Masuk ke Portal Siswa SMPIT Baituljannah</p>
+            <h2>Admin Panel</h2>
+            <p>SMPIT Baituljannah</p>
         </div>
-        
         <div class="login-body">
             <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
-                <div class="alert">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <% errors.forEach(error => { %>
-                        <%= error %><br>
-                    <% }); %>
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        <% errors.forEach(error => { %>
+                            <li><%= error %></li>
+                        <% }); %>
+                    </ul>
                 </div>
             <% } %>
-            
-            <form method="POST" action="/login" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+
+            <% if (typeof error !== 'undefined') { %>
+                <div class="alert alert-danger">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <form method="POST" action="/admin/login">
                 <div class="form-group">
-                    <label class="form-label">
-                        <i class="fas fa-user"></i>
-                        Username
+                    <label for="username" class="form-label">
+                        <i class="fas fa-user"></i>Username
                     </label>
                     <div class="input-group">
-                        <i class="input-icon fas fa-user"></i>
-                        <input type="text" class="form-control" name="username" placeholder="Masukkan username Anda" 
-                               value="<%= typeof formData !== 'undefined' ? formData.username || '' : '' %>" required>
+                        <input type="text" class="form-control" id="username" name="username" 
+                               value="<%= typeof formData !== 'undefined' ? formData.username || '' : '' %>" 
+                               placeholder="Masukkan username" required>
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
-                    <label class="form-label">
-                        <i class="fas fa-lock"></i>
-                        Password
+                    <label for="password" class="form-label">
+                        <i class="fas fa-lock"></i>Password
                     </label>
                     <div class="input-group">
-                        <i class="input-icon fas fa-lock"></i>
-                        <input type="password" class="form-control" name="password" placeholder="Masukkan password Anda" required>
+                        <input type="password" class="form-control" id="password" name="password" 
+                               placeholder="Masukkan password" required>
+                        <span class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                        </span>
                     </div>
                 </div>
-                
-                <button type="submit" class="btn-login">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Masuk
+
+                <button type="submit" class="btn btn-primary btn-login">
+                    <i class="fas fa-sign-in-alt me-2"></i>Login
                 </button>
             </form>
-            
-            <div class="links">
-                <a href="/signup">Daftar Akun Baru</a>
-                <span class="divider">|</span>
-                <a href="/">Kembali ke Beranda</a>
-                <span class="divider">|</span>
-                <a href="/admin/login">Login Admin</a>
+
+            <div class="back-link">
+                <a href="/">
+                    <i class="fas fa-arrow-left me-2"></i>Kembali ke Beranda
+                </a>
             </div>
         </div>
     </div>
+
+    <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 </html>

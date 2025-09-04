@@ -1,0 +1,211 @@
+<div class="row">
+    <div class="col-md-6">
+        <h6 class="text-primary mb-3">
+            <i class="fas fa-user me-2"></i>
+            Data Pribadi Siswa
+        </h6>
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td width="40%"><strong>Nama Lengkap:</strong></td>
+                <td><%= registration.nama_lengkap %></td>
+            </tr>
+            <tr>
+                <td><strong>Tempat, Tanggal Lahir:</strong></td>
+                <td><%= registration.tempat_lahir %>, <%= new Date(registration.tanggal_lahir).toLocaleDateString('id-ID') %></td>
+            </tr>
+            <tr>
+                <td><strong>Jenis Kelamin:</strong></td>
+                <td><%= registration.jenis_kelamin %></td>
+            </tr>
+            <tr>
+                <td><strong>Agama:</strong></td>
+                <td><%= registration.agama %></td>
+            </tr>
+            <tr>
+                <td><strong>Alamat:</strong></td>
+                <td><%= registration.alamat %></td>
+            </tr>
+            <tr>
+                <td><strong>No. Telepon:</strong></td>
+                <td><%= registration.no_telepon || '-' %></td>
+            </tr>
+            <tr>
+                <td><strong>Email:</strong></td>
+                <td><%= registration.email || '-' %></td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="col-md-6">
+        <h6 class="text-success mb-3">
+            <i class="fas fa-school me-2"></i>
+            Data Sekolah Asal
+        </h6>
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td width="40%"><strong>Asal Sekolah:</strong></td>
+                <td><%= registration.asal_sekolah %></td>
+            </tr>
+            <tr>
+                <td><strong>Alamat Sekolah:</strong></td>
+                <td><%= registration.alamat_sekolah %></td>
+            </tr>
+            <tr>
+                <td><strong>Tahun Lulus:</strong></td>
+                <td><%= registration.tahun_lulus %></td>
+            </tr>
+        </table>
+        
+        <h6 class="text-info mb-3 mt-4">
+            <i class="fas fa-users me-2"></i>
+            Data Orang Tua
+        </h6>
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td width="40%"><strong>Nama Ayah:</strong></td>
+                <td><%= registration.nama_ayah %></td>
+            </tr>
+            <tr>
+                <td><strong>Pekerjaan Ayah:</strong></td>
+                <td><%= registration.pekerjaan_ayah %></td>
+            </tr>
+            <tr>
+                <td><strong>Nama Ibu:</strong></td>
+                <td><%= registration.nama_ibu %></td>
+            </tr>
+            <tr>
+                <td><strong>Pekerjaan Ibu:</strong></td>
+                <td><%= registration.pekerjaan_ibu %></td>
+            </tr>
+            <tr>
+                <td><strong>No. Telepon Ortu:</strong></td>
+                <td><%= registration.no_telepon_ortu %></td>
+            </tr>
+            <tr>
+                <td><strong>Email Ortu:</strong></td>
+                <td><%= registration.email_ortu || '-' %></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <h6 class="text-warning mb-3">
+            <i class="fas fa-graduation-cap me-2"></i>
+            Program & Motivasi
+        </h6>
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td width="20%"><strong>Program Pilihan:</strong></td>
+                <td>
+                    <span class="badge bg-info fs-6"><%= registration.program_pilihan %></span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Motivasi:</strong></td>
+                <td><%= registration.motivasi || 'Tidak ada motivasi yang ditulis' %></td>
+            </tr>
+            <tr>
+                <td><strong>Status:</strong></td>
+                <td>
+                    <% if (registration.status === 'pending') { %>
+                        <span class="badge bg-warning">Menunggu</span>
+                    <% } else if (registration.status === 'approved') { %>
+                        <span class="badge bg-success">Diterima</span>
+                    <% } else if (registration.status === 'rejected') { %>
+                        <span class="badge bg-danger">Ditolak</span>
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Tanggal Daftar:</strong></td>
+                <td><%= new Date(registration.created_at).toLocaleDateString('id-ID', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                }) %></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="d-flex gap-2 justify-content-end">
+            <% if (registration.status === 'pending') { %>
+                <button class="btn btn-success btn-sm update-status-btn" data-id="<%= registration.id %>" data-status="approved">
+                    <i class="fas fa-check me-2"></i>
+                    Terima
+                </button>
+                <button class="btn btn-danger btn-sm update-status-btn" data-id="<%= registration.id %>" data-status="rejected">
+                    <i class="fas fa-times me-2"></i>
+                    Tolak
+                </button>
+            <% } else if (registration.status === 'approved') { %>
+                <button class="btn btn-warning btn-sm update-status-btn" data-id="<%= registration.id %>" data-status="pending">
+                    <i class="fas fa-undo me-2"></i>
+                    Kembalikan ke Pending
+                </button>
+                <button class="btn btn-danger btn-sm update-status-btn" data-id="<%= registration.id %>" data-status="rejected">
+                    <i class="fas fa-times me-2"></i>
+                    Tolak
+                </button>
+            <% } else if (registration.status === 'rejected') { %>
+                <button class="btn btn-success btn-sm update-status-btn" data-id="<%= registration.id %>" data-status="approved">
+                    <i class="fas fa-check me-2"></i>
+                    Terima
+                </button>
+                <button class="btn btn-warning btn-sm update-status-btn" data-id="<%= registration.id %>" data-status="pending">
+                    <i class="fas fa-undo me-2"></i>
+                    Kembalikan ke Pending
+                </button>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<script>
+// Event listener untuk tombol update status di modal detail
+$(document).ready(function() {
+    $('.update-status-btn').off('click').on('click', function() {
+        const id = $(this).data('id');
+        const status = $(this).data('status');
+        
+        const statusText = status === 'approved' ? 'menerima' : (status === 'rejected' ? 'menolak' : 'mengubah ke pending');
+        
+        if (confirm(`Apakah Anda yakin ingin ${statusText} pendaftaran ini?`)) {
+            fetch(`/admin/registrations/${id}/status`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status: status })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Tutup modal dan refresh halaman utama
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('detailModal'));
+                    if (modal) {
+                        modal.hide();
+                    }
+                    // Refresh halaman utama
+                    if (window.parent && window.parent.location) {
+                        window.parent.location.reload();
+                    } else {
+                        location.reload();
+                    }
+                } else {
+                    alert('Gagal memperbarui status: ' + (data.message || 'Terjadi kesalahan'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat memperbarui status');
+            });
+        }
+    });
+});
+</script>

@@ -9,7 +9,6 @@ const morgan = require('morgan');
 const { body, validationResult } = require('express-validator');
 const fs = require('fs');
 const multer = require('multer');
-const sharp = require('sharp');
 const { pool, dbHelpers } = require('./database-mysql');
 
 // Load school content data
@@ -45,7 +44,7 @@ const fileFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image/')) {
     cb(null, true);
   } else {
-    cb(new Error('File harus berupa gambar (JPG, PNG, GIF, WebP) - akan dikonversi otomatis ke WebP'), false);
+    cb(new Error('File harus berupa gambar (JPG, PNG, GIF, WebP)'), false);
   }
 };
 
@@ -862,11 +861,6 @@ app.get('/portal-siswa', (req, res) => {
   res.render('portal-siswa', { title: 'Portal Siswa - SMPIT Baituljannah' });
 });
 
-// Test route right after portal-siswa
-app.get('/test-after-portal', (req, res) => {
-  res.json({ message: 'Test after portal working', location: 'after-portal-siswa' });
-});
-
 // Emergency test route
 app.get('/emergency-test', (req, res) => {
   res.json({ message: 'Emergency test working', status: 'OK' });
@@ -878,13 +872,18 @@ app.get('/berita-test', (req, res) => {
   res.json({ message: 'Berita test route working', timestamp: new Date().toISOString() });
 });
 
+// Simple test route for debugging
+app.get('/simple-test', (req, res) => {
+  res.json({ message: 'Simple test working' });
+});
+
 // Another test route
 app.get('/berita-debug', (req, res) => {
   res.json({ message: 'Berita debug route working', path: req.path });
 });
 
-// Berita routes - both /berita and /berita-page point to the same handler
-const beritaHandler = async (req, res) => {
+// Berita route (changed back to /berita-page to avoid conflict with static folder)
+app.get('/berita-page', async (req, res) => {
   // Write to file for debugging
   const fs = require('fs');
   const logMessage = `\n\n=== BERITA ROUTE ACCESSED AT ${new Date().toISOString()} ===\nRequest URL: ${req.url}\nRequest method: ${req.method}\n`;
@@ -919,22 +918,14 @@ const beritaHandler = async (req, res) => {
     console.log('Template rendered successfully');
     
   } catch (error) {
-    console.error('Error in berita route:', error);
-    res.status(500).render('error', {
-      title: 'Error',
-      message: 'Terjadi kesalahan saat memuat berita',
-      error: error
+    console.error('Error fetching news for public page:', error);
+    console.log('Rendering berita template with empty array due to error');
+    res.render('berita', {
+      title: 'Berita Terbaru - SMPIT Baituljannah',
+      news: []
     });
   }
-};
-
-// Main berita route
-app.get('/berita', beritaHandler);
-
-// Alternative berita route (for backward compatibility)
-app.get('/berita-page', beritaHandler);
-
-
+});
 
 // Student registration routes
 // GET route for registration form
@@ -1843,43 +1834,24 @@ app.delete('/admin/api/news/:id', requireAdminAuth, async (req, res) => {
 
 
 // Upload image for news
-app.post('/admin/api/news/upload-image', requireAdminAuth, upload.single('image'), async (req, res) => {
+app.post('/admin/api/news/upload-image', requireAdminAuth, upload.single('image'), (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'Tidak ada file yang diupload' });
     }
     
-    const originalPath = req.file.path;
-    const originalName = path.parse(req.file.filename).name;
-    const webpFilename = originalName + '.webp';
-    const webpPath = path.join(uploadsDir, webpFilename);
-    
-    // Convert image to WebP format
-    await sharp(originalPath)
-      .webp({ quality: 80 }) // 80% quality for good balance between size and quality
-      .toFile(webpPath);
-    
-    // Delete original file after conversion
-    fs.unlinkSync(originalPath);
-    
-    // Return the URL path for the converted WebP image
-    const imageUrl = `/uploads/news/${webpFilename}`;
+    // Return the URL path for the uploaded image
+    const imageUrl = `/uploads/news/${req.file.filename}`;
     
     res.json({
       success: true,
-      message: 'Gambar berhasil diupload dan dikonversi ke WebP',
+      message: 'Gambar berhasil diupload',
       imageUrl: imageUrl,
-      filename: webpFilename
+      filename: req.file.filename
     });
   } catch (error) {
-    console.error('Error uploading and converting image:', error);
-    
-    // Clean up files if conversion fails
-    if (req.file && fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path);
-    }
-    
-    res.status(500).json({ error: 'Terjadi kesalahan saat mengupload dan mengkonversi gambar' });
+    console.error('Error uploading image:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat mengupload gambar' });
   }
 });
 
@@ -1919,25 +1891,8 @@ app.get('/test-debug', (req, res) => {
   res.json({ message: 'Test endpoint working', timestamp: new Date().toISOString() });
 });
 
-// Simple test route
-app.get('/simple-route-test', (req, res) => {
-  console.log('=== SIMPLE ROUTE TEST CALLED ===');
-  res.json({ message: 'Simple route test working', status: 'SUCCESS' });
-});
-
-// Emergency test route (moved here before 404 handler)
-app.get('/emergency-test-final', (req, res) => {
-  res.json({ message: 'Emergency test working FINAL', status: 'OK', location: 'before-404-handler' });
-});
-
-// Berita debug route (moved here before 404 handler)
-app.get('/berita-debug-final', (req, res) => {
-  res.json({ message: 'Berita debug route working FINAL', path: req.path, location: 'before-404-handler' });
-});
-
 // 404 handler
 app.use((req, res) => {
-  console.log('=== 404 HANDLER CALLED ===', req.path);
   res.status(404).render('404', { title: 'Page Not Found' });
 });
 

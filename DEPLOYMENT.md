@@ -1,6 +1,6 @@
-# Panduan Deployment SMPTI Baituljannah
+# Panduan Deployment SMPIT Baituljannah
 
-Panduan ini menjelaskan cara mengkonfigurasi dan menjalankan aplikasi SMPTI Baituljannah agar dapat diakses melalui domain `smpitbaituljannah.sch.id`.
+Panduan ini menjelaskan cara mengkonfigurasi dan menjalankan aplikasi SMPIT Baituljannah agar dapat diakses melalui domain `smpitbaituljannah.sch.id`.
 
 ## Prasyarat
 

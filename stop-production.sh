@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Script untuk menghentikan aplikasi SMPTI Baituljannah
-echo "Stopping SMPTI Baituljannah Application..."
+# Script untuk menghentikan aplikasi SMPIT Baituljannah
+echo "Stopping SMPIT Baituljannah Application..."
 
 # Stop PM2 process
 pm2 stop smpbaituljannah

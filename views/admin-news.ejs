@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.8);
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+        }
+        .main-content {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+            border-radius: 0.75rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+        }
+        .news-item {
+            transition: transform 0.2s ease;
+        }
+        .news-item:hover {
+            transform: translateY(-2px);
+        }
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+        }
+        .editor-container {
+            min-height: 300px;
+        }
+        #editor {
+            min-height: 250px;
+        }
+        .image-preview {
+            max-width: 200px;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0">
+                <div class="sidebar d-flex flex-column p-3">
+                    <div class="text-center mb-4">
+                        <h5 class="text-white mb-0">Admin Panel</h5>
+                        <small class="text-white-50">SMPIT Baituljannah</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <small class="text-white-50 text-uppercase">Selamat datang</small>
+                        <div class="text-white fw-bold"><%= adminUser.full_name %></div>
+                    </div>
+                    
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="/admin/dashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                        <a class="nav-link" href="/admin/registrations">
+                            <i class="fas fa-users me-2"></i> Pendaftaran
+                        </a>
+                        <a class="nav-link active" href="/admin/news">
+                            <i class="fas fa-newspaper me-2"></i> Berita
+                        </a>
+                        <a class="nav-link" href="/admin/settings">
+                            <i class="fas fa-cog me-2"></i> Pengaturan
+                        </a>
+                        <hr class="text-white-50">
+                        <a class="nav-link" href="/admin/logout">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10">
+                <div class="main-content p-4">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2 class="mb-1">Manajemen Berita</h2>
+                            <p class="text-muted mb-0">Kelola berita dan artikel sekolah</p>
+                        </div>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal" onclick="openNewsModal()">
+                            <i class="fas fa-plus me-2"></i>Tambah Berita
+                        </button>
+                    </div>
+                    
+                    <!-- Statistics Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <i class="fas fa-newspaper text-primary fs-2 mb-2"></i>
+                                    <h4 class="mb-1" id="totalNews">0</h4>
+                                    <small class="text-muted">Total Berita</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <i class="fas fa-eye text-success fs-2 mb-2"></i>
+                                    <h4 class="mb-1" id="publishedNews">0</h4>
+                                    <small class="text-muted">Dipublikasikan</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <i class="fas fa-edit text-warning fs-2 mb-2"></i>
+                                    <h4 class="mb-1" id="draftNews">0</h4>
+                                    <small class="text-muted">Draft</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <i class="fas fa-archive text-secondary fs-2 mb-2"></i>
+                                    <h4 class="mb-1" id="archivedNews">0</h4>
+                                    <small class="text-muted">Diarsipkan</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-label">Filter Status</label>
+                                    <select class="form-select" id="statusFilter">
+                                        <option value="all">Semua Status</option>
+                                        <option value="published">Dipublikasikan</option>
+                                        <option value="draft">Draft</option>
+                                        <option value="archived">Diarsipkan</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Pencarian</label>
+                                    <input type="text" class="form-control" id="searchInput" placeholder="Cari judul berita...">
+                                </div>
+                                <div class="col-md-4 d-flex align-items-end">
+                                    <button class="btn btn-outline-primary me-2" onclick="loadNewsList()">
+                                        <i class="fas fa-search me-1"></i>Cari
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="resetFilters()">
+                                        <i class="fas fa-undo me-1"></i>Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- News List -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Daftar Berita</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="newsListContainer">
+                                <div class="text-center py-4">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <p class="mt-2 text-muted">Memuat data berita...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- News Modal -->
+    <div class="modal fade" id="newsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newsModalTitle">Tambah Berita Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newsForm">
+                        <input type="hidden" id="newsId">
+                        
+                        <div class="mb-3">
+                            <label for="newsTitle" class="form-label">Judul Berita *</label>
+                            <input type="text" class="form-control" id="newsTitle" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="newsExcerpt" class="form-label">Ringkasan</label>
+                            <textarea class="form-control" id="newsExcerpt" rows="3" placeholder="Ringkasan singkat berita (opsional)"></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="newsFeaturedImage" class="form-label">Gambar Utama</label>
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="imageUpload" accept="image/*">
+                                <button type="button" class="btn btn-outline-secondary" onclick="uploadImage()">Upload</button>
+                            </div>
+                            <input type="hidden" id="newsFeaturedImage">
+                            <div class="mt-2" id="imagePreviewContainer" style="display: none;">
+                                <img id="imagePreview" class="image-preview" alt="Preview" style="max-width: 200px; max-height: 150px; object-fit: cover;">
+                                <button type="button" class="btn btn-sm btn-danger mt-2" onclick="removeImage()">Hapus Gambar</button>
+                            </div>
+                            <small class="form-text text-muted">Format yang didukung: JPG, PNG, GIF, WebP. Maksimal 5MB.</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Konten Berita *</label>
+                            <div class="editor-container">
+                                <div id="editor"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="newsStatus" class="form-label">Status</label>
+                            <select class="form-select" id="newsStatus">
+                                <option value="draft">Draft</option>
+                                <option value="published">Dipublikasikan</option>
+                                <option value="archived">Diarsipkan</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" onclick="saveNews()">Simpan Berita</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Alert Container -->
+    <div id="alertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    
+    <script>
+        let quill;
+        let currentNewsId = null;
+        
+        $(document).ready(function() {
+            // Initialize Quill editor
+            quill = new Quill('#editor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['blockquote', 'code-block'],
+                        ['link', 'image'],
+                        ['clean']
+                    ]
+                }
+            });
+            
+            // Load initial data
+            loadNewsStats();
+            loadNewsList();
+            
+            // Image file change handler
+            $('#imageUpload').on('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    // Show preview immediately
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#imagePreview').attr('src', e.target.result);
+                        $('#imagePreviewContainer').show();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Search on enter
+            $('#searchInput').on('keypress', function(e) {
+                if (e.which === 13) {
+                    loadNewsList();
+                }
+            });
+        });
+        
+        function loadNewsStats() {
+            $.get('/admin/api/news/stats')
+                .done(function(stats) {
+                    $('#totalNews').text(stats.total || 0);
+                    $('#publishedNews').text(stats.published || 0);
+                    $('#draftNews').text(stats.draft || 0);
+                    $('#archivedNews').text(stats.archived || 0);
+                })
+                .fail(function() {
+                    showAlert('danger', 'Gagal memuat statistik berita');
+                });
+        }
+        
+        function loadNewsList() {
+            const status = $('#statusFilter').val();
+            const search = $('#searchInput').val();
+            
+            let url = '/admin/api/news?';
+            if (status !== 'all') url += `status=${status}&`;
+            if (search) url += `search=${encodeURIComponent(search)}&`;
+            
+            $('#newsListContainer').html(`
+                <div class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Memuat data berita...</p>
+                </div>
+            `);
+            
+            $.get(url)
+                .done(function(news) {
+                    displayNewsList(news);
+                })
+                .fail(function() {
+                    $('#newsListContainer').html(`
+                        <div class="text-center py-4">
+                            <i class="fas fa-exclamation-triangle text-warning fs-2 mb-2"></i>
+                            <p class="text-muted">Gagal memuat data berita</p>
+                            <button class="btn btn-outline-primary" onclick="loadNewsList()">Coba Lagi</button>
+                        </div>
+                    `);
+                });
+        }
+        
+        function displayNewsList(news) {
+            if (news.length === 0) {
+                $('#newsListContainer').html(`
+                    <div class="text-center py-4">
+                        <i class="fas fa-newspaper text-muted fs-2 mb-2"></i>
+                        <p class="text-muted">Belum ada berita</p>
+                        <button class="btn btn-primary" onclick="openNewsModal()">Tambah Berita Pertama</button>
+                    </div>
+                `);
+                return;
+            }
+            
+            let html = '<div class="row">';
+            news.forEach(function(item) {
+                const statusClass = {
+                    'published': 'success',
+                    'draft': 'warning',
+                    'archived': 'secondary'
+                }[item.status] || 'secondary';
+                
+                const statusText = {
+                    'published': 'Dipublikasikan',
+                    'draft': 'Draft',
+                    'archived': 'Diarsipkan'
+                }[item.status] || item.status;
+                
+                const publishedDate = item.published_at ? new Date(item.published_at).toLocaleDateString('id-ID') : '-';
+                const createdDate = new Date(item.created_at).toLocaleDateString('id-ID');
+                
+                html += `
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card news-item h-100">
+                            ${item.featured_image ? `<img src="${item.featured_image}" class="card-img-top" style="height: 150px; object-fit: cover;" alt="${item.title}">` : ''}
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <span class="badge bg-${statusClass} status-badge">${statusText}</span>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="editNews(${item.id})"><i class="fas fa-edit me-2"></i>Edit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="deleteNews(${item.id}, '${item.title}')"><i class="fas fa-trash me-2"></i>Hapus</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <h6 class="card-title">${item.title}</h6>
+                                <p class="card-text text-muted small flex-grow-1">${item.excerpt || 'Tidak ada ringkasan'}</p>
+                                <div class="mt-auto">
+                                    <small class="text-muted d-block">Oleh: ${item.author_name}</small>
+                                    <small class="text-muted d-block">Dibuat: ${createdDate}</small>
+                                    ${item.status === 'published' ? `<small class="text-muted d-block">Dipublikasi: ${publishedDate}</small>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            
+            $('#newsListContainer').html(html);
+        }
+        
+        function openNewsModal(newsId = null) {
+            currentNewsId = newsId;
+            
+            if (newsId) {
+                // Edit mode
+                $('#newsModalTitle').text('Edit Berita');
+                loadNewsData(newsId);
+            } else {
+                // Add mode
+                $('#newsModalTitle').text('Tambah Berita Baru');
+                resetNewsForm();
+            }
+            
+            $('#newsModal').modal('show');
+        }
+        
+        function loadNewsData(newsId) {
+            $.get(`/admin/api/news/${newsId}`)
+                .done(function(news) {
+                    $('#newsId').val(news.id);
+                    $('#newsTitle').val(news.title);
+                    $('#newsExcerpt').val(news.excerpt);
+                    $('#newsFeaturedImage').val(news.featured_image || '');
+                    $('#newsStatus').val(news.status);
+                    
+                    if (news.featured_image) {
+                        $('#imagePreview').attr('src', news.featured_image);
+                        $('#imagePreviewContainer').show();
+                    }
+                    
+                    quill.root.innerHTML = news.content;
+                })
+                .fail(function() {
+                    showAlert('danger', 'Gagal memuat data berita');
+                });
+        }
+        
+        function resetNewsForm() {
+            $('#newsForm')[0].reset();
+            $('#newsId').val('');
+            $('#imageUpload').val('');
+            $('#newsFeaturedImage').val('');
+            $('#imagePreviewContainer').hide();
+            quill.root.innerHTML = '';
+        }
+        
+        function saveNews() {
+            const title = $('#newsTitle').val().trim();
+            const content = quill.root.innerHTML.trim();
+            
+            if (!title || !content || content === '<p><br></p>') {
+                showAlert('warning', 'Judul dan konten berita wajib diisi');
+                return;
+            }
+            
+            const newsData = {
+                title: title,
+                content: content,
+                excerpt: $('#newsExcerpt').val().trim(),
+                featured_image: $('#newsFeaturedImage').val().trim(),
+                status: $('#newsStatus').val()
+            };
+            
+            const isEdit = currentNewsId !== null;
+            const url = isEdit ? `/admin/api/news/${currentNewsId}` : '/admin/api/news';
+            const method = isEdit ? 'PUT' : 'POST';
+            
+            $.ajax({
+                url: url,
+                method: method,
+                data: JSON.stringify(newsData),
+                contentType: 'application/json',
+                success: function(response) {
+                    showAlert('success', response.message);
+                    $('#newsModal').modal('hide');
+                    loadNewsStats();
+                    loadNewsList();
+                },
+                error: function(xhr) {
+                    const error = xhr.responseJSON?.error || 'Terjadi kesalahan';
+                    showAlert('danger', error);
+                }
+            });
+        }
+        
+        function editNews(newsId) {
+            openNewsModal(newsId);
+        }
+        
+        function deleteNews(newsId, title) {
+            if (confirm(`Apakah Anda yakin ingin menghapus berita "${title}"?`)) {
+                $.ajax({
+                    url: `/admin/api/news/${newsId}`,
+                    method: 'DELETE',
+                    success: function(response) {
+                        showAlert('success', response.message);
+                        loadNewsStats();
+                        loadNewsList();
+                    },
+                    error: function(xhr) {
+                        const error = xhr.responseJSON?.error || 'Gagal menghapus berita';
+                        showAlert('danger', error);
+                    }
+                });
+            }
+        }
+        
+        function resetFilters() {
+            $('#statusFilter').val('all');
+            $('#searchInput').val('');
+            loadNewsList();
+        }
+        
+        function uploadImage() {
+            const fileInput = document.getElementById('imageUpload');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showAlert('warning', 'Pilih file gambar terlebih dahulu');
+                return;
+            }
+            
+            // Validate file size (5MB max)
+            if (file.size > 5 * 1024 * 1024) {
+                showAlert('danger', 'Ukuran file terlalu besar. Maksimal 5MB.');
+                return;
+            }
+            
+            // Validate file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                showAlert('danger', 'Format file tidak didukung. Gunakan JPG, PNG, GIF, atau WebP.');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('image', file);
+            
+            // Show loading state
+            const uploadBtn = event.target;
+            const originalText = uploadBtn.textContent;
+            uploadBtn.textContent = 'Uploading...';
+            uploadBtn.disabled = true;
+            
+            $.ajax({
+                url: '/admin/api/news/upload-image',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.success) {
+                        $('#newsFeaturedImage').val(response.imageUrl);
+                        $('#imagePreview').attr('src', response.imageUrl);
+                        $('#imagePreviewContainer').show();
+                        showAlert('success', 'Gambar berhasil diupload');
+                        
+                        // Clear file input
+                        fileInput.value = '';
+                    } else {
+                        showAlert('danger', response.error || 'Gagal mengupload gambar');
+                    }
+                },
+                error: function(xhr) {
+                    const response = xhr.responseJSON;
+                    showAlert('danger', response?.error || 'Terjadi kesalahan saat mengupload gambar');
+                },
+                complete: function() {
+                    // Reset button state
+                    uploadBtn.textContent = originalText;
+                    uploadBtn.disabled = false;
+                }
+            });
+        }
+        
+        function removeImage() {
+            const imageUrl = $('#newsFeaturedImage').val();
+            
+            if (imageUrl && imageUrl.startsWith('/uploads/news/')) {
+                const filename = imageUrl.split('/').pop();
+                
+                $.ajax({
+                    url: `/admin/api/news/delete-image/${filename}`,
+                    type: 'DELETE',
+                    success: function(response) {
+                        if (response.success) {
+                            showAlert('success', 'Gambar berhasil dihapus');
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error('Error deleting image:', xhr.responseJSON);
+                    }
+                });
+            }
+            
+            // Clear form fields and hide preview
+            $('#newsFeaturedImage').val('');
+            $('#imageUpload').val('');
+            $('#imagePreviewContainer').hide();
+        }
+        
+        function showAlert(type, message) {
+            const alertId = 'alert-' + Date.now();
+            const alertHtml = `
+                <div id="${alertId}" class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            
+            $('#alertContainer').append(alertHtml);
+            
+            // Auto remove after 5 seconds
+            setTimeout(function() {
+                $(`#${alertId}`).alert('close');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

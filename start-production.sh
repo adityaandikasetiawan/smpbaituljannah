@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Script untuk menjalankan aplikasi SMPTI Baituljannah di production
-echo "Starting SMPTI Baituljannah Application..."
+# Script untuk menjalankan aplikasi SMPIT Baituljannah di production
+echo "Starting SMPIT Baituljannah Application..."
 
 # Set working directory
 cd /var/www/html/smpbaituljannah

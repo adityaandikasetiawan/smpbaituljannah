@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pendaftaran - Admin SMPIT Baituljannah</title>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/datatables/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --secondary-blue: #1e40af;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --border-light: #e2e8f0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f1f5f9 100%);
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+        }
+        
+        .sidebar {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            min-height: 100vh;
+            color: white;
+            box-shadow: 4px 0 20px rgba(37, 99, 235, 0.15);
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.9);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 0.25rem 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+        }
+        
+        .sidebar .nav-link:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            transform: translateX(4px);
+        }
+        
+        .sidebar .nav-link.active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .main-content {
+            padding: 2rem;
+            background: transparent;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+            border: 1px solid var(--border-light);
+        }
+        
+        .btn-status {
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+        
+        .status-pending {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #92400e;
+            border: 1px solid #f59e0b;
+        }
+        
+        .status-approved {
+            background: linear-gradient(135deg, var(--light-blue) 0%, #bfdbfe 100%);
+            color: var(--secondary-blue);
+            border: 1px solid var(--primary-blue);
+        }
+        
+        .status-rejected {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            color: #991b1b;
+            border: 1px solid #dc2626;
+        }
+        
+        .header-title {
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .filter-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-light);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .form-control, .form-select {
+            border-radius: 12px;
+            border: 2px solid var(--border-light);
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.15);
+        }
+        
+        .table th {
+            background: linear-gradient(135deg, var(--light-blue) 0%, #e0f2fe 100%);
+            color: var(--secondary-blue);
+            font-weight: 700;
+            border: none;
+            padding: 1rem;
+        }
+        
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-color: var(--border-light);
+        }
+        
+        .btn-group .btn {
+            border-radius: 8px;
+            margin: 0 2px;
+        }
+        
+        .alert {
+            border-radius: 15px;
+            border: none;
+            padding: 1rem 1.5rem;
+        }
+        
+        .badge {
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+        }
+        
+        .bulk-actions {
+            background: var(--light-blue);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.08);
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        .avatar-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.875rem;
+        }
+        
+        .registration-row:hover {
+            background-color: rgba(37, 99, 235, 0.02);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0">
+                <div class="sidebar">
+                    <div class="p-3">
+                        <h4 class="mb-0">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            Admin Panel
+                        </h4>
+                        <small class="opacity-75">SMPIT Baituljannah</small>
+                    </div>
+                    <nav class="nav flex-column px-3">
+                        <a class="nav-link" href="/admin/dashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            Dashboard
+                        </a>
+                        <a class="nav-link active" href="/admin/registrations">
+                            <i class="fas fa-users me-2"></i>
+                            Data Pendaftaran
+                        </a>
+                        <a class="nav-link" href="/admin/settings">
+                            <i class="fas fa-cog me-2"></i>
+                            Pengaturan
+                        </a>
+                        <hr class="my-3" style="border-color: rgba(255,255,255,0.2);">
+                        <a class="nav-link" href="/admin/logout">
+                            <i class="fas fa-sign-out-alt me-2"></i>
+                            Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10">
+                <div class="main-content">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2 class="header-title">Data Pendaftaran Siswa</h2>
+                            <p class="text-muted">Kelola data pendaftaran siswa baru dengan sistem yang terintegrasi</p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-primary" id="refreshBtn">
+                                <i class="fas fa-sync-alt me-2"></i>
+                                Refresh
+                            </button>
+                            <a href="/admin/dashboard" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>
+                                Kembali
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h6 class="text-muted mb-1">Total Pendaftar</h6>
+                                        <h3 class="mb-0 text-primary"><%= registrations.length %></h3>
+                                    </div>
+                                    <div class="text-primary">
+                                        <i class="fas fa-users fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h6 class="text-muted mb-1">Menunggu</h6>
+                                        <h3 class="mb-0 text-warning"><%= registrations.filter(r => r.status === 'pending').length %></h3>
+                                    </div>
+                                    <div class="text-warning">
+                                        <i class="fas fa-clock fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h6 class="text-muted mb-1">Diterima</h6>
+                                        <h3 class="mb-0 text-success"><%= registrations.filter(r => r.status === 'approved').length %></h3>
+                                    </div>
+                                    <div class="text-success">
+                                        <i class="fas fa-check-circle fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h6 class="text-muted mb-1">Ditolak</h6>
+                                        <h3 class="mb-0 text-danger"><%= registrations.filter(r => r.status === 'rejected').length %></h3>
+                                    </div>
+                                    <div class="text-danger">
+                                        <i class="fas fa-times-circle fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Filter Card -->
+                    <div class="filter-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">
+                                <i class="fas fa-filter me-2 text-primary"></i>
+                                Filter & Pencarian Lanjutan
+                            </h5>
+                            <button class="btn btn-outline-secondary btn-sm" id="resetFiltersBtn">
+                                <i class="fas fa-undo me-1"></i>
+                                Reset
+                            </button>
+                        </div>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-2">
+                                <label class="form-label fw-semibold">Status</label>
+                                <select class="form-select" id="statusFilter">
+                                    <option value="">Semua Status</option>
+                                    <option value="pending">Menunggu</option>
+                                    <option value="approved">Diterima</option>
+                                    <option value="rejected">Ditolak</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label fw-semibold">Program</label>
+                                <select class="form-select" id="programFilter">
+                                    <option value="">Semua Program</option>
+                                    <option value="Reguler">Reguler</option>
+                                    <option value="Tahfidz">Tahfidz</option>
+                                    <option value="Sains">Sains</option>
+                                    <option value="Bahasa">Bahasa</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Cari Nama/Sekolah</label>
+                                <input type="text" class="form-control" id="nameSearch" placeholder="Nama siswa atau asal sekolah...">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label fw-semibold">Dari Tanggal</label>
+                                <input type="date" class="form-control" id="dateFrom">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label fw-semibold">Sampai Tanggal</label>
+                                <input type="date" class="form-control" id="dateTo">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label">&nbsp;</label>
+                                <button class="btn btn-primary w-100" id="applyFiltersBtn">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bulk Actions -->
+                    <div class="bulk-actions" id="bulkActions">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Aksi Massal:</strong>
+                                <span id="selectedCount">0</span> item dipilih
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-success btn-sm" id="bulkApproveBtn">
+                                    <i class="fas fa-check me-1"></i>
+                                    Terima Semua
+                                </button>
+                                <button class="btn btn-danger btn-sm" id="bulkRejectBtn">
+                                    <i class="fas fa-times me-1"></i>
+                                    Tolak Semua
+                                </button>
+                                <div class="dropdown">
+                                    <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-download me-1"></i>
+                                        Export Terpilih
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item bulk-export-item" href="#" data-format="csv"><i class="fas fa-file-csv me-2"></i>CSV</a></li>
+                                         <li><a class="dropdown-item bulk-export-item" href="#" data-format="excel"><i class="fas fa-file-excel me-2"></i>Excel</a></li>
+                                         <li><a class="dropdown-item bulk-export-item" href="#" data-format="pdf"><i class="fas fa-file-pdf me-2"></i>PDF</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Success/Error Messages -->
+                    <% if (typeof success !== 'undefined' && success) { %>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>
+                            Status pendaftaran berhasil diperbarui!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    <% } %>
+
+                    <% if (typeof error !== 'undefined' && error) { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            <%= error %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    <% } %>
+
+                    <!-- Registrations Table -->
+                    <div class="table-container">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">
+                                <i class="fas fa-list me-2"></i>
+                                Daftar Pendaftaran
+                            </h4>
+                            <div class="d-flex gap-2">
+                                <div class="dropdown">
+                                    <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown">
+                                        <i class="fas fa-download me-2"></i>
+                                        Export Data
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item export-data-item" href="#" data-format="csv"><i class="fas fa-file-csv me-2"></i>Export CSV</a></li>
+                            <li><a class="dropdown-item export-data-item" href="#" data-format="excel"><i class="fas fa-file-excel me-2"></i>Export Excel</a></li>
+                            <li><a class="dropdown-item export-data-item" href="#" data-format="pdf"><i class="fas fa-file-pdf me-2"></i>Export PDF</a></li>
+                                    </ul>
+                                </div>
+                                <span class="badge bg-primary fs-6">Total: <%= registrations.length %> data</span>
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="registrationsTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th width="40">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="selectAll">
+                                            </div>
+                                        </th>
+                                        <th width="50">No</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>TTL</th>
+                                        <th>Program</th>
+                                        <th>Asal Sekolah</th>
+                                        <th>Orang Tua</th>
+                                        <th>Tanggal Daftar</th>
+                                        <th>Status</th>
+                                        <th width="150">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (registrations && registrations.length > 0) { %>
+                                        <% registrations.forEach((registration, index) => { %>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input row-checkbox" type="checkbox" value="<%= registration.id %>">
+                                                    </div>
+                                                </td>
+                                                <td><%= index + 1 %></td>
+                                                <td>
+                                                    <strong><%= registration.nama_lengkap %></strong><br>
+                                                    <small class="text-muted">
+                                                        <i class="fas fa-venus-mars me-1"></i>
+                                                        <%= registration.jenis_kelamin %>
+                                                    </small>
+                                                </td>
+                                                <td>
+                                                    <small>
+                                                        <%= registration.tempat_lahir %>,<br>
+                                                        <%= new Date(registration.tanggal_lahir).toLocaleDateString('id-ID') %>
+                                                    </small>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info"><%= registration.program_pilihan %></span>
+                                                </td>
+                                                <td>
+                                                    <small>
+                                                        <%= registration.asal_sekolah %><br>
+                                                        <span class="text-muted">Lulus: <%= registration.tahun_lulus %></span>
+                                                    </small>
+                                                </td>
+                                                <td>
+                                                    <small>
+                                                        Ayah: <%= registration.nama_ayah %><br>
+                                                        Ibu: <%= registration.nama_ibu %>
+                                                    </small>
+                                                </td>
+                                                <td>
+                                                    <small><%= new Date(registration.created_at).toLocaleDateString('id-ID') %></small>
+                                                </td>
+                                                <td>
+                                                    <% if (registration.status === 'pending') { %>
+                                                        <span class="btn-status status-pending">Menunggu</span>
+                                                    <% } else if (registration.status === 'approved') { %>
+                                                        <span class="btn-status status-approved">Diterima</span>
+                                                    <% } else if (registration.status === 'rejected') { %>
+                                                        <span class="btn-status status-rejected">Ditolak</span>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group" role="group">
+                                                        <button type="button" class="btn btn-sm btn-outline-primary view-details-btn" 
+                                                                data-id="<%= registration.id %>"
+                                                                title="Lihat Detail">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <% if (registration.status === 'pending') { %>
+                                                            <button type="button" class="btn btn-sm btn-outline-success update-status-btn" 
+                                                                    data-id="<%= registration.id %>" data-status="approved"
+                                                                    title="Terima">
+                                                                <i class="fas fa-check"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-sm btn-outline-danger update-status-btn" 
+                                                                    data-id="<%= registration.id %>" data-status="rejected"
+                                                                    title="Tolak">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        <% } %>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="9" class="text-center text-muted py-4">
+                                                <i class="fas fa-inbox fa-2x mb-3 d-block"></i>
+                                                Belum ada data pendaftaran
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user me-2"></i>
+                        Detail Pendaftaran Siswa
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modalContent">
+                    <!-- Content will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery/jquery-3.7.0.min.js"></script>
+    <script src="/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/js/datatables/dataTables.bootstrap5.min.js"></script>
+    <script>
+        let table;
+        
+        $(document).ready(function() {
+            table = $('#registrationsTable').DataTable({
+                "pageLength": 25,
+                "ordering": true,
+                "searching": true,
+                "lengthChange": true,
+                "info": true,
+                "order": [[ 7, "desc" ]], // Sort by date descending (index 7)
+                "columnDefs": [
+                    { "orderable": false, "targets": [0, 9] } // Disable sorting on checkbox and action columns
+                ]
+            });
+        });
+
+        // Legacy function - redirects to advanced filters
+        function applyFilters() {
+            applyAdvancedFilters();
+        }
+
+        function viewDetails(id) {
+            fetch(`/admin/registrations/${id}/details`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('modalContent').innerHTML = html;
+                    new bootstrap.Modal(document.getElementById('detailModal')).show();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Gagal memuat detail pendaftaran');
+                });
+        }
+
+        function updateStatus(id, status) {
+            const statusText = status === 'approved' ? 'menerima' : 'menolak';
+            
+            if (confirm(`Apakah Anda yakin ingin ${statusText} pendaftaran ini?`)) {
+                fetch(`/admin/registrations/${id}/status`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status: status })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Gagal memperbarui status: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat memperbarui status');
+                });
+            }
+        }
+
+        function exportData(format = 'csv') {
+            const currentFilters = {
+                status: document.getElementById('statusFilter').value,
+                program: document.getElementById('programFilter').value,
+                name: document.getElementById('nameSearch').value,
+                dateFrom: document.getElementById('dateFrom').value,
+                dateTo: document.getElementById('dateTo').value
+            };
+            
+            const params = new URLSearchParams();
+            params.append('format', format);
+            
+            // Add filters to export
+            Object.keys(currentFilters).forEach(key => {
+                if (currentFilters[key]) {
+                    params.append(key, currentFilters[key]);
+                }
+            });
+            
+            window.location.href = `/admin/registrations/export?${params.toString()}`;
+        }
+
+        // New functions for enhanced features
+        function toggleSelectAll() {
+            const selectAll = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('.row-checkbox');
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAll.checked;
+            });
+            
+            updateBulkActions();
+        }
+
+        function updateBulkActions() {
+            const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+            const bulkActions = document.getElementById('bulkActions');
+            const selectedCount = document.getElementById('selectedCount');
+            
+            selectedCount.textContent = checkboxes.length;
+            
+            if (checkboxes.length > 0) {
+                bulkActions.style.display = 'block';
+            } else {
+                bulkActions.style.display = 'none';
+            }
+        }
+
+        function bulkApprove() {
+            const selected = getSelectedIds();
+            if (selected.length === 0) return;
+            
+            if (confirm(`Apakah Anda yakin ingin menerima ${selected.length} pendaftaran yang dipilih?`)) {
+                bulkUpdateStatus(selected, 'approved');
+            }
+        }
+
+        function bulkReject() {
+            const selected = getSelectedIds();
+            if (selected.length === 0) return;
+            
+            if (confirm(`Apakah Anda yakin ingin menolak ${selected.length} pendaftaran yang dipilih?`)) {
+                bulkUpdateStatus(selected, 'rejected');
+            }
+        }
+
+        function bulkExport(format = 'csv') {
+            const selected = getSelectedIds();
+            if (selected.length === 0) {
+                // Show modal to choose export type
+                showExportModal();
+                return;
+            }
+            
+            const params = new URLSearchParams();
+            params.append('format', format);
+            selected.forEach(id => params.append('ids', id));
+            
+            window.location.href = `/admin/registrations/export?${params.toString()}`;
+        }
+        
+        function bulkExportSelected(format) {
+            const selected = getSelectedIds();
+            if (selected.length === 0) {
+                alert('Pilih data yang ingin diekspor terlebih dahulu');
+                return;
+            }
+            
+            const params = new URLSearchParams();
+            params.append('format', format);
+            selected.forEach(id => params.append('ids', id));
+            
+            window.location.href = `/admin/registrations/export?${params.toString()}`;
+        }
+        
+        function showExportModal() {
+            const modalHtml = `
+                <div class="modal fade" id="exportModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Pilih Jenis Export</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Pilih data yang ingin diekspor:</p>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary export-all-btn" data-format="csv">
+                                        <i class="fas fa-file-csv me-2"></i>Export Semua Data (CSV)
+                                    </button>
+                                    <button class="btn btn-outline-success export-all-btn" data-format="excel">
+                                        <i class="fas fa-file-excel me-2"></i>Export Semua Data (Excel)
+                                    </button>
+                                    <button class="btn btn-outline-danger export-all-btn" data-format="pdf">
+                                        <i class="fas fa-file-pdf me-2"></i>Export Semua Data (PDF)
+                                    </button>
+                                    <hr>
+                                    <button class="btn btn-outline-info export-filtered-btn" data-format="csv">
+                                        <i class="fas fa-filter me-2"></i>Export Data Terfilter (CSV)
+                                    </button>
+                                    <button class="btn btn-outline-info export-filtered-btn" data-format="excel">
+                                        <i class="fas fa-filter me-2"></i>Export Data Terfilter (Excel)
+                                    </button>
+                                    <button class="btn btn-outline-info export-filtered-btn" data-format="pdf">
+                                        <i class="fas fa-filter me-2"></i>Export Data Terfilter (PDF)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove existing modal if any
+            const existingModal = document.getElementById('exportModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Add modal to body
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('exportModal'));
+            modal.show();
+        }
+        
+        function exportAllData(format) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('exportModal'));
+            modal.hide();
+            
+            const params = new URLSearchParams();
+            params.append('format', format);
+            params.append('type', 'all');
+            
+            window.location.href = `/admin/registrations/export?${params.toString()}`;
+        }
+        
+        function exportFilteredData(format) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('exportModal'));
+            modal.hide();
+            
+            exportData(format);
+        }
+
+        function getSelectedIds() {
+            const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+        function bulkUpdateStatus(ids, status) {
+            Promise.all(ids.map(id => 
+                fetch(`/admin/registrations/${id}/status`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status })
+                })
+            ))
+            .then(() => {
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat memperbarui status');
+            });
+        }
+
+        function resetFilters() {
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('programFilter').value = '';
+            document.getElementById('nameSearch').value = '';
+            document.getElementById('dateFrom').value = '';
+            document.getElementById('dateTo').value = '';
+            
+            // Clear all DataTable filters
+            table.search('').columns().search('');
+            
+            // Clear any custom search functions
+            $.fn.dataTable.ext.search = [];
+            
+            table.draw();
+        }
+
+        function refreshData() {
+            location.reload();
+        }
+
+        // Enhanced filter function with date range
+        function applyAdvancedFilters() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const programFilter = document.getElementById('programFilter').value;
+            const nameSearch = document.getElementById('nameSearch').value;
+            const dateFrom = document.getElementById('dateFrom').value;
+            const dateTo = document.getElementById('dateTo').value;
+            
+            // Clear all previous filters
+            table.columns().search('');
+            table.search('');
+            
+            // Apply individual column filters with proper mapping
+            if (statusFilter) {
+                // Map database values to display text
+                let statusText = '';
+                if (statusFilter === 'pending') statusText = 'Menunggu';
+                else if (statusFilter === 'approved') statusText = 'Diterima';
+                else if (statusFilter === 'rejected') statusText = 'Ditolak';
+                
+                table.columns(8).search(statusText); // Status column
+            }
+            if (programFilter) {
+                table.columns(4).search(programFilter); // Program column
+            }
+            
+            // Apply global search for name and school
+            if (nameSearch) {
+                table.search(nameSearch);
+            }
+            
+            // Custom date range filtering
+            $.fn.dataTable.ext.search.push(
+                function(settings, data, dataIndex) {
+                    if (!dateFrom && !dateTo) return true;
+                    
+                    const dateStr = data[7]; // Date column (index 7)
+                    if (!dateStr) return true;
+                    
+                    // Parse the date from the table (assuming Indonesian format)
+                    const dateParts = dateStr.split('/');
+                    if (dateParts.length !== 3) return true;
+                    
+                    const tableDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+                    const fromDate = dateFrom ? new Date(dateFrom) : null;
+                    const toDate = dateTo ? new Date(dateTo) : null;
+                    
+                    if (fromDate && tableDate < fromDate) return false;
+                    if (toDate && tableDate > toDate) return false;
+                    
+                    return true;
+                }
+            );
+            
+            table.draw();
+            
+            // Remove the custom filter after drawing
+            $.fn.dataTable.ext.search.pop();
+        }
+
+        // Initialize tooltips and event listeners
+        $(document).ready(function() {
+            // Add event listeners for real-time filtering
+            $('#statusFilter, #programFilter').on('change', applyAdvancedFilters);
+            $('#nameSearch').on('keyup', applyAdvancedFilters);
+            $('#dateFrom, #dateTo').on('change', applyAdvancedFilters);
+            
+            // Add event listeners for buttons
+            $('#refreshBtn').on('click', refreshData);
+            $('#resetFiltersBtn').on('click', resetFilters);
+            $('#applyFiltersBtn').on('click', applyAdvancedFilters);
+            $('#bulkApproveBtn').on('click', bulkApprove);
+            $('#bulkRejectBtn').on('click', bulkReject);
+            $('#selectAll').on('change', toggleSelectAll);
+            
+            // Event listeners for row checkboxes
+            $(document).on('change', '.row-checkbox', updateBulkActions);
+            
+            // Event listeners for action buttons
+            $(document).on('click', '.view-details-btn', function() {
+                const id = $(this).data('id');
+                viewDetails(id);
+            });
+            
+            $(document).on('click', '.update-status-btn', function() {
+                const id = $(this).data('id');
+                const status = $(this).data('status');
+                updateStatus(id, status);
+            });
+            
+            // Event listeners for export buttons
+            $(document).on('click', '.bulk-export-item', function(e) {
+                e.preventDefault();
+                const format = $(this).data('format');
+                bulkExportSelected(format);
+            });
+            
+            $(document).on('click', '.export-data-item', function(e) {
+                e.preventDefault();
+                const format = $(this).data('format');
+                exportData(format);
+            });
+            
+            // Event listeners for modal export buttons
+            $(document).on('click', '.export-all-btn', function() {
+                const format = $(this).data('format');
+                exportAllData(format);
+            });
+            
+            $(document).on('click', '.export-filtered-btn', function() {
+                const format = $(this).data('format');
+                exportFilteredData(format);
+            });
+            
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+</html>

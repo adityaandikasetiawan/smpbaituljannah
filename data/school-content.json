@@ -134,7 +134,7 @@
   ],
   "kurikulum": {
     "jenis": "Kurikulum Merdeka",
-    "deskripsi": "SMPTI Baituljannah menerapkan Kurikulum Merdeka yang terintegrasi dengan teknologi informasi, memberikan fleksibilitas kepada siswa untuk mengembangkan potensi di bidang IT sesuai dengan fase perkembangannya.",
+    "deskripsi": "SMPIT Baituljannah menerapkan Kurikulum Merdeka yang terintegrasi dengan teknologi informasi, memberikan fleksibilitas kepada siswa untuk mengembangkan potensi di bidang IT sesuai dengan fase perkembangannya.",
     "mata_pelajaran": {
       "wajib": [
         "Pendidikan Agama dan Budi Pekerti",
@@ -229,7 +229,7 @@
       {
         "tahun": "2023",
         "prestasi": "Juara 3 Lomba Mobile App Development tingkat Nasional",
-        "siswa": "Tim Developer SMPTI Baituljannah"
+        "siswa": "Tim Developer SMPIT Baituljannah"
       },
       {
         "tahun": "2023",
@@ -241,7 +241,7 @@
       {
         "tahun": "2024",
         "prestasi": "Juara 1 Lomba IoT (Internet of Things) tingkat Nasional",
-        "siswa": "Tim IT SMPTI Baituljannah"
+        "siswa": "Tim IT SMPIT Baituljannah"
       },
       {
         "tahun": "2024",
@@ -251,12 +251,12 @@
       {
         "tahun": "2023",
         "prestasi": "Juara 1 Lomba E-Sports tingkat Nasional",
-        "siswa": "Tim E-Sports SMPTI Baituljannah"
+        "siswa": "Tim E-Sports SMPIT Baituljannah"
       },
       {
         "tahun": "2023",
         "prestasi": "Juara 3 Lomba Video Editing tingkat Nasional",
-        "siswa": "Tim Multimedia SMPTI Baituljannah"
+        "siswa": "Tim Multimedia SMPIT Baituljannah"
       }
     ],
     "sekolah": [
@@ -276,15 +276,15 @@
   },
   "faq": [
     {
-      "question": "Bagaimana cara mendaftar di SMPTI Baituljannah?",
-      "answer": "Pendaftaran dilakukan melalui sistem online di website resmi SMPTI Baituljannah atau datang langsung ke sekolah. Periode pendaftaran biasanya dimulai bulan Januari hingga Mei setiap tahunnya dengan tes seleksi akademik dan wawancara."
+      "question": "Bagaimana cara mendaftar di SMPIT Baituljannah?",
+      "answer": "Pendaftaran dilakukan melalui sistem online di website resmi SMPIT Baituljannah atau datang langsung ke sekolah. Periode pendaftaran biasanya dimulai bulan Januari hingga Mei setiap tahunnya dengan tes seleksi akademik dan wawancara."
     },
     {
       "question": "Apa saja syarat pendaftaran siswa baru?",
       "answer": "Syarat pendaftaran meliputi: (1) Ijazah SD/sederajat, (2) Akta kelahiran, (3) Kartu Keluarga, (4) Pas foto terbaru, (5) Surat keterangan sehat dari dokter, (6) Surat keterangan kelakuan baik dari sekolah asal."
     },
     {
-      "question": "Berapa biaya sekolah di SMPTI Baituljannah?",
+      "question": "Berapa biaya sekolah di SMPIT Baituljannah?",
       "answer": "Sebagai sekolah swasta, biaya pendidikan meliputi uang pangkal, SPP bulanan, dan biaya pengembangan fasilitas IT. Tersedia program cicilan dan beasiswa prestasi untuk meringankan biaya pendidikan."
     },
     {
@@ -292,7 +292,7 @@
       "answer": "Tersedia 20+ ekstrakurikuler meliputi: Programming Club, Robotika, Web Development, E-Sports, English Club, Pramuka, PMR, Rohis, Basket, Futsal, Renang, Tari, Musik, Teater, Jurnalistik Digital, dan Fotografi."
     },
     {
-      "question": "Bagaimana sistem pembelajaran di SMPTI Baituljannah?",
+      "question": "Bagaimana sistem pembelajaran di SMPIT Baituljannah?",
       "answer": "Kami menerapkan Kurikulum Merdeka terintegrasi IT dengan pembelajaran hybrid (tatap muka dan online). Jam belajar dari 07.00-15.30 WIB dengan sistem smart class dan pembelajaran berbasis projek teknologi."
     },
     {
