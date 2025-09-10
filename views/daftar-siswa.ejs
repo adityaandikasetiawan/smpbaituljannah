@@ -3,7 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pendaftaran Siswa Baru - SMPIT Baituljannah</title>
+  <title>Pendaftaran Siswa Baru 2024/2025 - SMPIT Baituljannah</title>
+  <meta name="description" content="Daftar sekarang di SMPIT Baituljannah untuk tahun ajaran 2024/2025. Sekolah Islam terpadu terbaik dengan program unggulan dan fasilitas modern. Pendaftaran online mudah dan cepat.">
+  <meta name="keywords" content="pendaftaran siswa baru SMPIT Baituljannah, daftar SMP islam terpadu, pendaftaran online, sekolah islam terbaik, PPDB 2024">
+  <meta name="author" content="SMPIT Baituljannah">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://smpitbaituljannah.sch.id/daftar-siswa">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://smpitbaituljannah.sch.id/daftar-siswa">
+  <meta property="og:title" content="Pendaftaran Siswa Baru 2024/2025 - SMPIT Baituljannah">
+  <meta property="og:description" content="Daftar sekarang di SMPIT Baituljannah untuk tahun ajaran 2024/2025. Sekolah Islam terpadu terbaik dengan program unggulan dan fasilitas modern. Pendaftaran online mudah dan cepat.">
+  <meta property="og:image" content="https://smpitbaituljannah.sch.id/img/logo smp.png">
+  <meta property="og:site_name" content="SMPIT Baituljannah">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://smpitbaituljannah.sch.id/daftar-siswa">
+  <meta property="twitter:title" content="Pendaftaran Siswa Baru 2024/2025 - SMPIT Baituljannah">
+  <meta property="twitter:description" content="Daftar sekarang di SMPIT Baituljannah untuk tahun ajaran 2024/2025. Sekolah Islam terpadu terbaik dengan program unggulan dan fasilitas modern. Pendaftaran online mudah dan cepat.">
+  <meta property="twitter:image" content="https://smpitbaituljannah.sch.id/img/logo smp.png">
   
   <!-- CSS -->
   <link rel="stylesheet" href="/css/vendors.css">
@@ -53,6 +73,7 @@
       padding: 40px;
       border-radius: 10px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-top: 60px;
     }
     
     .form-group {
@@ -169,49 +190,19 @@
 </head>
 <body class="preloader-visible" data-barba="wrapper">
   <!-- Preloader -->
-  <div class="preloader js-preloader" id="preloader">
+  <div class="preloader js-preloader">
     <div class="preloader__wrap">
       <div class="preloader__icon">
-        <div class="preloader__img"></div>
+        <i class="icon icon-loading"></i>
       </div>
     </div>
-    <div class="preloader__title">SMPIT Baituljannah</div>
   </div>
 
   <!-- Header -->
-  <header data-anim="fade" data-add-bg="" class="header -type-4 -shadow bg-white border-bottom-light js-header">
-    <div class="header__container py-10">
-      <div class="row justify-between items-center">
-        
-        <div class="col-auto">
-          <div class="header-left d-flex items-center">
-            
-            <div class="header__logo pr-30 xl:pr-20 md:pr-0">
-              <a data-barba href="/">
-                <img src="/img/logo smp.png" alt="SMPIT Baituljannah" style="max-height: 50px; width: auto;">
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-auto">
-          <div class="d-flex items-center">
-            <div class="header-menu">
-              <div class="header-menu__content">
-                <div class="d-flex items-center">
-                  <a href="/login" class="button -sm -outline-blue-1 text-blue-1 ml-30">Portal Siswa</a>
-                  <a href="/" class="button -sm -blue-1 text-white ml-30">Beranda</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+  <%- include('partials/header') %>
 
   <!-- Main Content -->
-  <main class="registration-container">
+  <main class="registration-container layout-pt-lg">
     <div class="registration-form">
       <div class="text-center mb-40">
         <h1 class="text-30 lh-14 fw-700">Pendaftaran Siswa Baru</h1>
@@ -409,71 +400,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer -type-1 bg-dark-1">
-    <div class="container">
-      <div class="row y-gap-30 justify-between pt-60 pb-60">
-        <div class="col-xl-3 col-lg-3 col-md-6">
-          <div class="footer-header">
-            <div class="footer-header__logo">
-              <img src="/img/general/logo-white.svg" alt="SMPIT Baituljannah">
-            </div>
-            <p class="footer-header__text text-17 text-white mt-20">
-              SMPIT Baituljannah - Membentuk Generasi Islami yang Cerdas dan Berakhlak Mulia
-            </p>
-          </div>
-        </div>
-        
-        <div class="col-xl-3 col-lg-3 col-md-6">
-          <div class="footer-header">
-            <h4 class="footer-header__title text-white">Kontak Kami</h4>
-            <div class="footer-header__content mt-20">
-              <p class="text-white"><i class="fas fa-map-marker-alt"></i> Jl. Pendidikan No. 123, Jakarta Selatan</p>
-              <p class="text-white"><i class="fas fa-phone"></i> (021) 1234-5678</p>
-              <p class="text-white"><i class="fas fa-envelope"></i> info@smpitbaituljannah.sch.id</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-xl-3 col-lg-3 col-md-6">
-          <div class="footer-header">
-            <h4 class="footer-header__title text-white">Jam Operasional</h4>
-            <div class="footer-header__content mt-20">
-              <p class="text-white">Senin - Jumat: 07:00 - 16:00</p>
-              <p class="text-white">Sabtu: 07:00 - 12:00</p>
-              <p class="text-white">Minggu: Tutup</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-xl-3 col-lg-3 col-md-6">
-          <div class="footer-header">
-            <h4 class="footer-header__title text-white">Media Sosial</h4>
-            <div class="footer-header__content mt-20">
-              <div class="footer-header-socials">
-                <a href="#" class="size-40 d-flex justify-center items-center rounded-8 bg-white">
-                  <i class="fab fa-facebook-f text-dark-1"></i>
-                </a>
-                <a href="#" class="size-40 d-flex justify-center items-center rounded-8 bg-white ml-10">
-                  <i class="fab fa-instagram text-dark-1"></i>
-                </a>
-                <a href="#" class="size-40 d-flex justify-center items-center rounded-8 bg-white ml-10">
-                  <i class="fab fa-youtube text-dark-1"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="py-30 border-top-light">
-        <div class="row justify-between items-center">
-          <div class="col-auto">
-            <p class="text-13 text-white">© 2024 SMPIT Baituljannah. All rights reserved.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <%- include('partials/footer') %>
 
   <!-- JavaScript -->
   <script src="/js/vendors.js"></script>
@@ -481,7 +408,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Hide preloader
-      const preloader = document.getElementById('preloader');
+      const preloader = document.querySelector('.preloader');
       if (preloader) {
         setTimeout(() => {
           preloader.classList.add('fade-out');

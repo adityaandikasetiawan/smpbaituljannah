@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Slider Banner - Admin SMPIT Baituljannah</title>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/datatables/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --secondary-blue: #1e40af;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --border-light: #e2e8f0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f1f5f9 100%);
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+        }
+        .sidebar {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            min-height: 100vh;
+            color: white;
+            box-shadow: 4px 0 20px rgba(37, 99, 235, 0.15);
+        }
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.9);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 0.25rem 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .main-content {
+            padding: 2rem;
+        }
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.08);
+            border: 1px solid var(--border-light);
+            margin-bottom: 2rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+        .table {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .table thead th {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            font-weight: 600;
+        }
+        .badge {
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+        }
+        .badge-success {
+            background: #10b981;
+        }
+        .badge-secondary {
+            background: #6b7280;
+        }
+        .slider-preview {
+            width: 100px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0">
+                <div class="sidebar">
+                    <div class="p-3">
+                        <h4 class="mb-0">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            Admin Panel
+                        </h4>
+                        <small class="opacity-75">SMPIT Baituljannah</small>
+                    </div>
+                    <nav class="nav flex-column px-3">
+                        <a class="nav-link" href="/admin/dashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="/admin/registrations">
+                            <i class="fas fa-users me-2"></i>
+                            Data Pendaftaran
+                        </a>
+                        <a class="nav-link" href="/admin/news">
+                            <i class="fas fa-newspaper me-2"></i>
+                            Manajemen Berita
+                        </a>
+                        <!-- Beranda Management -->
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="berandaDropdown" role="button" data-bs-toggle="collapse" data-bs-target="#berandaSubmenu" aria-expanded="true">
+                                <i class="fas fa-home me-2"></i>
+                                Kelola Beranda
+                            </a>
+                            <div class="collapse show" id="berandaSubmenu">
+                                <div class="nav flex-column ms-3">
+                                    <a class="nav-link py-2" href="/admin/testimonials">
+                                        <i class="fas fa-quote-left me-2"></i>
+                                        Testimoni
+                                    </a>
+                                    <a class="nav-link py-2 active" href="/admin/sliders">
+                                        <i class="fas fa-images me-2"></i>
+                                        Slider Banner
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="nav-link" href="/admin/settings">
+                            <i class="fas fa-cog me-2"></i>
+                            Pengaturan
+                        </a>
+                        <hr class="my-3" style="border-color: rgba(255,255,255,0.2);">
+                        <a class="nav-link" href="/admin/logout">
+                            <i class="fas fa-sign-out-alt me-2"></i>
+                            Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10">
+                <div class="main-content">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2 class="fw-bold text-dark">Kelola Slider Banner</h2>
+                            <p class="text-muted">Manage slider banner utama halaman beranda</p>
+                        </div>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sliderModal">
+                            <i class="fas fa-plus me-2"></i>
+                            Tambah Slider
+                        </button>
+                    </div>
+
+                    <!-- Sliders Table -->
+                    <div class="content-card">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="slidersTable">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Preview</th>
+                                        <th>Judul</th>
+                                        <th>Subtitle</th>
+                                        <th>Link</th>
+                                        <th>Status</th>
+                                        <th>Urutan</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% sliders.forEach((slider, index) => { %>
+                                    <tr>
+                                        <td><%= index + 1 %></td>
+                                        <td>
+                                            <img src="<%= slider.image %>" alt="<%= slider.title %>" class="slider-preview">
+                                        </td>
+                                        <td><strong><%= slider.title %></strong></td>
+                                        <td>
+                                            <div style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                                <%= slider.subtitle || '-' %>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <% if (slider.link_url) { %>
+                                                <a href="<%= slider.link_url %>" target="_blank" class="text-primary">
+                                                    <%= slider.link_text || 'Link' %>
+                                                </a>
+                                            <% } else { %>
+                                                <span class="text-muted">-</span>
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <span class="badge <%= slider.is_active ? 'badge-success' : 'badge-secondary' %>">
+                                                <%= slider.is_active ? 'Aktif' : 'Nonaktif' %>
+                                            </span>
+                                        </td>
+                                        <td><%= slider.display_order %></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1" onclick="editSlider(<%= slider.id %>)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteSlider(<%= slider.id %>)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slider Modal -->
+    <div class="modal fade" id="sliderModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sliderModalTitle">Tambah Slider</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="sliderForm">
+                    <div class="modal-body">
+                        <input type="hidden" id="sliderId">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Judul *</label>
+                            <input type="text" class="form-control" id="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subtitle" class="form-label">Subtitle</label>
+                            <textarea class="form-control" id="subtitle" rows="2" placeholder="Deskripsi singkat (opsional)"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">URL Gambar *</label>
+                            <input type="url" class="form-control" id="image" placeholder="/img/slider/image.jpg" required>
+                            <small class="text-muted">Gunakan gambar dengan resolusi tinggi (minimal 1920x1080px)</small>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="link_url" class="form-label">URL Link (Opsional)</label>
+                                    <input type="url" class="form-control" id="link_url" placeholder="https://example.com">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="link_text" class="form-label">Teks Link</label>
+                                    <input type="text" class="form-control" id="link_text" placeholder="Selengkapnya">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="display_order" class="form-label">Urutan Tampil</label>
+                                    <input type="number" class="form-control" id="display_order" value="0" min="0">
+                                    <small class="text-muted">Semakin kecil angka, semakin awal ditampilkan</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="is_active" class="form-label">Status</label>
+                                    <select class="form-control" id="is_active">
+                                        <option value="true">Aktif</option>
+                                        <option value="false">Nonaktif</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Preview Gambar</label>
+                            <div id="imagePreview" class="border rounded p-3 text-center text-muted">
+                                Masukkan URL gambar untuk melihat preview
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery/jquery-3.7.0.min.js"></script>
+    <script src="/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="/js/datatables/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#slidersTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/id.json'
+                },
+                order: [[6, 'asc']] // Sort by display_order
+            });
+        });
+
+        // Image preview
+        $('#image').on('input', function() {
+            const imageUrl = $(this).val();
+            const preview = $('#imagePreview');
+            
+            if (imageUrl) {
+                preview.html(`<img src="${imageUrl}" alt="Preview" style="max-width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px;">`);
+            } else {
+                preview.html('Masukkan URL gambar untuk melihat preview');
+            }
+        });
+
+        // Form submission
+        $('#sliderForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                title: $('#title').val(),
+                subtitle: $('#subtitle').val() || null,
+                image: $('#image').val(),
+                link_url: $('#link_url').val() || null,
+                link_text: $('#link_text').val() || null,
+                is_active: $('#is_active').val() === 'true',
+                display_order: parseInt($('#display_order').val())
+            };
+            
+            const sliderId = $('#sliderId').val();
+            const url = sliderId ? `/admin/api/sliders/${sliderId}` : '/admin/api/sliders';
+            const method = sliderId ? 'PUT' : 'POST';
+            
+            $.ajax({
+                url: url,
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    alert(sliderId ? 'Slider berhasil diupdate!' : 'Slider berhasil ditambahkan!');
+                    location.reload();
+                },
+                error: function(xhr) {
+                    alert('Error: ' + (xhr.responseJSON?.message || 'Terjadi kesalahan'));
+                }
+            });
+        });
+
+        // Edit slider
+        function editSlider(id) {
+            $.get(`/admin/api/sliders/${id}`)
+                .done(function(slider) {
+                    $('#sliderId').val(slider.id);
+                    $('#title').val(slider.title);
+                    $('#subtitle').val(slider.subtitle || '');
+                    $('#image').val(slider.image);
+                    $('#link_url').val(slider.link_url || '');
+                    $('#link_text').val(slider.link_text || '');
+                    $('#is_active').val(slider.is_active.toString());
+                    $('#display_order').val(slider.display_order);
+                    $('#sliderModalTitle').text('Edit Slider');
+                    
+                    // Update preview
+                    if (slider.image) {
+                        $('#imagePreview').html(`<img src="${slider.image}" alt="Preview" style="max-width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px;">`);
+                    }
+                    
+                    $('#sliderModal').modal('show');
+                })
+                .fail(function(xhr) {
+                    if (xhr.status === 401 || xhr.status === 403) {
+                        alert('Session expired. Silakan login kembali.');
+                        window.location.href = '/admin/login';
+                    } else {
+                        alert('Error: ' + (xhr.responseJSON?.error || 'Terjadi kesalahan saat mengambil data slider'));
+                    }
+                });
+        }
+
+        // Delete slider
+        function deleteSlider(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus slider ini?')) {
+                $.ajax({
+                    url: `/admin/api/sliders/${id}`,
+                    method: 'DELETE',
+                    success: function() {
+                        alert('Slider berhasil dihapus!');
+                        location.reload();
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + (xhr.responseJSON?.message || 'Terjadi kesalahan'));
+                    }
+                });
+            }
+        }
+
+        // Reset form when modal is hidden
+        $('#sliderModal').on('hidden.bs.modal', function() {
+            $('#sliderForm')[0].reset();
+            $('#sliderId').val('');
+            $('#sliderModalTitle').text('Tambah Slider');
+            $('#imagePreview').html('Masukkan URL gambar untuk melihat preview');
+        });
+    </script>
+</body>
+</html>

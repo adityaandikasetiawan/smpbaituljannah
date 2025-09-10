@@ -4,6 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
+  <meta name="description" content="SMPIT Baituljannah - Sekolah Menengah Pertama Islam Terpadu terbaik dengan program unggulan, fasilitas modern, dan pendidikan berkualitas di Indonesia.">
+  <meta name="keywords" content="SMPIT Baituljannah, sekolah islam terpadu, SMP islam, pendidikan islam, sekolah menengah pertama, pendaftaran siswa baru">
+  <meta name="author" content="SMPIT Baituljannah">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://smpitbaituljannah.sch.id/">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://smpitbaituljannah.sch.id/">
+  <meta property="og:title" content="SMPIT Baituljannah - Sekolah Islam Terpadu Terbaik">
+  <meta property="og:description" content="SMPIT Baituljannah - Sekolah Menengah Pertama Islam Terpadu terbaik dengan program unggulan, fasilitas modern, dan pendidikan berkualitas di Indonesia.">
+  <meta property="og:image" content="https://smpitbaituljannah.sch.id/img/logo smp.png">
+  <meta property="og:site_name" content="SMPIT Baituljannah">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://smpitbaituljannah.sch.id/">
+  <meta property="twitter:title" content="SMPIT Baituljannah - Sekolah Islam Terpadu Terbaik">
+  <meta property="twitter:description" content="SMPIT Baituljannah - Sekolah Menengah Pertama Islam Terpadu terbaik dengan program unggulan, fasilitas modern, dan pendidikan berkualitas di Indonesia.">
+  <meta property="twitter:image" content="https://smpitbaituljannah.sch.id/img/logo smp.png">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,6 +45,32 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/img/general/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/general/favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/general/apple-touch-icon.png">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "SMPIT Baituljannah",
+    "alternateName": "Sekolah Menengah Pertama Islam Terpadu Baituljannah",
+    "url": "https://smpitbaituljannah.sch.id",
+    "logo": "https://smpitbaituljannah.sch.id/img/logo smp.png",
+    "description": "Sekolah Menengah Pertama Islam Terpadu terbaik dengan program unggulan, fasilitas modern, dan pendidikan berkualitas di Indonesia.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "ID",
+      "addressLocality": "Indonesia"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "url": "https://smpitbaituljannah.sch.id/contact"
+    },
+    "sameAs": [
+      "https://smpitbaituljannah.sch.id"
+    ]
+  }
+  </script>
 </head>
 <body>
   <!-- Preloader -->
@@ -44,25 +90,46 @@
     <!-- Banner Slider Section -->
     <section class="banner-slider-section" style="min-height: 70vh; position: relative; overflow: hidden; margin-top: 20px;">
       <div class="banner-slider-container" id="bannerSlider">
-        <!-- Slide 1 -->
-        <div class="banner-slide active" style="background: url('/img/slider/DSC09013.webp'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
+        <% 
+          // Menggunakan data slider dari database atau fallback ke slider default
+          const sliderData = sliders && sliders.length > 0 ? sliders : [
+            {image: '/img/slider/DSC09013.webp', title: 'SMPIT Baituljannah', subtitle: 'Sekolah Islam Terpadu Terbaik', link_url: null, link_text: null},
+            {image: '/img/slider/DSC09327.webp', title: 'Pendidikan Berkualitas', subtitle: 'Membentuk Generasi Islami', link_url: null, link_text: null},
+            {image: '/img/slider/PKLN2292 (2).webp', title: 'Fasilitas Modern', subtitle: 'Mendukung Proses Pembelajaran', link_url: null, link_text: null},
+            {image: '/img/slider/WhatsApp Image 2024-10-11 at 08.47.53 (1).webp', title: 'Prestasi Membanggakan', subtitle: 'Siswa Berprestasi Tingkat Nasional', link_url: null, link_text: null},
+            {image: '/img/slider/ini.webp', title: 'Lingkungan Islami', subtitle: 'Pembentukan Karakter Mulia', link_url: null, link_text: null}
+          ];
+          sliderData.forEach((slide, index) => { 
+        %>
+        <div class="banner-slide <%= index === 0 ? 'active' : '' %>" style="background: url('<%= slide.image %>'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
+          <% if (slide.title || slide.subtitle || slide.link_url) { %>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="banner-content text-white">
+                  <% if (slide.title) { %>
+                    <h1 class="banner-title display-4 fw-bold mb-3" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+                      <%= slide.title %>
+                    </h1>
+                  <% } %>
+                  <% if (slide.subtitle) { %>
+                    <p class="banner-subtitle lead mb-4" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+                      <%= slide.subtitle %>
+                    </p>
+                  <% } %>
+                  <% if (slide.link_url && slide.link_text) { %>
+                    <a href="<%= slide.link_url %>" class="btn btn-primary btn-lg px-4 py-3 rounded-pill">
+                      <%= slide.link_text %>
+                      <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
         </div>
-
-        <!-- Slide 2 -->
-        <div class="banner-slide" style="background: url('/img/slider/DSC09327.webp'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="banner-slide" style="background: url('/img/slider/PKLN2292 (2).webp'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
-        </div>
-
-        <!-- Slide 4 -->
-        <div class="banner-slide" style="background: url('/img/slider/WhatsApp Image 2024-10-11 at 08.47.53 (1).webp'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
-        </div>
-
-        <!-- Slide 5 -->
-        <div class="banner-slide" style="background: url('/img/slider/ini.webp'); background-size: cover; background-position: center; min-height: 70vh; display: flex; align-items: center;">
-        </div>
+        <% }) %>
       </div>
 
       <!-- Navigation Buttons -->
@@ -274,62 +341,53 @@
         </div>
 
         <div class="row y-gap-30 pt-60 lg:pt-50">
-          <% 
-            // Data berita terbaru dengan gambar asli
-            const beritaTerbaru = [
-              {
-                judul: "Dauroh Qur'an Intensif",
-                tanggal: "15 Januari 2025",
-                ringkasan: "SMPIT Baituljannah mengadakan program Dauroh Qur'an intensif untuk meningkatkan kemampuan membaca dan menghafal Al-Qur'an siswa.",
-                gambar: "/img/berita/dauroh qur'an.webp",
-                kategori: "Kegiatan"
-              },
-              {
-                judul: "Wisuda Angkatan 2025",
-                tanggal: "20 Juni 2025",
-                ringkasan: "Upacara wisuda siswa kelas IX angkatan 2025 dilaksanakan dengan khidmat. Selamat kepada seluruh lulusan yang telah menyelesaikan pendidikan di SMPIT Baituljannah.",
-                gambar: "/img/berita/granduation class 2025.webp",
-                kategori: "Acara"
-              },
-              {
-                judul: "Peringatan Hari Guru Nasional",
-                tanggal: "25 November 2024",
-                ringkasan: "SMPIT Baituljannah memperingati Hari Guru Nasional dengan berbagai kegiatan apresiasi kepada para guru yang telah berdedikasi dalam mendidik siswa.",
-                gambar: "/img/berita/hari guru.webp",
-                kategori: "Peringatan"
-              }
-            ];
-            beritaTerbaru.forEach((berita, index) => { 
-          %>
-          <div class="col-lg-4 col-md-6">
-            <div class="blogCard -type-1">
-              <div class="blogCard__image">
-                <img src="<%= berita.gambar %>" alt="<%= berita.judul %>" class="w-100" style="height: 200px; object-fit: cover; border-radius: 8px;">
-              </div>
-
-              <div class="blogCard__content mt-20">
-                <div class="blogCard__category text-13 fw-500 text-<%= ['blue', 'green', 'red'][index % 3] %>-1">
-                  <%= berita.kategori %>
+          <% if (latestNews && latestNews.length > 0) { %>
+            <% latestNews.forEach((berita, index) => { %>
+            <div class="col-lg-4 col-md-6">
+              <div class="blogCard -type-1">
+                <div class="blogCard__image">
+                  <% if (berita.featured_image) { %>
+                    <img src="<%= berita.featured_image %>" alt="<%= berita.title %>" class="w-100" style="height: 200px; object-fit: cover; border-radius: 8px;">
+                  <% } else { %>
+                    <div class="d-flex align-items-center justify-content-center bg-light-3" style="height: 200px; border-radius: 8px;">
+                      <i class="icon icon-newspaper text-40 text-light-1"></i>
+                    </div>
+                  <% } %>
                 </div>
-                <h4 class="blogCard__title text-17 lh-15 fw-500 mt-5">
-                  <a href="/berita#<%= berita.judul.toLowerCase().replace(/\s+/g, '-') %>"><%= berita.judul %></a>
-                </h4>
-                <p class="blogCard__text text-14 lh-18 text-light-1 mt-10">
-                  <%= berita.ringkasan %>
-                </p>
-                <div class="blogCard__date text-13 text-light-1 mt-15">
-                  <i class="icon icon-calendar mr-8"></i>
-                  <%= berita.tanggal %>
+
+                <div class="blogCard__content mt-20">
+                  <div class="blogCard__category text-13 fw-500 text-<%= ['blue', 'green', 'red'][index % 3] %>-1">
+                    Berita
+                  </div>
+                  <h4 class="blogCard__title text-17 lh-15 fw-500 mt-5">
+                    <a href="/berita/<%= berita.slug %>"><%= berita.title %></a>
+                  </h4>
+                  <p class="blogCard__text text-14 lh-18 text-light-1 mt-10">
+                    <%= berita.excerpt || berita.content.substring(0, 150) + '...' %>
+                  </p>
+                  <div class="blogCard__date text-13 text-light-1 mt-15">
+                    <i class="icon icon-calendar mr-8"></i>
+                    <%= new Date(berita.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <% }) %>
+            <% }) %>
+          <% } else { %>
+            <div class="col-12 text-center">
+              <p class="text-15 text-light-1">Belum ada berita terbaru.</p>
+            </div>
+          <% } %>
         </div>
 
         <div class="row justify-center pt-60 lg:pt-40">
           <div class="col-auto">
-            <a href="/berita" class="button -blue-1 text-white">Lihat Semua Berita</a>
+            <a href="/berita" class="button -sm -outline-blue-1 text-blue-1 px-30 py-12 rounded-6 transition-all duration-200" 
+               onmouseover="this.style.backgroundColor='#3b82f6'; this.style.color='white'; this.style.borderColor='#3b82f6';" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#3b82f6'; this.style.borderColor='#3b82f6';">
+              Lihat Semua Berita
+              <i class="fas fa-arrow-right ml-8 text-11"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -519,7 +577,10 @@
               </p>
               
               <div class="d-flex flex-wrap justify-center y-gap-20">
-                <!-- Tombol Daftar Sekarang telah dinonaktifkan -->
+                <a href="/daftar-siswa" class="btn btn-boarding-primary mr-20">
+                  <i class="fas fa-user-plus mr-10"></i>
+                  Daftar Sekarang
+                </a>
                 <a href="/program-unggulan" class="btn btn-boarding-secondary">
                   <i class="fas fa-info-circle mr-10"></i>
                   Info Lengkap
@@ -657,32 +718,40 @@
 
         <div class="row y-gap-30 pt-60 lg:pt-50">
           <% 
-                // Menggunakan data testimoni placeholder karena belum ada di JSON
-                const testimoniPlaceholder = [
-                  {judul: "Fondasi Kuat untuk Masa Depan", isi: "SMPIT Baituljannah memberikan bekal ilmu agama dan umum yang seimbang. Sekarang saya berhasil melanjutkan ke SMA favorit dengan nilai terbaik.", nama: "Ahmad Fauzi", peran: "Alumni 2023"},
-                  {judul: "Karakter Islami Terbentuk", isi: "Program tahfidz dan pembinaan akhlak di SMPIT Baituljannah membentuk kepribadian saya. Alhamdulillah sekarang saya aktif di organisasi dakwah kampus.", nama: "Fatimah Zahra", peran: "Alumni 2022"},
-                  {judul: "Prestasi yang Membanggakan", isi: "Berkat bimbingan guru-guru terbaik, saya berhasil meraih juara olimpiade sains tingkat nasional dan melanjutkan ke sekolah impian.", nama: "Muhammad Rizki", peran: "Alumni 2024"}
+                // Menggunakan data testimoni dari database atau fallback ke placeholder
+                const testimoniData = testimonials && testimonials.length > 0 ? testimonials : [
+                  {name: "Ahmad Fauzi", role: "Alumni 2023", text: "SMPIT Baituljannah memberikan bekal ilmu agama dan umum yang seimbang. Sekarang saya berhasil melanjutkan ke SMA favorit dengan nilai terbaik.", image: null, rating: 5},
+                  {name: "Fatimah Zahra", role: "Alumni 2022", text: "Program tahfidz dan pembinaan akhlak di SMPIT Baituljannah membentuk kepribadian saya. Alhamdulillah sekarang saya aktif di organisasi dakwah kampus.", image: null, rating: 5},
+                  {name: "Muhammad Rizki", role: "Alumni 2024", text: "Berkat bimbingan guru-guru terbaik, saya berhasil meraih juara olimpiade sains tingkat nasional dan melanjutkan ke sekolah impian.", image: null, rating: 5}
                 ];
-                testimoniPlaceholder.forEach((testimoni, index) => { 
+                testimoniData.slice(0, 6).forEach((testimoni, index) => { 
               %>
           <div class="col-lg-4 col-md-6">
             <div class="testimonialCard">
               <div class="testimonialCard__content">
-                <h4 class="testimonialCard__title text-17 fw-500 text-dark-1">
-                  "<%= testimoni.judul %>"
-                </h4>
-                <p class="testimonialCard__text text-15 lh-18 text-light-1 mt-20">
-                  <%= testimoni.isi %>
+                <p class="testimonialCard__text text-15 lh-18 text-light-1">
+                  "<%= testimoni.text %>"
                 </p>
+                <% if (testimoni.rating) { %>
+                <div class="mt-15">
+                  <% for (let i = 1; i <= 5; i++) { %>
+                    <i class="fas fa-star <%= i <= testimoni.rating ? 'text-warning' : 'text-muted' %>"></i>
+                  <% } %>
+                </div>
+                <% } %>
               </div>
 
               <div class="testimonialCard__author d-flex items-center mt-30">
-                <div class="size-60 rounded-full bg-<%= ['blue', 'green', 'red'][index % 3] %>-1 d-flex align-items-center justify-center text-white fw-500 text-20">
-                  <%= testimoni.nama.charAt(0) %>
-                </div>
+                <% if (testimoni.image) { %>
+                  <img src="<%= testimoni.image %>" alt="<%= testimoni.name %>" class="size-60 rounded-full object-cover">
+                <% } else { %>
+                  <div class="size-60 rounded-full bg-<%= ['blue', 'green', 'red'][index % 3] %>-1 d-flex align-items-center justify-center text-white fw-500 text-20">
+                    <%= testimoni.name.charAt(0) %>
+                  </div>
+                <% } %>
                 <div class="ml-20">
-                  <div class="text-16 lh-1 fw-500 text-dark-1"><%= testimoni.nama %></div>
-                  <div class="text-14 lh-1 mt-5 text-light-1"><%= testimoni.peran %></div>
+                  <div class="text-16 lh-1 fw-500 text-dark-1"><%= testimoni.name %></div>
+                  <div class="text-14 lh-1 mt-5 text-light-1"><%= testimoni.role %></div>
                 </div>
               </div>
             </div>

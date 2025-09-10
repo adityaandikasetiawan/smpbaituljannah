@@ -11,6 +11,24 @@ const dbConfig = {
   charset: 'utf8mb4'
 };
 
+// Database availability flag
+let isDatabaseAvailable = false;
+
+// Safe database operation wrapper
+const safeDbOperation = async (operation, fallbackData = null) => {
+  if (!isDatabaseAvailable) {
+    console.warn('Database not available, returning fallback data');
+    return fallbackData;
+  }
+  
+  try {
+    return await operation();
+  } catch (error) {
+    console.error('Database operation failed:', error.message);
+    return fallbackData;
+  }
+};
+
 // Create connection pool
 const pool = mysql.createPool({
   ...dbConfig,
@@ -37,9 +55,12 @@ async function initializeDatabase() {
     await createTables();
     await insertDefaultAdmin();
     
+    isDatabaseAvailable = true;
     console.log('MySQL database initialized successfully');
   } catch (error) {
+    isDatabaseAvailable = false;
     console.error('Error initializing MySQL database:', error);
+    throw error;
   }
 }
 
@@ -122,6 +143,7 @@ async function createTables() {
         content TEXT NOT NULL,
         excerpt TEXT,
         featured_image VARCHAR(255),
+        category VARCHAR(100) DEFAULT 'Umum',
         author_id INT,
         status ENUM('draft', 'published', 'archived') DEFAULT 'draft',
         published_at TIMESTAMP NULL,
@@ -129,11 +151,79 @@ async function createTables() {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         INDEX idx_slug (slug),
         INDEX idx_status (status),
+        INDEX idx_category (category),
         INDEX idx_published_at (published_at),
         INDEX idx_author_id (author_id),
         FOREIGN KEY (author_id) REFERENCES admin_users(id) ON DELETE SET NULL
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
+    
+    // Add category column if it doesn't exist (for existing databases)
+    await connection.execute(`
+      ALTER TABLE news ADD COLUMN IF NOT EXISTS category VARCHAR(100) DEFAULT 'Umum' AFTER featured_image
+    `);
+    
+    await connection.execute(`
+      ALTER TABLE news ADD INDEX IF NOT EXISTS idx_category (category)
+    `);
+    
+    // Testimonials table
+    await connection.execute(`
+      CREATE TABLE IF NOT EXISTS testimonials (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        role VARCHAR(100) NOT NULL,
+        content TEXT NOT NULL,
+        image VARCHAR(255),
+        rating INT DEFAULT 5 CHECK (rating >= 1 AND rating <= 5),
+        is_active BOOLEAN DEFAULT TRUE,
+        display_order INT DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_is_active (is_active),
+        INDEX idx_display_order (display_order)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `);
+    
+    // Sliders table
+    await connection.execute(`
+      CREATE TABLE IF NOT EXISTS sliders (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        subtitle TEXT,
+        image VARCHAR(255) NOT NULL,
+        link_url VARCHAR(255),
+        link_text VARCHAR(100),
+        is_active BOOLEAN DEFAULT TRUE,
+        display_order INT DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_is_active (is_active),
+        INDEX idx_display_order (display_order)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `);
+    
+    // Insert default testimonials if table is empty
+    const [testimonialRows] = await connection.execute('SELECT COUNT(*) as count FROM testimonials');
+    if (testimonialRows[0].count === 0) {
+      await connection.execute(`
+        INSERT INTO testimonials (name, role, content, rating, display_order) VALUES
+        ('Ahmad Fauzi', 'Alumni 2023', 'SMPIT Baituljannah telah memberikan pendidikan yang sangat berkualitas. Saya merasa siap menghadapi tantangan di jenjang selanjutnya.', 5, 1),
+        ('Siti Nurhaliza', 'Alumni 2022', 'Lingkungan belajar yang Islami dan modern membuat saya nyaman belajar. Guru-guru sangat perhatian dan profesional.', 5, 2),
+        ('Muhammad Rizki', 'Alumni 2023', 'Program unggulan di SMPIT Baituljannah sangat membantu mengembangkan potensi diri. Terima kasih untuk semua ilmu yang diberikan.', 5, 3)
+      `);
+    }
+    
+    // Insert default sliders if table is empty
+    const [sliderRows] = await connection.execute('SELECT COUNT(*) as count FROM sliders');
+    if (sliderRows[0].count === 0) {
+      await connection.execute(`
+        INSERT INTO sliders (title, subtitle, image, display_order) VALUES
+        ('Selamat Datang di SMPIT Baituljannah', 'Membentuk Generasi Qurani yang Unggul dan Berakhlak Mulia', '/img/slider/DSC09013.webp', 1),
+        ('Pendidikan Berkualitas', 'Dengan Kurikulum Terintegrasi dan Fasilitas Modern', '/img/slider/DSC09327.webp', 2),
+        ('Lingkungan Islami', 'Menciptakan Suasana Belajar yang Kondusif dan Religius', '/img/slider/PKLN2292 (2).webp', 3)
+      `);
+    }
     
   } finally {
     connection.release();
@@ -480,15 +570,15 @@ const dbHelpers = {
 
   // News functions
   createNews: async (newsData) => {
-    const { title, slug, content, excerpt, featured_image, author_id, status = 'draft' } = newsData;
+    const { title, slug, content, excerpt, featured_image, category = 'Umum', author_id, status = 'draft' } = newsData;
     const connection = await pool.getConnection();
     
     try {
       const published_at = status === 'published' ? new Date() : null;
       
       const [result] = await connection.execute(
-        'INSERT INTO news (title, slug, content, excerpt, featured_image, author_id, status, published_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [title, slug, content, excerpt, featured_image, author_id, status, published_at]
+        'INSERT INTO news (title, slug, content, excerpt, featured_image, category, author_id, status, published_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [title, slug, content, excerpt, featured_image, category, author_id, status, published_at]
       );
       
       return { id: result.insertId, ...newsData };
@@ -508,6 +598,8 @@ const dbHelpers = {
       `;
       const params = [];
       
+      console.log('getAllNews called with filters:', filters);
+      
       if (filters.status && filters.status !== 'all') {
         query += ' AND n.status = ?';
         params.push(filters.status);
@@ -518,15 +610,64 @@ const dbHelpers = {
         params.push(filters.author_id);
       }
       
+      if (filters.search) {
+        query += ' AND (n.title LIKE ? OR n.content LIKE ? OR n.excerpt LIKE ?)';
+        const searchTerm = `%${filters.search}%`;
+        params.push(searchTerm, searchTerm, searchTerm);
+        console.log('Search query added with term:', searchTerm);
+      }
+      
       query += ' ORDER BY n.created_at DESC';
       
       if (filters.limit) {
         query += ' LIMIT ?';
         params.push(parseInt(filters.limit));
+        
+        if (filters.offset) {
+          query += ' OFFSET ?';
+          params.push(parseInt(filters.offset));
+        }
+      }
+      
+      console.log('Final SQL query:', query);
+      console.log('Query parameters:', params);
+      
+      const [rows] = await connection.execute(query, params);
+      console.log('Query returned rows:', rows.length);
+      return rows;
+    } finally {
+      connection.release();
+    }
+  },
+
+  getNewsCount: async (filters = {}) => {
+    const connection = await pool.getConnection();
+    try {
+      let query = `
+        SELECT COUNT(*) as total
+        FROM news n 
+        WHERE 1=1
+      `;
+      const params = [];
+      
+      if (filters.status && filters.status !== 'all') {
+        query += ' AND n.status = ?';
+        params.push(filters.status);
+      }
+      
+      if (filters.author_id) {
+        query += ' AND n.author_id = ?';
+        params.push(filters.author_id);
+      }
+      
+      if (filters.search) {
+        query += ' AND (n.title LIKE ? OR n.content LIKE ? OR n.excerpt LIKE ?)';
+        const searchTerm = `%${filters.search}%`;
+        params.push(searchTerm, searchTerm, searchTerm);
       }
       
       const [rows] = await connection.execute(query, params);
-      return rows;
+      return rows[0].total;
     } finally {
       connection.release();
     }
@@ -583,12 +724,12 @@ const dbHelpers = {
   },
 
   updateNews: async (id, newsData) => {
-    const { title, slug, content, excerpt, featured_image, status } = newsData;
+    const { title, slug, content, excerpt, featured_image, category, status } = newsData;
     const connection = await pool.getConnection();
     
     try {
-      let query = 'UPDATE news SET title = ?, slug = ?, content = ?, excerpt = ?, featured_image = ?, status = ?';
-      let params = [title, slug, content, excerpt, featured_image, status];
+      let query = 'UPDATE news SET title = ?, slug = ?, content = ?, excerpt = ?, featured_image = ?, category = ?, status = ?';
+      let params = [title, slug, content, excerpt, featured_image, category, status];
       
       // Update published_at if status changes to published
       if (status === 'published') {
@@ -631,10 +772,214 @@ const dbHelpers = {
     } finally {
       connection.release();
     }
+  },
+
+  // Testimonials functions
+  getAllTestimonials: async () => {
+    const connection = await pool.getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT * FROM testimonials ORDER BY display_order ASC, created_at DESC'
+      );
+      return rows;
+    } finally {
+      connection.release();
+    }
+  },
+
+  getActiveTestimonials: async () => {
+    const fallbackData = [
+      {
+        id: 1,
+        name: 'Ahmad Fauzi',
+        role: 'Alumni 2023',
+        content: 'SMP Baitul Jannah memberikan pendidikan yang sangat baik dengan nilai-nilai Islam yang kuat.',
+        rating: 5,
+        image: null,
+        is_active: true
+      },
+      {
+        id: 2,
+        name: 'Siti Nurhaliza',
+        role: 'Orang Tua Siswa',
+        content: 'Anak saya berkembang dengan baik di SMP Baitul Jannah. Guru-gurunya sangat perhatian.',
+        rating: 5,
+        image: null,
+        is_active: true
+      }
+    ];
+    
+    return await safeDbOperation(async () => {
+      const connection = await pool.getConnection();
+      try {
+        const [rows] = await connection.execute(
+          'SELECT * FROM testimonials WHERE is_active = TRUE ORDER BY display_order ASC, created_at DESC'
+        );
+        return rows;
+      } finally {
+        connection.release();
+      }
+    }, fallbackData);
+  },
+
+  getTestimonialById: async (id) => {
+    const connection = await pool.getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT * FROM testimonials WHERE id = ?',
+        [id]
+      );
+      return rows[0] || null;
+    } finally {
+      connection.release();
+    }
+  },
+
+  createTestimonial: async (testimonialData) => {
+    const connection = await pool.getConnection();
+    try {
+      const { name, role, content, image, rating, is_active, display_order } = testimonialData;
+      const [result] = await connection.execute(
+        'INSERT INTO testimonials (name, role, content, image, rating, is_active, display_order) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [name, role, content, image || null, rating || 5, is_active !== false, display_order || 0]
+      );
+      return result.insertId;
+    } finally {
+      connection.release();
+    }
+  },
+
+  updateTestimonial: async (id, testimonialData) => {
+    const connection = await pool.getConnection();
+    try {
+      const { name, role, content, image, rating, is_active, display_order } = testimonialData;
+      await connection.execute(
+        'UPDATE testimonials SET name = ?, role = ?, content = ?, image = ?, rating = ?, is_active = ?, display_order = ? WHERE id = ?',
+        [name, role, content, image, rating, is_active, display_order, id]
+      );
+      return true;
+    } finally {
+      connection.release();
+    }
+  },
+
+  deleteTestimonial: async (id) => {
+    const connection = await pool.getConnection();
+    try {
+      await connection.execute('DELETE FROM testimonials WHERE id = ?', [id]);
+      return true;
+    } finally {
+      connection.release();
+    }
+  },
+
+  // Sliders functions
+  getAllSliders: async () => {
+    const connection = await pool.getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT * FROM sliders ORDER BY display_order ASC, created_at DESC'
+      );
+      return rows;
+    } finally {
+      connection.release();
+    }
+  },
+
+  getActiveSliders: async () => {
+    const fallbackData = [
+      {
+        id: 1,
+        title: 'Selamat Datang di SMP Baitul Jannah',
+        subtitle: 'Pendidikan Berkualitas dengan Nilai-nilai Islam',
+        description: 'Membentuk generasi yang berakhlak mulia dan berprestasi',
+        image: '/img/slider/slide-1.jpg',
+        link_url: '/daftar-siswa',
+        link_text: 'Daftar Sekarang',
+        is_active: true,
+        display_order: 1
+      },
+      {
+        id: 2,
+        title: 'Fasilitas Lengkap dan Modern',
+        subtitle: 'Mendukung Proses Pembelajaran Optimal',
+        description: 'Laboratorium, perpustakaan, dan fasilitas olahraga terbaik',
+        image: '/img/slider/slide-2.jpg',
+        link_url: '/fasilitas',
+        link_text: 'Lihat Fasilitas',
+        is_active: true,
+        display_order: 2
+      }
+    ];
+    
+    return await safeDbOperation(async () => {
+      const connection = await pool.getConnection();
+      try {
+        const [rows] = await connection.execute(
+          'SELECT * FROM sliders WHERE is_active = TRUE ORDER BY display_order ASC, created_at DESC'
+        );
+        return rows;
+      } finally {
+        connection.release();
+      }
+    }, fallbackData);
+  },
+
+  getSliderById: async (id) => {
+    const connection = await pool.getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT * FROM sliders WHERE id = ?',
+        [id]
+      );
+      return rows[0] || null;
+    } finally {
+      connection.release();
+    }
+  },
+
+  createSlider: async (sliderData) => {
+    const connection = await pool.getConnection();
+    try {
+      const { title, subtitle, image, link_url, link_text, is_active, display_order } = sliderData;
+      const [result] = await connection.execute(
+        'INSERT INTO sliders (title, subtitle, image, link_url, link_text, is_active, display_order) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [title, subtitle || null, image, link_url || null, link_text || null, is_active !== false, display_order || 0]
+      );
+      return result.insertId;
+    } finally {
+      connection.release();
+    }
+  },
+
+  updateSlider: async (id, sliderData) => {
+    const connection = await pool.getConnection();
+    try {
+      const { title, subtitle, image, link_url, link_text, is_active, display_order } = sliderData;
+      await connection.execute(
+        'UPDATE sliders SET title = ?, subtitle = ?, image = ?, link_url = ?, link_text = ?, is_active = ?, display_order = ? WHERE id = ?',
+        [title, subtitle, image, link_url, link_text, is_active, display_order, id]
+      );
+      return true;
+    } finally {
+      connection.release();
+    }
+  },
+
+  deleteSlider: async (id) => {
+    const connection = await pool.getConnection();
+    try {
+      await connection.execute('DELETE FROM sliders WHERE id = ?', [id]);
+      return true;
+    } finally {
+      connection.release();
+    }
   }
 };
 
-// Initialize database on module load
-initializeDatabase();
+// Initialize database on module load (non-blocking)
+initializeDatabase().catch(err => {
+  console.warn('Database initialization failed, running without database:', err.message);
+});
 
 module.exports = { pool, dbHelpers };

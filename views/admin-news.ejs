@@ -4,58 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/img/logo smp.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/logo smp.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/logo smp.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/logo smp.png">
     <style>
+        :root {
+            --primary-blue: #2563eb;
+            --secondary-blue: #1e40af;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --border-light: #e2e8f0;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --danger-red: #ef4444;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f1f5f9 100%);
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+        }
+        
         .sidebar {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 4px 0 20px rgba(37, 99, 235, 0.15);
         }
+        
         .sidebar .nav-link {
-            color: rgba(255,255,255,0.8);
-            padding: 0.75rem 1rem;
+            color: rgba(255,255,255,0.9);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
             margin: 0.25rem 0;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
         }
+        
         .sidebar .nav-link:hover,
         .sidebar .nav-link.active {
+            background: rgba(255,255,255,0.15);
             color: white;
-            background-color: rgba(255,255,255,0.1);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+        
         .main-content {
-            background-color: #f8f9fa;
-            min-height: 100vh;
+            padding: 2rem;
         }
+        
+        .stats-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.08);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.12);
+        }
+        
+        .stats-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin: 0 auto 1rem;
+        }
+        
         .card {
-            border: none;
-            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
-            border-radius: 0.75rem;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.08);
+            border: 1px solid var(--border-light);
+            margin-bottom: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.12);
+        }
+        
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
             border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
+        
         .btn-primary:hover {
-            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+            background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
         }
+        
         .news-item {
             transition: transform 0.2s ease;
         }
+        
         .news-item:hover {
             transform: translateY(-2px);
         }
+        
         .status-badge {
             font-size: 0.75rem;
             padding: 0.25rem 0.5rem;
         }
+        
         .editor-container {
             min-height: 300px;
         }
+        
         #editor {
             min-height: 250px;
         }
+        
         .image-preview {
             max-width: 200px;
             max-height: 150px;
@@ -69,33 +151,35 @@
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-3 col-lg-2 px-0">
-                <div class="sidebar d-flex flex-column p-3">
-                    <div class="text-center mb-4">
-                        <h5 class="text-white mb-0">Admin Panel</h5>
-                        <small class="text-white-50">SMPIT Baituljannah</small>
+                <div class="sidebar d-flex flex-column">
+                    <div class="p-3">
+                        <h4 class="mb-0">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            Admin Panel
+                        </h4>
+                        <small class="opacity-75">SMPIT Baituljannah</small>
                     </div>
-                    
-                    <div class="mb-3">
-                        <small class="text-white-50 text-uppercase">Selamat datang</small>
-                        <div class="text-white fw-bold"><%= adminUser.full_name %></div>
-                    </div>
-                    
-                    <nav class="nav flex-column">
+                    <nav class="nav flex-column px-3">
                         <a class="nav-link" href="/admin/dashboard">
-                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            Dashboard
                         </a>
                         <a class="nav-link" href="/admin/registrations">
-                            <i class="fas fa-users me-2"></i> Pendaftaran
+                            <i class="fas fa-users me-2"></i>
+                            Data Pendaftaran
                         </a>
                         <a class="nav-link active" href="/admin/news">
-                            <i class="fas fa-newspaper me-2"></i> Berita
+                            <i class="fas fa-newspaper me-2"></i>
+                            Manajemen Berita
                         </a>
                         <a class="nav-link" href="/admin/settings">
-                            <i class="fas fa-cog me-2"></i> Pengaturan
+                            <i class="fas fa-cog me-2"></i>
+                            Pengaturan
                         </a>
-                        <hr class="text-white-50">
+                        <hr class="my-3" style="border-color: rgba(255,255,255,0.2);">
                         <a class="nav-link" href="/admin/logout">
-                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                            <i class="fas fa-sign-out-alt me-2"></i>
+                            Logout
                         </a>
                     </nav>
                 </div>
@@ -103,11 +187,11 @@
             
             <!-- Main Content -->
             <div class="col-md-9 col-lg-10">
-                <div class="main-content p-4">
+                <div class="main-content">
                     <!-- Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
-                            <h2 class="mb-1">Manajemen Berita</h2>
+                            <h2 class="mb-1" style="color: var(--primary-blue); font-weight: 700;">Manajemen Berita</h2>
                             <p class="text-muted mb-0">Kelola berita dan artikel sekolah</p>
                         </div>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal" onclick="openNewsModal()">
@@ -118,30 +202,30 @@
                     <!-- Statistics Cards -->
                     <div class="row mb-4">
                         <div class="col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-newspaper text-primary fs-2 mb-2"></i>
-                                    <h4 class="mb-1" id="totalNews">0</h4>
-                                    <small class="text-muted">Total Berita</small>
+                            <div class="stats-card text-center">
+                                <div class="stats-icon" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);">
+                                    <i class="fas fa-newspaper"></i>
                                 </div>
+                                <h4 class="mb-1" id="totalNews" style="color: var(--primary-blue); font-weight: 700;">0</h4>
+                                <small class="text-muted">Total Berita</small>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-eye text-success fs-2 mb-2"></i>
-                                    <h4 class="mb-1" id="publishedNews">0</h4>
-                                    <small class="text-muted">Dipublikasikan</small>
+                            <div class="stats-card text-center">
+                                <div class="stats-icon" style="background: linear-gradient(135deg, var(--success-green) 0%, #34d399 100%);">
+                                    <i class="fas fa-eye"></i>
                                 </div>
+                                <h4 class="mb-1" id="publishedNews" style="color: var(--success-green); font-weight: 700;">0</h4>
+                                <small class="text-muted">Dipublikasikan</small>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-edit text-warning fs-2 mb-2"></i>
-                                    <h4 class="mb-1" id="draftNews">0</h4>
-                                    <small class="text-muted">Draft</small>
+                            <div class="stats-card text-center">
+                                <div class="stats-icon" style="background: linear-gradient(135deg, var(--warning-orange) 0%, #fbbf24 100%);">
+                                    <i class="fas fa-edit"></i>
                                 </div>
+                                <h4 class="mb-1" id="draftNews" style="color: var(--warning-orange); font-weight: 700;">0</h4>
+                                <small class="text-muted">Draft</small>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -170,12 +254,14 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Pencarian</label>
-                                    <input type="text" class="form-control" id="searchInput" placeholder="Cari judul berita...">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="searchInput" placeholder="Cari judul berita...">
+                                        <span class="input-group-text" id="searchIndicator">
+                                            <i class="fas fa-search text-muted"></i>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="col-md-4 d-flex align-items-end">
-                                    <button class="btn btn-outline-primary me-2" onclick="loadNewsList()">
-                                        <i class="fas fa-search me-1"></i>Cari
-                                    </button>
                                     <button class="btn btn-outline-secondary" onclick="resetFilters()">
                                         <i class="fas fa-undo me-1"></i>Reset
                                     </button>
@@ -186,8 +272,9 @@
                     
                     <!-- News List -->
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Daftar Berita</h5>
+                            <small class="text-muted" id="newsResultCount">Memuat data...</small>
                         </div>
                         <div class="card-body">
                             <div id="newsListContainer">
@@ -225,6 +312,20 @@
                         <div class="mb-3">
                             <label for="newsExcerpt" class="form-label">Ringkasan</label>
                             <textarea class="form-control" id="newsExcerpt" rows="3" placeholder="Ringkasan singkat berita (opsional)"></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="newsCategory" class="form-label">Kategori</label>
+                            <select class="form-select" id="newsCategory">
+                                <option value="Umum">Umum</option>
+                                <option value="Akademik">Akademik</option>
+                                <option value="Ekstrakurikuler">Ekstrakurikuler</option>
+                                <option value="Prestasi">Prestasi</option>
+                                <option value="Kegiatan Sekolah">Kegiatan Sekolah</option>
+                                <option value="Pengumuman">Pengumuman</option>
+                                <option value="Beasiswa">Beasiswa</option>
+                                <option value="PPDB">PPDB</option>
+                            </select>
                         </div>
                         
                         <div class="mb-3">
@@ -311,11 +412,29 @@
                 }
             });
             
-            // Search on enter
+            // Search on enter and real-time search
             $('#searchInput').on('keypress', function(e) {
                 if (e.which === 13) {
                     loadNewsList();
                 }
+            });
+            
+            // Real-time search with debounce
+            let searchTimeout;
+            $('#searchInput').on('input', function() {
+                clearTimeout(searchTimeout);
+                
+                // Show searching indicator
+                $('#searchIndicator').html('<i class="fas fa-spinner fa-spin text-primary"></i>');
+                
+                searchTimeout = setTimeout(function() {
+                    loadNewsList();
+                }, 500); // 500ms delay for debounce
+            });
+            
+            // Filter change handler
+            $('#statusFilter').on('change', function() {
+                loadNewsList();
             });
         });
         
@@ -352,6 +471,8 @@
             $.get(url)
                 .done(function(news) {
                     displayNewsList(news);
+                    // Reset search indicator
+                    $('#searchIndicator').html('<i class="fas fa-search text-muted"></i>');
                 })
                 .fail(function() {
                     $('#newsListContainer').html(`
@@ -361,16 +482,36 @@
                             <button class="btn btn-outline-primary" onclick="loadNewsList()">Coba Lagi</button>
                         </div>
                     `);
+                    // Reset search indicator
+                    $('#searchIndicator').html('<i class="fas fa-search text-muted"></i>');
                 });
         }
         
         function displayNewsList(news) {
+            // Update result count
+            const status = $('#statusFilter').val();
+            const search = $('#searchInput').val();
+            let resultText = `Menampilkan ${news.length} berita`;
+            
+            if (status !== 'all' || search) {
+                resultText += ' (hasil filter';
+                if (status !== 'all') resultText += ` status: ${status}`;
+                if (search) resultText += ` pencarian: "${search}"`;
+                resultText += ')';
+            }
+            
+            $('#newsResultCount').text(resultText);
+            
             if (news.length === 0) {
+                const emptyMessage = (status !== 'all' || search) ? 
+                    'Tidak ada berita yang sesuai dengan filter' : 
+                    'Belum ada berita';
+                    
                 $('#newsListContainer').html(`
                     <div class="text-center py-4">
                         <i class="fas fa-newspaper text-muted fs-2 mb-2"></i>
-                        <p class="text-muted">Belum ada berita</p>
-                        <button class="btn btn-primary" onclick="openNewsModal()">Tambah Berita Pertama</button>
+                        <p class="text-muted">${emptyMessage}</p>
+                        ${(status === 'all' && !search) ? '<button class="btn btn-primary" onclick="openNewsModal()">Tambah Berita Pertama</button>' : ''}
                     </div>
                 `);
                 return;
@@ -399,7 +540,10 @@
                             ${item.featured_image ? `<img src="${item.featured_image}" class="card-img-top" style="height: 150px; object-fit: cover;" alt="${item.title}">` : ''}
                             <div class="card-body d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <span class="badge bg-${statusClass} status-badge">${statusText}</span>
+                                    <div>
+                                        <span class="badge bg-${statusClass} status-badge">${statusText}</span>
+                                        <span class="badge bg-info ms-1">${item.category || 'Umum'}</span>
+                                    </div>
                                     <div class="dropdown">
                                         <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="dropdown">
                                             <i class="fas fa-ellipsis-v"></i>
@@ -450,6 +594,7 @@
                     $('#newsTitle').val(news.title);
                     $('#newsExcerpt').val(news.excerpt);
                     $('#newsFeaturedImage').val(news.featured_image || '');
+                    $('#newsCategory').val(news.category || 'Umum');
                     $('#newsStatus').val(news.status);
                     
                     if (news.featured_image) {
@@ -482,11 +627,20 @@
                 return;
             }
             
+            const featuredImageValue = $('#newsFeaturedImage').val().trim();
+            
+            // Debug: Log client-side data
+            console.log('=== CLIENT SIDE DEBUG ===');
+            console.log('Featured image field value:', featuredImageValue);
+            console.log('Featured image field exists:', $('#newsFeaturedImage').length > 0);
+            console.log('========================');
+            
             const newsData = {
                 title: title,
                 content: content,
                 excerpt: $('#newsExcerpt').val().trim(),
-                featured_image: $('#newsFeaturedImage').val().trim(),
+                featured_image: featuredImageValue,
+                category: $('#newsCategory').val(),
                 status: $('#newsStatus').val()
             };
             
@@ -579,7 +733,16 @@
                 contentType: false,
                 success: function(response) {
                     if (response.success) {
+                        console.log('=== UPLOAD SUCCESS DEBUG ===');
+                        console.log('Upload response:', response);
+                        console.log('Image URL:', response.imageUrl);
+                        console.log('Setting field value...');
+                        
                         $('#newsFeaturedImage').val(response.imageUrl);
+                        
+                        console.log('Field value after setting:', $('#newsFeaturedImage').val());
+                        console.log('========================');
+                        
                         $('#imagePreview').attr('src', response.imageUrl);
                         $('#imagePreviewContainer').show();
                         showAlert('success', 'Gambar berhasil diupload');

@@ -3,7 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Berita - SMPIT Baituljannah</title>
+  <title>Berita Terkini - SMPIT Baituljannah</title>
+  <meta name="description" content="Berita terkini dan informasi terbaru dari SMPIT Baituljannah. Dapatkan update kegiatan sekolah, prestasi siswa, dan program pendidikan terbaru.">
+  <meta name="keywords" content="berita SMPIT Baituljannah, informasi sekolah, kegiatan sekolah, prestasi siswa, berita pendidikan islam">
+  <meta name="author" content="SMPIT Baituljannah">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://smpitbaituljannah.sch.id/berita">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://smpitbaituljannah.sch.id/berita">
+  <meta property="og:title" content="Berita Terkini - SMPIT Baituljannah">
+  <meta property="og:description" content="Berita terkini dan informasi terbaru dari SMPIT Baituljannah. Dapatkan update kegiatan sekolah, prestasi siswa, dan program pendidikan terbaru.">
+  <meta property="og:image" content="https://smpitbaituljannah.sch.id/img/logo smp.png">
+  <meta property="og:site_name" content="SMPIT Baituljannah">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://smpitbaituljannah.sch.id/berita">
+  <meta property="twitter:title" content="Berita Terkini - SMPIT Baituljannah">
+  <meta property="twitter:description" content="Berita terkini dan informasi terbaru dari SMPIT Baituljannah. Dapatkan update kegiatan sekolah, prestasi siswa, dan program pendidikan terbaru.">
+  <meta property="twitter:image" content="https://smpitbaituljannah.sch.id/img/logo smp.png">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,6 +69,35 @@
             </div> -->
           </div>
         </div>
+        
+        <!-- Pagination -->
+        <% if (totalPages > 1) { %>
+        <div class="row justify-center mt-60">
+          <div class="col-auto">
+            <div class="pagination -buttons">
+              <% if (hasPrevPage) { %>
+                <a href="/berita?page=<%= prevPage %>" class="pagination__button button -blue-1 text-white size-40 rounded-8 d-flex justify-center align-items-center">
+                  <i class="icon icon-chevron-left"></i>
+                </a>
+              <% } %>
+              
+              <% for (let i = 1; i <= totalPages; i++) { %>
+                <% if (i === currentPage) { %>
+                  <span class="pagination__button button -blue-1 text-white size-40 rounded-8 d-flex justify-center align-items-center"><%= i %></span>
+                <% } else { %>
+                  <a href="/berita?page=<%= i %>" class="pagination__button button -outline-blue-1 text-blue-1 size-40 rounded-8 d-flex justify-center align-items-center"><%= i %></a>
+                <% } %>
+              <% } %>
+              
+              <% if (hasNextPage) { %>
+                <a href="/berita?page=<%= nextPage %>" class="pagination__button button -blue-1 text-white size-40 rounded-8 d-flex justify-center align-items-center">
+                  <i class="icon icon-chevron-right"></i>
+                </a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% } %>
       </div>
     </section>
 
@@ -67,28 +116,38 @@
             <% news.forEach(function(article) { %>
               <div class="col-lg-4 col-md-6">
                 <div class="eventCard -type-1 bg-white rounded-8 shadow-4 overflow-hidden">
-                  <div class="eventCard__img">
-                    <% if (article.featured_image) { %>
-                      <img src="<%= article.featured_image %>" alt="<%= article.title %>" class="w-100" style="height: 200px; object-fit: cover;">
-                    <% } else { %>
-                      <div class="bg-light-6 d-flex align-items-center justify-center" style="height: 200px;">
-                        <i class="fas fa-newspaper text-light-1 text-40"></i>
-                      </div>
-                    <% } %>
-                  </div>
-                  <div class="eventCard__content px-30 py-30">
-                    <h4 class="eventCard__title text-17 fw-500"><%= article.title %></h4>
-                    <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">
-                      <%= new Date(article.created_at).toLocaleDateString('id-ID', { 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
-                      }) %>
+                  <a href="/berita/<%= article.slug %>" class="text-decoration-none text-dark">
+                    <div class="eventCard__img">
+                      <% if (article.featured_image) { %>
+                        <img src="<%= article.featured_image %>" alt="<%= article.title %>" class="w-100" style="height: 200px; object-fit: cover;">
+                      <% } else { %>
+                        <div class="bg-light-6 d-flex align-items-center justify-center" style="height: 200px;">
+                          <i class="fas fa-newspaper text-light-1 text-40"></i>
+                        </div>
+                      <% } %>
                     </div>
-                    <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">
-                      <%= article.excerpt || article.content.substring(0, 150) + '...' %>
-                    </p>
-                  </div>
+                    <div class="eventCard__content px-30 py-30">
+                      <div class="d-flex align-items-center mb-10">
+                        <span class="badge bg-blue-1 text-white text-12 px-15 py-5 rounded-4">
+                          <%= article.category || 'Umum' %>
+                        </span>
+                      </div>
+                      <h4 class="eventCard__title text-17 fw-500"><%= article.title %></h4>
+                      <div class="eventCard__date text-14 lh-1 text-light-1 mt-5">
+                        <%= new Date(article.created_at).toLocaleDateString('id-ID', { 
+                          year: 'numeric', 
+                          month: 'long', 
+                          day: 'numeric' 
+                        }) %>
+                      </div>
+                      <p class="eventCard__text text-14 lh-18 text-light-1 mt-10">
+                        <%= article.excerpt || article.content.substring(0, 150) + '...' %>
+                      </p>
+                      <div class="mt-15">
+                        <span class="button -sm -blue-1 text-white">Baca Selengkapnya</span>
+                      </div>
+                    </div>
+                  </a>
                 </div>
               </div>
             <% }); %>

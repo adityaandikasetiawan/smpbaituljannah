@@ -22,6 +22,15 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 console.log('App.js loaded, setting up middleware...');
 console.log('=== TESTING CONSOLE LOG FUNCTIONALITY ===');
 
+// Add a simple middleware to log ALL requests
+app.use((req, res, next) => {
+  console.log('*** FIRST MIDDLEWARE - ALL REQUESTS ***', req.method, req.url);
+  // Also log to file to ensure we can see it
+  const logMessage = `${new Date().toISOString()} - FIRST MIDDLEWARE: ${req.method} ${req.url}\n`;
+  fs.appendFileSync(path.join(__dirname, 'first_middleware.log'), logMessage);
+  next();
+});
+
 // Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, 'public', 'uploads', 'news');
 if (!fs.existsSync(uploadsDir)) {
@@ -114,9 +123,9 @@ app.use((req, res, next) => {
   const logMessage = `${new Date().toISOString()} - ${req.method} ${req.url} - Body: ${JSON.stringify(req.body)}\n`;
   fs.appendFileSync(path.join(__dirname, 'debug.log'), logMessage);
   
-  process.stdout.write('=== MIDDLEWARE CALLED ===\n');
-  process.stdout.write(`${req.method} ${req.url} - Body: ${JSON.stringify(req.body)}\n`);
-  process.stdout.write('=== END MIDDLEWARE ===\n');
+  console.log('=== MIDDLEWARE CALLED ===');
+  console.log(`${req.method} ${req.url} - Body: ${JSON.stringify(req.body)}`);
+  console.log('=== END MIDDLEWARE ===');
   res.locals.user = req.session.user || null;
   res.locals.isAuthenticated = !!req.session.user;
   next();
@@ -545,14 +554,38 @@ app.get('/simple-test', (req, res) => {
   res.json({ message: 'Simple test route working', timestamp: new Date().toISOString() });
 });
 
-app.get('/', (req, res) => {
-  res.render('home', {
-    title: 'SMPIT Baituljannah - Sekolah Islam Terpadu',
-    categories: categoriesData,
-    courses: coursesData,
-    testimonials: testimonialsData,
-    schoolContent: schoolContent
-  });
+app.get('/', async (req, res) => {
+  try {
+    // Ambil 3 berita terbaru yang published
+    const latestNews = await dbHelpers.getAllNews({ status: 'published', limit: 3 });
+    
+    // Ambil testimoni aktif dari database
+    const testimonials = await dbHelpers.getActiveTestimonials();
+    
+    // Ambil slider aktif dari database
+    const sliders = await dbHelpers.getActiveSliders();
+    
+    res.render('home', {
+      title: 'SMPIT Baituljannah - Sekolah Islam Terpadu',
+      categories: categoriesData,
+      courses: coursesData,
+      testimonials: testimonials || testimonialsData, // fallback ke data placeholder
+      sliders: sliders || [],
+      schoolContent: schoolContent,
+      latestNews: latestNews || []
+    });
+  } catch (error) {
+    console.error('Error fetching data for homepage:', error);
+    res.render('home', {
+      title: 'SMPIT Baituljannah - Sekolah Islam Terpadu',
+      categories: categoriesData,
+      courses: coursesData,
+      testimonials: testimonialsData, // fallback ke data placeholder
+      sliders: [],
+      schoolContent: schoolContent,
+      latestNews: []
+    });
+  }
 });
 
 app.get('/courses', (req, res) => {
@@ -885,54 +918,112 @@ app.get('/berita-debug', (req, res) => {
 
 // Berita routes - both /berita and /berita-page point to the same handler
 const beritaHandler = async (req, res) => {
-  // Write to file for debugging
-  const fs = require('fs');
-  const logMessage = `\n\n=== BERITA ROUTE ACCESSED AT ${new Date().toISOString()} ===\nRequest URL: ${req.url}\nRequest method: ${req.method}\n`;
-  fs.appendFileSync('berita_debug.log', logMessage);
-  
-  console.log('\n\n=== BERITA ROUTE ACCESSED AT', new Date().toISOString(), '===');
-  console.log('Request URL:', req.url);
-  console.log('Request method:', req.method);
-  
   try {
-    console.log('Calling getAllNews with params:', { status: 'published', limit: 20 });
-    const news = await dbHelpers.getAllNews({ status: 'published', limit: 20 });
+    // Get pagination parameters
+    const page = parseInt(req.query.page) || 1;
+    const limit = 4; // 4 berita per halaman
+    const offset = (page - 1) * limit;
     
-    console.log('=== NEWS DATA FETCHED ===');
-    console.log('Type of news:', typeof news);
-    console.log('Is array:', Array.isArray(news));
-    console.log('Number of published news found:', news ? news.length : 0);
+    // Get total count for pagination
+    const totalNews = await dbHelpers.getNewsCount({ status: 'published' });
+    const totalPages = Math.ceil(totalNews / limit);
     
-    if (news && news.length > 0) {
-      console.log('First news item:', JSON.stringify(news[0], null, 2));
-    } else {
-      console.log('No news found or news is empty/null');
-    }
-    
-    console.log('Rendering berita template with news array length:', news ? news.length : 0);
+    // Get news with pagination
+    const news = await dbHelpers.getAllNews({ 
+      status: 'published', 
+      limit: limit,
+      offset: offset
+    });
     
     res.render('berita', {
       title: 'Berita Terbaru - SMPIT Baituljannah',
-      news: news || []
+      news: news || [],
+      currentPage: page,
+      totalPages: totalPages,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1,
+      nextPage: page + 1,
+      prevPage: page - 1
     });
-    
-    console.log('Template rendered successfully');
     
   } catch (error) {
-    console.error('Error in berita route:', error);
-    res.status(500).render('error', {
-      title: 'Error',
-      message: 'Terjadi kesalahan saat memuat berita',
-      error: error
-    });
+    logMessage += `Error in berita route: ${error.message}\n`;
+    logMessage += `Error stack: ${error.stack}\n`;
+    
+    if (!res.headersSent) {
+      res.status(500).render('error', {
+        title: 'Error',
+        message: 'Terjadi kesalahan saat memuat berita',
+        error: error
+      });
+    }
+  }
+  
+  try {
+    fs.appendFileSync('berita_debug.log', logMessage);
+  } catch (fsError) {
+    console.error('File system error at end:', fsError);
   }
 };
 
+// Test route to verify Express is working
+console.log('About to register test-express route');
+app.get('/test-express', (req, res) => {
+  const logMessage = `${new Date().toISOString()} - TEST ROUTE CALLED: ${req.method} ${req.url}\n`;
+  fs.appendFileSync(path.join(__dirname, 'route_debug.log'), logMessage);
+  res.send('Express is working!');
+});
+console.log('test-express route registered successfully');
+
 // Main berita route
-app.get('/berita', beritaHandler);
+console.log('About to register /berita route with beritaHandler');
+app.get('/berita', (req, res) => {
+  // Log to file instead of console
+  const logMessage = `${new Date().toISOString()} - ROUTE HANDLER CALLED: ${req.method} ${req.url}\n`;
+  fs.appendFileSync(path.join(__dirname, 'route_debug.log'), logMessage);
+  
+  console.log('=== /berita route called directly ===');
+  console.log('Request URL:', req.url);
+  console.log('Request method:', req.method);
+  return beritaHandler(req, res);
+});
+console.log('/berita route registered successfully');
 
 // Alternative berita route (for backward compatibility)
 app.get('/berita-page', beritaHandler);
+
+// Berita detail route - using slug parameter
+app.get('/berita/:slug', async (req, res) => {
+  try {
+    const slug = req.params.slug;
+    console.log(`=== BERITA DETAIL ROUTE ACCESSED: ${slug} ===`);
+    
+    // Get news by slug
+    const news = await dbHelpers.getNewsBySlug(slug);
+    
+    if (!news) {
+      console.log(`News with slug '${slug}' not found`);
+      return res.status(404).render('404', {
+        title: 'Berita Tidak Ditemukan - SMPIT Baituljannah'
+      });
+    }
+    
+    console.log(`Found news: ${news.title}`);
+    
+    // Render detail page
+    res.render('berita-detail', {
+      title: `${news.title} - SMPIT Baituljannah`,
+      news: news
+    });
+    
+  } catch (error) {
+    console.error('Error in berita detail route:', error);
+    res.status(500).render('500', {
+      title: 'Server Error - SMPIT Baituljannah'
+    });
+  }
+});
+console.log('/berita/:slug route registered successfully');
 
 
 
@@ -1420,6 +1511,42 @@ app.get('/admin/news', requireAdminAuth, async (req, res) => {
   }
 });
 
+// Admin Testimonials Page
+app.get('/admin/testimonials', requireAdminAuth, async (req, res) => {
+  try {
+    const adminUser = await dbHelpers.findAdminByUsername(req.session.adminUsername);
+    const testimonials = await dbHelpers.getAllTestimonials();
+    
+    res.render('admin-testimonials', {
+      title: 'Kelola Testimoni - SMPIT Baituljannah',
+      adminName: req.session.adminUsername,
+      adminUser: adminUser || { full_name: 'Administrator' },
+      testimonials: testimonials
+    });
+  } catch (err) {
+    console.error('Database error:', err);
+    return res.status(500).send('Database error');
+  }
+});
+
+// Admin Sliders Page
+app.get('/admin/sliders', requireAdminAuth, async (req, res) => {
+  try {
+    const adminUser = await dbHelpers.findAdminByUsername(req.session.adminUsername);
+    const sliders = await dbHelpers.getAllSliders();
+    
+    res.render('admin-sliders', {
+      title: 'Kelola Slider Banner - SMPIT Baituljannah',
+      adminName: req.session.adminUsername,
+      adminUser: adminUser || { full_name: 'Administrator' },
+      sliders: sliders
+    });
+  } catch (err) {
+    console.error('Database error:', err);
+    return res.status(500).send('Database error');
+  }
+});
+
 // Admin API endpoints for settings
 app.get('/admin/api/stats', requireAdminAuth, (req, res) => {
   // Mock data for now - can be replaced with actual database queries
@@ -1643,8 +1770,12 @@ app.get('/admin/api/export-logs', requireAdminAuth, (req, res) => {
 // Get all news (with filters)
 app.get('/admin/api/news', requireAdminAuth, async (req, res) => {
   try {
-    const { status, author, limit } = req.query;
+    const { status, author, limit, search } = req.query;
     const filters = {};
+    
+    // Debug logging
+    console.log('News API Request - Query params:', req.query);
+    console.log('Search parameter:', search);
     
     if (status && status !== 'all') {
       filters.status = status;
@@ -1654,8 +1785,17 @@ app.get('/admin/api/news', requireAdminAuth, async (req, res) => {
       filters.author_id = author;
     }
     
+    if (search && search.trim() !== '') {
+      filters.search = search.trim();
+      console.log('Search filter applied:', filters.search);
+    }
+    
+    console.log('Final filters:', filters);
+    
     const newsLimit = limit ? parseInt(limit) : 50;
     const news = await dbHelpers.getAllNews(filters, newsLimit);
+    
+    console.log('News results count:', news.length);
     
     res.json(news);
   } catch (error) {
@@ -1696,6 +1836,13 @@ app.get('/admin/api/news/:id', requireAdminAuth, async (req, res) => {
 app.post('/admin/api/news', requireAdminAuth, async (req, res) => {
   try {
     const { title, content, excerpt, featured_image, status } = req.body;
+    
+    // Debug: Log received data
+    console.log('=== CREATE NEWS DEBUG ===');
+    console.log('Request body:', req.body);
+    console.log('Featured image value:', featured_image);
+    console.log('Featured image type:', typeof featured_image);
+    console.log('========================');
     
     // Basic validation
     if (!title || !content) {
@@ -1752,6 +1899,13 @@ app.put('/admin/api/news/:id', requireAdminAuth, async (req, res) => {
   try {
     const newsId = req.params.id;
     const { title, content, excerpt, featured_image, status } = req.body;
+    
+    // Debug: Log received data
+    console.log('=== UPDATE NEWS DEBUG ===');
+    console.log('Request body:', req.body);
+    console.log('Featured image value:', featured_image);
+    console.log('Featured image type:', typeof featured_image);
+    console.log('========================');
     
     // Basic validation
     if (!title || !content) {
@@ -1902,6 +2056,186 @@ app.delete('/admin/api/news/delete-image/:filename', requireAdminAuth, (req, res
   }
 });
 
+// ===== TESTIMONIALS API ENDPOINTS =====
+
+// Get all testimonials
+app.get('/admin/api/testimonials', requireAdminAuth, async (req, res) => {
+  try {
+    const testimonials = await dbHelpers.getAllTestimonials();
+    res.json(testimonials);
+  } catch (error) {
+    console.error('Error fetching testimonials:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat mengambil data testimoni' });
+  }
+});
+
+// Get single testimonial
+app.get('/admin/api/testimonials/:id', requireAdminAuth, async (req, res) => {
+  try {
+    const testimonial = await dbHelpers.getTestimonialById(req.params.id);
+    if (!testimonial) {
+      return res.status(404).json({ error: 'Testimoni tidak ditemukan' });
+    }
+    res.json(testimonial);
+  } catch (error) {
+    console.error('Error fetching testimonial:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat mengambil data testimoni' });
+  }
+});
+
+// Create testimonial
+app.post('/admin/api/testimonials', requireAdminAuth, async (req, res) => {
+  try {
+    const { name, role, image, rating, text, content, is_active } = req.body;
+    const testimonialContent = text || content;
+    
+    if (!name || !role || !testimonialContent) {
+      return res.status(400).json({ error: 'Nama, peran, dan testimoni harus diisi' });
+    }
+    
+    const testimonialId = await dbHelpers.createTestimonial({
+      name,
+      role,
+      image: image || '/img/testimonials/default.jpg',
+      rating: parseInt(rating) || 5,
+      content: testimonialContent,
+      is_active: is_active !== false
+    });
+    
+    res.json({ success: true, message: 'Testimoni berhasil ditambahkan', id: testimonialId });
+  } catch (error) {
+    console.error('Error creating testimonial:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat menambahkan testimoni' });
+  }
+});
+
+// Update testimonial
+app.put('/admin/api/testimonials/:id', requireAdminAuth, async (req, res) => {
+  try {
+    const { name, role, image, rating, text, content, is_active } = req.body;
+    const testimonialContent = text || content;
+    
+    if (!name || !role || !testimonialContent) {
+      return res.status(400).json({ error: 'Nama, peran, dan testimoni harus diisi' });
+    }
+    
+    await dbHelpers.updateTestimonial(req.params.id, {
+      name,
+      role,
+      image: image || '/img/testimonials/default.jpg',
+      rating: parseInt(rating) || 5,
+      content: testimonialContent,
+      is_active: is_active !== false
+    });
+    
+    res.json({ success: true, message: 'Testimoni berhasil diupdate' });
+  } catch (error) {
+    console.error('Error updating testimonial:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat mengupdate testimoni' });
+  }
+});
+
+// Delete testimonial
+app.delete('/admin/api/testimonials/:id', requireAdminAuth, async (req, res) => {
+  try {
+    await dbHelpers.deleteTestimonial(req.params.id);
+    res.json({ success: true, message: 'Testimoni berhasil dihapus' });
+  } catch (error) {
+    console.error('Error deleting testimonial:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat menghapus testimoni' });
+  }
+});
+
+// ===== SLIDERS API ENDPOINTS =====
+
+// Get all sliders
+app.get('/admin/api/sliders', requireAdminAuth, async (req, res) => {
+  try {
+    const sliders = await dbHelpers.getAllSliders();
+    res.json(sliders);
+  } catch (error) {
+    console.error('Error fetching sliders:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat mengambil data slider' });
+  }
+});
+
+// Get single slider
+app.get('/admin/api/sliders/:id', requireAdminAuth, async (req, res) => {
+  try {
+    const slider = await dbHelpers.getSliderById(req.params.id);
+    if (!slider) {
+      return res.status(404).json({ error: 'Slider tidak ditemukan' });
+    }
+    res.json(slider);
+  } catch (error) {
+    console.error('Error fetching slider:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat mengambil data slider' });
+  }
+});
+
+// Create slider
+app.post('/admin/api/sliders', requireAdminAuth, async (req, res) => {
+  try {
+    const { title, subtitle, image, link_url, link_text, is_active, display_order } = req.body;
+    
+    if (!title || !image) {
+      return res.status(400).json({ error: 'Judul dan gambar harus diisi' });
+    }
+    
+    const sliderId = await dbHelpers.createSlider({
+      title,
+      subtitle: subtitle || null,
+      image,
+      link_url: link_url || null,
+      link_text: link_text || null,
+      is_active: is_active !== false,
+      display_order: parseInt(display_order) || 0
+    });
+    
+    res.json({ success: true, message: 'Slider berhasil ditambahkan', id: sliderId });
+  } catch (error) {
+    console.error('Error creating slider:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat menambahkan slider' });
+  }
+});
+
+// Update slider
+app.put('/admin/api/sliders/:id', requireAdminAuth, async (req, res) => {
+  try {
+    const { title, subtitle, image, link_url, link_text, is_active, display_order } = req.body;
+    
+    if (!title || !image) {
+      return res.status(400).json({ error: 'Judul dan gambar harus diisi' });
+    }
+    
+    await dbHelpers.updateSlider(req.params.id, {
+      title,
+      subtitle: subtitle || null,
+      image,
+      link_url: link_url || null,
+      link_text: link_text || null,
+      is_active: is_active !== false,
+      display_order: parseInt(display_order) || 0
+    });
+    
+    res.json({ success: true, message: 'Slider berhasil diupdate' });
+  } catch (error) {
+    console.error('Error updating slider:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat mengupdate slider' });
+  }
+});
+
+// Delete slider
+app.delete('/admin/api/sliders/:id', requireAdminAuth, async (req, res) => {
+  try {
+    await dbHelpers.deleteSlider(req.params.id);
+    res.json({ success: true, message: 'Slider berhasil dihapus' });
+  } catch (error) {
+    console.error('Error deleting slider:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat menghapus slider' });
+  }
+});
+
 // Admin logout
 app.get('/admin/logout', requireAdminAuth, (req, res) => {
   req.session.destroy((err) => {
@@ -1925,6 +2259,53 @@ app.get('/simple-route-test', (req, res) => {
   res.json({ message: 'Simple route test working', status: 'SUCCESS' });
 });
 
+// Debug endpoint for testing news search without authentication
+app.get('/debug/news', (req, res) => {
+  console.log('=== DEBUG NEWS ENDPOINT CALLED ===');
+  const { search, status } = req.query;
+  console.log('Query parameters:', { search, status });
+  
+  res.json({
+    success: true,
+    message: 'Debug news endpoint working',
+    query: req.query,
+    path: req.path
+  });
+});
+console.log('DEBUG: /debug/news endpoint registered successfully');
+
+// Debug endpoint with async for database testing
+app.get('/debug/news-async', async (req, res) => {
+  try {
+    console.log('=== DEBUG NEWS ASYNC ENDPOINT CALLED ===');
+    const { search, status } = req.query;
+    console.log('Query parameters:', { search, status });
+    
+    const filters = {};
+    if (status && status !== 'all') {
+      filters.status = status;
+    }
+    if (search && search.trim()) {
+      filters.search = search.trim();
+    }
+    
+    console.log('Filters applied:', filters);
+    
+    const news = await dbHelpers.getAllNews(filters);
+    console.log('News results count:', news.length);
+    
+    res.json({
+      success: true,
+      data: news,
+      filters: filters,
+      count: news.length
+    });
+  } catch (error) {
+    console.error('Debug news endpoint error:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // Emergency test route (moved here before 404 handler)
 app.get('/emergency-test-final', (req, res) => {
   res.json({ message: 'Emergency test working FINAL', status: 'OK', location: 'before-404-handler' });
@@ -1935,11 +2316,25 @@ app.get('/berita-debug-final', (req, res) => {
   res.json({ message: 'Berita debug route working FINAL', path: req.path, location: 'before-404-handler' });
 });
 
+// Test getAllNews function directly
+app.get('/test-get-all-news', async (req, res) => {
+  try {
+    console.log('=== TESTING getAllNews FUNCTION ===');
+    const news = await dbHelpers.getAllNews({ status: 'published', limit: 20 });
+    console.log('getAllNews result:', news);
+    res.json({ success: true, news: news, count: news ? news.length : 0 });
+  } catch (error) {
+    console.error('Error in getAllNews test:', error);
+    res.json({ success: false, error: error.message });
+  }
+});
+
 // 404 handler
 app.use((req, res) => {
-  console.log('=== 404 HANDLER CALLED ===', req.path);
+  console.log('=== 404 HANDLER CALLED ===', req.path, req.method);
   res.status(404).render('404', { title: 'Page Not Found' });
 });
+console.log('DEBUG: 404 handler registered successfully');
 
 // Error handler
 app.use((err, req, res, next) => {
@@ -1947,10 +2342,15 @@ app.use((err, req, res, next) => {
   res.status(500).render('500', { title: 'Server Error' });
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   console.log('=== SERVER STARTED SUCCESSFULLY ===');
   console.log('Middleware should be working now...');
+});
+
+server.on('error', (err) => {
+  console.error('Server error:', err);
+  fs.appendFileSync(path.join(__dirname, 'server_error.log'), `${new Date().toISOString()} - Server error: ${err.message}\n`);
 });
 
 module.exports = app;

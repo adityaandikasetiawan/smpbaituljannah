@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# Disallow admin pages
+Disallow: /admin/
+Disallow: /admin-login
+Disallow: /admin-dashboard
+Disallow: /admin-news
+Disallow: /admin-settings
+Disallow: /admin-registrations
+
+# Allow important pages
+Allow: /berita
+Allow: /program-unggulan
+Allow: /daftar-siswa
+Allow: /fasilitas
+Allow: /kurikulum
+Allow: /visi-misi
+Allow: /contact
+Allow: /faq
+Allow: /konsultasi
+Allow: /portal-siswa
+
+# Sitemap location
+Sitemap: https://smpitbaituljannah.sch.id/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
